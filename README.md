@@ -45,7 +45,7 @@ Optional arguments:
 ```
 ## DAG
 
-![DAG](dag-20240416-41516350.html)
+![DAG](vsgseq_dag.png)
 
 ## Dependencies
 
