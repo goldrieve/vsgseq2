@@ -207,3 +207,12 @@ Apr-16 13:04:19.085 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! exe
 ~> TaskHandler[id: 2; name: ASSEMBLE (ASSEMBLE on WT_E5); status: RUNNING; exit: -; error: -; workDir: /Users/goldriev/pkgs/vsgseq2/work/25/61018b0f9c258d3913cdbb9de6afc6]
 ~> TaskHandler[id: 8; name: ASSEMBLE (ASSEMBLE on WT_E6); status: RUNNING; exit: -; error: -; workDir: /Users/goldriev/pkgs/vsgseq2/work/03/89a05c782fbc39324bcb6f35e5199e]
 ~> TaskHandler[id: 6; name: ASSEMBLE (ASSEMBLE on WT_E3); status: RUNNING; exit: -; error: -; workDir: /Users/goldriev/pkgs/vsgseq2/work/02/7104b6d632fb974fb1a6ac5a3ae574]
+Apr-16 13:09:19.123 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 8 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: ASSEMBLE (ASSEMBLE on WT_E2); status: RUNNING; exit: -; error: -; workDir: /Users/goldriev/pkgs/vsgseq2/work/31/d8ebdd72c88b42c7dd512b66406122]
+~> TaskHandler[id: 4; name: ASSEMBLE (ASSEMBLE on WT_E4); status: RUNNING; exit: -; error: -; workDir: /Users/goldriev/pkgs/vsgseq2/work/28/407a225a41a92421fcbe1b9a239f99]
+~> TaskHandler[id: 3; name: ASSEMBLE (ASSEMBLE on WT_E8); status: RUNNING; exit: -; error: -; workDir: /Users/goldriev/pkgs/vsgseq2/work/1b/18650c571c4258c9baa197e7742c6e]
+~> TaskHandler[id: 7; name: ASSEMBLE (ASSEMBLE on WT_E1); status: RUNNING; exit: -; error: -; workDir: /Users/goldriev/pkgs/vsgseq2/work/69/a84ff7518720ca825f2ee0b9489b25]
+~> TaskHandler[id: 1; name: ASSEMBLE (ASSEMBLE on WT_E7); status: RUNNING; exit: -; error: -; workDir: /Users/goldriev/pkgs/vsgseq2/work/44/0dca08000d2f0a7475d619e8cd9c32]
+~> TaskHandler[id: 2; name: ASSEMBLE (ASSEMBLE on WT_E5); status: RUNNING; exit: -; error: -; workDir: /Users/goldriev/pkgs/vsgseq2/work/25/61018b0f9c258d3913cdbb9de6afc6]
+~> TaskHandler[id: 8; name: ASSEMBLE (ASSEMBLE on WT_E6); status: RUNNING; exit: -; error: -; workDir: /Users/goldriev/pkgs/vsgseq2/work/03/89a05c782fbc39324bcb6f35e5199e]
+~> TaskHandler[id: 6; name: ASSEMBLE (ASSEMBLE on WT_E3); status: RUNNING; exit: -; error: -; workDir: /Users/goldriev/pkgs/vsgseq2/work/02/7104b6d632fb974fb1a6ac5a3ae574]
