@@ -20,7 +20,7 @@ VSGSEQ2.nf: A pipeline for analysing VSGSeq data
 Required arguments:
 
   --reads Location of reads, if not in reads dir
-                [default: /Users/goldriev/pkgs/vsgseq2/data/reads/*{1,2}.fq.gz]
+                [default: /data/reads/*{1,2}.fq.gz]
   --vsg_db    Location of VSGdb
                 [default: concatAnTattb427.fa]
   --NOTVSG_db Location of NOTVSGdb
