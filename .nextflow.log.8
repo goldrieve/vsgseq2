@@ -1,0 +1,57 @@
+Apr-16 11:20:46.721 [main] DEBUG nextflow.cli.Launcher - $> nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' -resume --cpu 2 --cores 2
+Apr-16 11:20:46.832 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.1
+Apr-16 11:20:46.849 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/Users/goldriev/.nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.3,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.1
+Apr-16 11:20:46.858 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Apr-16 11:20:46.858 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Apr-16 11:20:46.861 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Apr-16 11:20:46.870 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Apr-16 11:20:46.946 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 by global default
+Apr-16 11:20:46.961 [main] INFO  nextflow.cli.CmdRun - Launching `vsgseq2.nf` [silly_mercator] DSL2 - revision: 4fe02c7d4a
+Apr-16 11:20:46.962 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Apr-16 11:20:46.962 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Apr-16 11:20:46.969 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /Users/goldriev/.nextflow/secrets/store.json
+Apr-16 11:20:46.975 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@62ce72ff] - activable => nextflow.secret.LocalSecretsProvider@62ce72ff
+Apr-16 11:20:47.024 [main] DEBUG nextflow.Session - Session UUID: bd8f0faa-68aa-494e-a565-0fb62e8d76c3
+Apr-16 11:20:47.024 [main] DEBUG nextflow.Session - Run name: silly_mercator
+Apr-16 11:20:47.025 [main] DEBUG nextflow.Session - Executor pool size: 16
+Apr-16 11:20:47.030 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Apr-16 11:20:47.034 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=48; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Apr-16 11:20:47.059 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.10.1 build 5891
+  Created: 12-01-2024 22:01 UTC (22:01 BST)
+  System: Mac OS X 14.4.1
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 11.0.13+7-b1751.21
+  Encoding: UTF-8 (UTF-8)
+  Process: 42561@sce-bio-c05389.bio.ed.ac.uk [129.215.170.47]
+  CPUs: 16 - Mem: 64 GB (8.5 GB) - Swap: 1 GB (992.5 MB)
+Apr-16 11:20:47.091 [main] DEBUG nextflow.Session - Work-dir: /Users/goldriev/pkgs/vsgseq2/work [Mac OS X]
+Apr-16 11:20:47.092 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /Users/goldriev/pkgs/vsgseq2/bin
+Apr-16 11:20:47.099 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Apr-16 11:20:47.106 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Apr-16 11:20:47.122 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Apr-16 11:20:47.131 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 17; maxThreads: 1000
+Apr-16 11:20:47.142 [main] ERROR nextflow.cli.Launcher - Unable to acquire lock on session with ID bd8f0faa-68aa-494e-a565-0fb62e8d76c3
+
+Common reasons for this error are:
+ - You are trying to resume the execution of an already running pipeline
+ - A previous execution was abruptly interrupted, leaving the session open
+
+You can see which process is holding the lock file by using the following command:
+ - lsof /Users/goldriev/pkgs/vsgseq2/.nextflow/cache/bd8f0faa-68aa-494e-a565-0fb62e8d76c3/db/LOCK
+java.io.IOException: Unable to acquire lock on session with ID bd8f0faa-68aa-494e-a565-0fb62e8d76c3
+
+Common reasons for this error are:
+ - You are trying to resume the execution of an already running pipeline
+ - A previous execution was abruptly interrupted, leaving the session open
+
+You can see which process is holding the lock file by using the following command:
+ - lsof /Users/goldriev/pkgs/vsgseq2/.nextflow/cache/bd8f0faa-68aa-494e-a565-0fb62e8d76c3/db/LOCK
+	at nextflow.cache.DefaultCacheStore.openDb(DefaultCacheStore.groovy:91)
+	at nextflow.cache.DefaultCacheStore.open(DefaultCacheStore.groovy:106)
+	at nextflow.cache.DefaultCacheStore.open(DefaultCacheStore.groovy)
+	at nextflow.cache.CacheDB.open(CacheDB.groovy:59)
+	at nextflow.Session.init(Session.groovy:420)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:128)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:372)
+	at nextflow.cli.Launcher.run(Launcher.groovy:500)
+	at nextflow.cli.Launcher.main(Launcher.groovy:672)

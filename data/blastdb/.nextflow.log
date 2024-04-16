@@ -1,0 +1,14 @@
+Apr-10 13:42:47.511 [main] DEBUG nextflow.cli.Launcher - $> nextflow run vsgseq2.nf -resume
+Apr-10 13:42:47.561 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.1
+Apr-10 13:42:47.578 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/Users/goldriev/.nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.3,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.1
+Apr-10 13:42:47.588 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Apr-10 13:42:47.589 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Apr-10 13:42:47.591 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Apr-10 13:42:47.599 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Apr-10 13:42:47.623 [main] DEBUG nextflow.scm.ProviderConfig - Using SCM config path: /Users/goldriev/.nextflow/scm
+Apr-10 13:42:47.633 [main] DEBUG nextflow.cli.Launcher - Operation aborted
+nextflow.exception.AbortOperationException: Cannot find script file: vsgseq2.nf
+	at nextflow.cli.CmdRun.getScriptFile(CmdRun.groovy:466)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:317)
+	at nextflow.cli.Launcher.run(Launcher.groovy:500)
+	at nextflow.cli.Launcher.main(Launcher.groovy:672)

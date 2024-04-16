@@ -1,0 +1,136 @@
+2024-04-11 14:59:01	38m 7s	nostalgic_gilbert	ERR	662534775706870cfe551ae3a1e2e888	e2dbc7da-b3b7-4bd1-9470-ad8098e3138a	nextflow run vsgseq2.nf
+2024-04-11 15:57:56	2.9s	cranky_knuth	ERR	662534775706870cfe551ae3a1e2e888	e2dbc7da-b3b7-4bd1-9470-ad8098e3138a	nextflow run vsgseq2.nf -resume
+2024-04-11 16:13:07	23.7s	extravagant_archimedes	ERR	ea50888548292ac9d7a4a17b5fb96fd0	e2dbc7da-b3b7-4bd1-9470-ad8098e3138a	nextflow run vsgseq2.nf -resume
+2024-04-11 16:16:30	24s	cheesy_picasso	ERR	23c22f8af076f0624c20a747132a1f3c	e2dbc7da-b3b7-4bd1-9470-ad8098e3138a	nextflow run vsgseq2.nf -resume
+2024-04-15 10:01:09	-	adoring_booth	-	cf40cb65f82e31ec13eaa79e474f981f	70def303-4e80-4576-b635-423e25cc70b3	nextflow run vsgseq2.nf --resume
+2024-04-15 10:01:30	32m 31s	extravagant_yalow	ERR	8e94ea89a3fd792b4e5d1ba222143ddb	9d48de99-1a36-442f-a4bc-58e0299d51ff	nextflow run vsgseq2.nf --resume
+2024-04-15 13:17:55	2h 36m 2s	stoic_bassi	ERR	ae2b46e68915b62249b6135159a22d21	3a84dcc8-7238-4e66-9e7f-b2bf17b2bff8	nextflow run vsgseq2.nf --resume
+2024-04-15 13:19:37	1.9s	reverent_pare	ERR	ae2b46e68915b62249b6135159a22d21	412e9a56-f7da-4720-9ce4-3d46e7b871b0	nextflow run vsgseq2.nf --reads '/data/reads/E1*{1,2}.fq.gz' --resume
+2024-04-15 13:20:18	1.7s	elated_hoover	ERR	ae2b46e68915b62249b6135159a22d21	128b027b-3888-41ab-991f-6820d026c46d	nextflow run vsgseq2.nf --reads '/data/reads/*{1,2}.fq.gz' --resume
+2024-04-15 13:20:37	1.8s	mad_dubinsky	ERR	ae2b46e68915b62249b6135159a22d21	3fe8ae4c-d89d-4245-84e5-58d6cea22172	nextflow run vsgseq2.nf --reads '/data/reads/*{1,2}.fq.gz' --resume
+2024-04-15 13:20:46	-	sharp_roentgen	-	ae2b46e68915b62249b6135159a22d21	81986706-d0e7-4cb1-9b13-02d06fc96915	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --resume
+2024-04-15 13:20:55	12m 25s	peaceful_magritte	ERR	ae2b46e68915b62249b6135159a22d21	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' --resume
+2024-04-15 13:39:02	18s	desperate_mayer	OK	974c114aa8a60e6b909fe514d970252b	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 13:41:57	2.6s	amazing_shannon	ERR	5a7722c00a3655f539e2ae4148e634b8	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 13:42:32	2.7s	sick_bhaskara	OK	f6605492e703682caca5ab5e57129220	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 13:49:43	16.9s	suspicious_bhabha	OK	d3e7746997cc3d200dbac89dac3c1463	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 13:50:54	3.2s	fervent_goldwasser	OK	9a252534613913d7caad7b3017f1d125	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 13:51:36	31.4s	elegant_blackwell	OK	90b1fc381833c5ad4c8caa0fdf1e8adc	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 13:58:44	16.6s	mighty_miescher	OK	9c7c6cfb9b55f82505d05286f4cf1f00	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 14:09:54	2.5s	hungry_hawking	OK	c8123e18a430b46f188355ce9e340a4c	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 14:10:49	31.2s	ecstatic_koch	OK	a36e138bb5be7bbc355b80b417977bd9	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 14:12:52	31.2s	boring_wilson	OK	f709b3a0cc671520ffe53aeaa23f9217	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 14:14:17	30.5s	astonishing_boyd	OK	275f69c6a97379328c6574d0fdb50c28	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 14:16:27	-	elegant_mclean	-	5c9b92a027ded5c645c7aa6e02d3b9fd	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 14:17:02	1.8s	prickly_cori	OK	8d47f98f3b6506e5c6efa96900256a63	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' -resume
+2024-04-15 14:20:40	39m 23s	boring_goldberg	ERR	8d47f98f3b6506e5c6efa96900256a63	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume
+2024-04-15 15:19:13	3.1s	lethal_aryabhata	ERR	3f248dba03c32ef41e45f0172ce86de7	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume
+2024-04-15 15:20:03	29.6s	nostalgic_faraday	OK	1f2841f7066feaff9453b2753b27dafe	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume
+2024-04-15 15:23:18	30.6s	sad_stallman	OK	9ec23b25dc974d49c670b0d070585c86	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume
+2024-04-15 15:24:02	3.1s	berserk_dubinsky	OK	9510cdff6a0db7e73e83978b2a0ef19a	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume
+2024-04-15 15:27:53	29.5s	maniac_torvalds	OK	7b2c6f295b8cafee2d1e3725c45ff350	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume --outdir test
+2024-04-15 15:29:49	2.6s	adoring_wright	OK	9510cdff6a0db7e73e83978b2a0ef19a	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume --outdir test
+2024-04-15 15:30:10	2.6s	golden_poitras	OK	9510cdff6a0db7e73e83978b2a0ef19a	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume
+2024-04-15 15:45:15	2.7s	dreamy_marconi	ERR	62830242d079f9d610e76605de999313	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume --outdir test
+2024-04-15 15:45:51	2.8s	big_rutherford	ERR	c6d26d7f9538b7b0fca22ddd3622823f	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume
+2024-04-15 15:46:17	4.5s	magical_northcutt	ERR	fade4470f78102a6eff58148ae2229a3	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume
+2024-04-15 15:46:51	30s	voluminous_gutenberg	OK	e0c366292015f8add79c8b2f132e7ac3	b64858f6-78ba-485c-9d61-d8b0d645f154	nextflow run vsgseq2.nf -resume
+2024-04-15 15:52:51	-	stoic_meninsky	-	e0c366292015f8add79c8b2f132e7ac3	0b5549b8-3b1f-4352-a9e1-8f28291bf36e	nextflow run vsgseq2.nf --help
+2024-04-15 15:53:27	30.2s	goofy_curie	ERR	e0c366292015f8add79c8b2f132e7ac3	0b5549b8-3b1f-4352-a9e1-8f28291bf36e	nextflow run vsgseq2.nf -resume --outdir test --cdhitID 0.96
+2024-04-15 15:53:44	-	sick_darwin	-	e0c366292015f8add79c8b2f132e7ac3	0b5549b8-3b1f-4352-a9e1-8f28291bf36e	nextflow run vsgseq2.nf -resume
+
+2024-04-15 15:54:29	-	stupefied_volta	-	e0c366292015f8add79c8b2f132e7ac3	98915700-45e2-4f45-98bd-de31af000fe3	nextflow run vsgseq2.nf -resume
+2024-04-15 15:56:11	-	extravagant_solvay	-	1cf640d4adb9350b48a6581d07a46997	5e339354-0415-4aec-a801-84cb883ee7f3	nextflow run vsgseq2.nf --cdhitid 0.96
+2024-04-15 16:00:35	-	festering_babbage	-	1cf640d4adb9350b48a6581d07a46997	c95cdcee-8189-41e2-8379-4daa5f8202f5	nextflow run vsgseq2.nf --help
+2024-04-15 16:04:21	-	cranky_magritte	-	98e5886cc29688d0a3dfc00f0cee7506	fd48f0a1-2f96-4ef5-b4c1-d4caa6e1b507	nextflow run vsgseq2.nf --reads '/data/reads/E1*{1,2}.fq.gz' --outdir test
+2024-04-15 16:05:01	3.9s	marvelous_agnesi	ERR	d3d40d46d6ca1d1625b0e7f8ab76d611	dce61a46-fa77-4287-b1b8-b028c5d69f50	nextflow run vsgseq2.nf --reads '/data/reads/E1*{1,2}.fq.gz' --outdir test
+2024-04-15 16:05:20	3.1s	nasty_gautier	ERR	d3d40d46d6ca1d1625b0e7f8ab76d611	4faca311-ef9b-457f-a50d-a4aeec5c3141	nextflow run vsgseq2.nf --reads '/data/reads/*{1,2}.fq.gz' --outdir test
+2024-04-15 16:05:32	45m 17s	shrivelled_austin	ERR	d3d40d46d6ca1d1625b0e7f8ab76d611	1d695d6e-c588-4668-b15a-79b451259551	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --outdir test
+2024-04-15 16:05:57	3.8s	nauseous_keller	ERR	d3d40d46d6ca1d1625b0e7f8ab76d611	efda8828-cc0f-45fd-8333-da67a92019a5	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --no_trimmomatic  --outdir test
+2024-04-15 16:06:21	3.6s	pensive_lagrange	ERR	d3d40d46d6ca1d1625b0e7f8ab76d611	f336da97-f08b-426b-9406-610f17ea362e	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --no_trimmomatic --outdir test
+2024-04-15 16:07:25	43m 24s	sick_celsius	ERR	d3d40d46d6ca1d1625b0e7f8ab76d611	ea3e5ac5-a2cf-47fd-aca0-1be80c6a2f8d	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --no_trimmomatic ' ' --outdir test
+2024-04-15 16:07:59	-	special_pike	-	d3d40d46d6ca1d1625b0e7f8ab76d611	7f5ca194-47c1-4d94-bbdb-5805f2c2bf19	nextflow run vsgseq2.nf --help
+2024-04-15 16:08:17	-	agitated_lalande	-	303b92839b5e7e88df599ffc87b3014e	caf29eb4-eb63-4263-9bff-4559981d20c6	nextflow run vsgseq2.nf --help
+2024-04-15 16:09:14	-	naughty_northcutt	-	a0e2e6052850b7a704f0ba4f826dd9f0	a6e70571-7887-4220-8080-74434bf9806f	nextflow run vsgseq2.nf --help
+2024-04-15 16:09:53	-	compassionate_torvalds	-	4e6c63baa3ef3491b3a6bb1a3bc0c320	14d11629-7b59-40ce-8525-4869fdf1b32e	nextflow run vsgseq2.nf --help
+2024-04-15 16:10:39	-	fervent_becquerel	-	0af888a8cf9add3d756800dfbd4a78ed	bfa325ee-7126-4a59-bdd5-7c33d267d39d	nextflow run vsgseq2.nf --help
+2024-04-15 16:10:55	-	evil_keller	-	1984efee3b1fab62a454819660491b2f	01f43e30-baab-4a08-b2c7-59fbc1a0d9c2	nextflow run vsgseq2.nf --help
+2024-04-15 16:12:10	38m 39s	gigantic_leakey	ERR	37dd00e3b0351948bb0031d922567ac1	73bc44de-e736-42fd-bf8d-6ee17f185475	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --no_trimmomatic --outdir test
+2024-04-15 16:12:34	4.2s	confident_stallman	ERR	37dd00e3b0351948bb0031d922567ac1	41d349de-86eb-4135-88fd-877873998273	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --no_trim --outdir test
+2024-04-15 16:12:50	-	goofy_shockley	-	37dd00e3b0351948bb0031d922567ac1	c10dd6ae-11df-45e7-8caa-d52be34b143f	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --no_trim ' ' --outdir test
+2024-04-15 16:13:10	-	prickly_brenner	-	b00a449beb3b380722f6ec9ecda3fc0c	9aeb134a-2278-435e-9430-976af0d6d532	nextflow run vsgseq2.nf --help
+2024-04-15 16:14:24	-	agitated_visvesvaraya	-	cd2b9af3741a3393766062e7d8b3c981	5bba3d9c-14d3-4fce-a28f-0963fcecfa0a	nextflow run vsgseq2.nf --help
+2024-04-15 16:23:27	-	elegant_hawking	-	175e2d01ed7151a1f53c35bd8cf34252	128425a9-59c9-4673-a9ef-cf76c79e8ae6	nextflow run vsgseq2.nf --reads 'data/reads/E2*{1,2}.fq.gz'
+2024-04-15 16:36:43	-	lethal_lavoisier	-	d118388015cd33aaa26399bbc989f05c	e45482ab-22e5-415b-a3cb-552c6efc0ca7	nextflow run vsgseq2.nf --reads 'data/reads/E2*{1,2}.fq.gz'
+2024-04-15 16:37:25	-	fabulous_mirzakhani	-	d118388015cd33aaa26399bbc989f05c	cb548057-b217-4be8-b039-225861894b93	nextflow run vsgseq2.nf --reads 'data/reads/E2*{1,2}.fq.gz'
+2024-04-15 16:39:31	10m 58s	thirsty_varahamihira	ERR	60186ba19e4d6b78b30c1566e33e5b63	6b7df0e4-163a-468e-8b7d-e3eea2b5776a	nextflow run vsgseq2.nf --reads 'data/reads/E2*{1,2}.fq.gz'
+2024-04-15 16:48:11	-	high_tesla	-	60186ba19e4d6b78b30c1566e33e5b63	67b97acf-aa5e-4ae9-9fbd-77505465e611	nextflow run vsgseq2.nf --reads 'data/reads/E1*{1,2}.fq.gz' --outdir E1 --cores 16 --cpu 16
+2024-04-15 16:50:53	-	fabulous_mandelbrot	-	60186ba19e4d6b78b30c1566e33e5b63	67b97acf-aa5e-4ae9-9fbd-77505465e611	nextflow run vsgseq2.nf --reads 'data/reads/E2*{1,2}.fq.gz' -resume
+2024-04-15 16:51:19	-	soggy_easley	-	60186ba19e4d6b78b30c1566e33e5b63	67b97acf-aa5e-4ae9-9fbd-77505465e611	nextflow run vsgseq2.nf --reads 'data/reads/E2*{1,2}.fq.gz' -resume 3cf3fe8e4d5521d15154d8c6985b8f
+2024-04-15 16:51:51	-	tender_hodgkin	-	60186ba19e4d6b78b30c1566e33e5b63	67b97acf-aa5e-4ae9-9fbd-77505465e611	nextflow run vsgseq2.nf --reads 'data/reads/E2*{1,2}.fq.gz' -resume 3cf3fe8e4d5521d15154d8c6985b8f
+2024-04-15 16:52:04	-	suspicious_easley	-	60186ba19e4d6b78b30c1566e33e5b63	67b97acf-aa5e-4ae9-9fbd-77505465e611	nextflow run vsgseq2.nf --reads 'data/reads/E2*{1,2}.fq.gz' -resume
+2024-04-15 16:52:15	-	wise_gauss	-	60186ba19e4d6b78b30c1566e33e5b63	67b97acf-aa5e-4ae9-9fbd-77505465e611	nextflow run vsgseq2.nf --reads 'data/reads/E2*{1,2}.fq.gz' -resume
+2024-04-15 16:52:29	-	fabulous_coulomb	-	60186ba19e4d6b78b30c1566e33e5b63	f0d7c071-f6f6-4aa0-bcab-c708f35f1828	nextflow run vsgseq2.nf --reads 'data/reads/E2*{1,2}.fq.gz' --cpu 16 --cores 16
+2024-04-15 16:53:09	-	jovial_galileo	-	60186ba19e4d6b78b30c1566e33e5b63	1b4b96be-b474-4f70-8635-f50bee6f6f64	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2E2/B1*{1,2}.fq.gz' --cpu 16 --cores 16
+2024-04-15 16:53:18	3.2s	sleepy_allen	ERR	60186ba19e4d6b78b30c1566e33e5b63	8b58a29f-cc81-4a10-a898-b34ce2972527	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1*{1,2}.fq.gz' --cpu 16 --cores 16
+2024-04-15 16:54:00	5m 55s	extravagant_gilbert	ERR	60186ba19e4d6b78b30c1566e33e5b63	d8631f09-254c-485a-b147-bf09bd616c89	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16
+2024-04-15 17:04:00	2.6s	grave_goldberg	ERR	99dd19321fe20055b26e5faa94fb8ae0	d8631f09-254c-485a-b147-bf09bd616c89	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:04:52	3.6s	elegant_allen	ERR	165997626e6c067b1d9a2838f0b000b7	d8631f09-254c-485a-b147-bf09bd616c89	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:12:29	-	fervent_aryabhata	-	270a7e71e926d9d8bc52438bd8a57006	d8631f09-254c-485a-b147-bf09bd616c89	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:13:00	-	evil_lichterman	-	16e0b2e58da00091986344aec342f6c2	d8631f09-254c-485a-b147-bf09bd616c89	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:14:57	2.4s	deadly_neumann	ERR	9bb1d682cf795f3acdc57412d5831e0c	d8631f09-254c-485a-b147-bf09bd616c89	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:15:12	6m 15s	desperate_mandelbrot	ERR	9bb1d682cf795f3acdc57412d5831e0c	b4f25b2d-c1ca-4fc1-9c53-8ee5a46baca8	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16
+2024-04-15 17:23:40	-	sad_linnaeus	-	03830260fe1426b8bb7098cc18e4169e	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16
+2024-04-15 17:23:51	-	naughty_mcclintock	-	03830260fe1426b8bb7098cc18e4169e	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:24:02	-	curious_bhaskara	-	03830260fe1426b8bb7098cc18e4169e	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:27:17	-	infallible_carson	-	6a922de270c1c46d0785d79a1de369ac	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:27:30	-	tender_moriondo	-	6a922de270c1c46d0785d79a1de369ac	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:28:54	-	chaotic_mendel	-	d3cd601ee325e5717f7bdc4166077b21	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:29:04	-	deadly_hugle	-	d3cd601ee325e5717f7bdc4166077b21	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:29:49	4m 56s	condescending_montalcini	ERR	4bfc3d24789d047412a7a8f5a55ecc24	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:36:31	2.3s	furious_monod	ERR	e5194e3a0a505245875f9d9fe42d0c9c	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:37:18	-	exotic_bose	-	17813d146a77f1feae3be3749ff25933	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:37:56	-	admiring_goodall	-	d41213ab6cbb85afa98b9640056d46c3	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:38:26	-	pensive_babbage	-	790ac8562b5f400c0b1af000605cb802	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:39:27	2.1s	reverent_sax	ERR	993fc144fcf3217e23696892b408db79	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:40:07	2.6s	sharp_marconi	ERR	00a8623fc95d26c15c9be95df88058cb	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:40:26	3.8s	friendly_watson	OK	bac47ee010ad91eb4a2984a5bef4dcf7	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:44:03	3.8s	stoic_volhard	OK	a4db0650f03789b7c22681fce5ce7a84	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' --cpu 16 --cores 16 -resume
+2024-04-15 17:53:52	-	spontaneous_saha	-	a4db0650f03789b7c22681fce5ce7a84	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads '/Volumes/csce/biology/groups/matthews/goldriev/*{1,2}.fq.gz' -resume
+2024-04-16 09:06:36	-	prickly_murdock	-	ee42eff7658a28b8252127a8c5ed26eb	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1*{1,2}.fq.gz' -resume
+2024-04-16 09:07:09	-	astonishing_montalcini	-	968f50489871c375b7480bda8d8927f0	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1*{1,2}.fq.gz' -resume
+2024-04-16 09:08:15	3.7s	hopeful_monod	ERR	ccc45989f5b5ca38fd4744ff7347955e	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1*{1,2}.fq.gz' -resume
+2024-04-16 09:10:25	-	deadly_meitner	-	ccc45989f5b5ca38fd4744ff7347955e	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume
+2024-04-16 09:10:58	-	chaotic_spence	-	ccc45989f5b5ca38fd4744ff7347955e	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 4 --cores 16
+2024-04-16 09:11:16	-	adoring_spence	-	ccc45989f5b5ca38fd4744ff7347955e	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 09:13:02	-	high_varahamihira	-	61a52ea4596f6f3600c6694a101bd7e9	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 09:13:09	5m 31s	furious_woese	ERR	61a52ea4596f6f3600c6694a101bd7e9	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 09:23:40	2.4s	infallible_babbage	ERR	7879848dde110dfa81e534caf5a9af3c	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 09:24:09	2.8s	voluminous_carlsson	ERR	5eb990dbd5f79fc11154edee7108e11d	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 09:27:08	3s	jovial_hilbert	ERR	b5c17f1a96d8a8f92321d017f722afd7	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 09:27:57	3s	sharp_coulomb	ERR	2cb3cd783bacb40eb51e58d03e6cc72a	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 09:28:55	5m 42s	naughty_gauss	ERR	2cb3cd783bacb40eb51e58d03e6cc72a	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 09:39:24	5m 38s	romantic_lamarck	ERR	087fd5d525833b190aea4685b4e5b24d	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 09:47:56	5m 29s	goofy_mcclintock	ERR	a781bbcea0eec811a63eac797bc8bb56	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 10:02:02	5m 41s	determined_rubens	ERR	32604ac2b66a0f23ce052c23886bf997	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 10:09:00	4m 51s	mighty_dubinsky	ERR	9bbb8e4cc16cecd2be0e5dcd7ae674d2	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 10:21:47	5m 35s	pedantic_rubens	ERR	ba72d77f64b4ff21d6de6cd10aabd100	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 10:29:38	6m	astonishing_yonath	OK	128429f358526f1ea91a9a2db604ef84	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 10:44:29	2.9s	awesome_hopper	ERR	9e714df6ea043f4023d79eb0c264e1fe	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 11:10:11	-	amazing_kalman	-	4fe02c7d4a7cac5ee658a7cb890a63c7	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 11:10:46	-	cheeky_euclid	-	4fe02c7d4a7cac5ee658a7cb890a63c7	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 11:10:58	6m 15s	gloomy_lichterman	OK	4fe02c7d4a7cac5ee658a7cb890a63c7	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/BRACA2/B1_1*{1,2}.fq.gz' -resume --cpu 16 --cores 16
+2024-04-16 11:19:08	-	modest_brenner	-	4fe02c7d4a7cac5ee658a7cb890a63c7	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' -resume --cpu 2 --cores 16
+2024-04-16 11:19:43	-	voluminous_bernard	-	4fe02c7d4a7cac5ee658a7cb890a63c7	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' -resume --cpu 2 --cores 4
+2024-04-16 11:19:52	-	amazing_montalcini	-	4fe02c7d4a7cac5ee658a7cb890a63c7	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' -resume --cpu 2 --cores 4
+2024-04-16 11:20:04	-	cheeky_jennings	-	4fe02c7d4a7cac5ee658a7cb890a63c7	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' -resume --cpu 4 --cores 4
+2024-04-16 11:20:17	-	fabulous_goodall	-	4fe02c7d4a7cac5ee658a7cb890a63c7	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' -resume --cpu 2 --cores 2
+2024-04-16 11:20:47	-	silly_mercator	-	4fe02c7d4a7cac5ee658a7cb890a63c7	bd8f0faa-68aa-494e-a565-0fb62e8d76c3	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' -resume --cpu 2 --cores 2
+2024-04-16 11:21:02	-	spontaneous_shockley	-	4fe02c7d4a7cac5ee658a7cb890a63c7	8c81c7f0-9c95-4822-b242-060ab70cec53	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --cpu 2 --cores 2
+2024-04-16 11:21:21	-	confident_mclean	-	4fe02c7d4a7cac5ee658a7cb890a63c7	be7afab1-7e7f-412f-9c1d-e64f2e800af8	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --cpu 16 --cores 16
+2024-04-16 11:22:05	-	ridiculous_leakey	-	4fe02c7d4a7cac5ee658a7cb890a63c7	4f328353-6da8-449a-bb53-66aa53540d53	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --cpu 16 --cores 16
+2024-04-16 11:23:21	-	gigantic_bardeen	-	4fe02c7d4a7cac5ee658a7cb890a63c7	b06a9836-e22e-49a2-9b4e-b88fd26e7033	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --requestedCpus 16 --cores 16
+2024-04-16 11:23:31	-	scruffy_nobel	-	4fe02c7d4a7cac5ee658a7cb890a63c7	79dcf4ab-c071-4015-a267-798279bf77b7	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --requestedCpus 2 --cores 16
+2024-04-16 11:24:47	32m 19s	angry_hugle	OK	fedf6ffb72c80376f42078b3c3be84d2	2338112c-8f3b-4c35-8fa8-5432cb00e37b	nextflow run vsgseq2.nf --reads 'data/reads/*{1,2}.fq.gz' --requestedcpus 2 --cores 4
+2024-04-16 11:31:56	5.4s	confident_goldberg	OK	fedf6ffb72c80376f42078b3c3be84d2	882772be-5940-427c-8662-4776eeb0ff34	nextflow run vsgseq2.nf -preview -with-dag
+2024-04-16 11:59:16	-	pensive_hamilton	-	fedf6ffb72c80376f42078b3c3be84d2	d6d58f2e-9048-4fb3-b4bf-732323ba9cae	nextflow run vsgseq2.nf --reads '/Volumes/csce/biology/groups/matthews/goldriev/WT_E*{1,2}.fq.gz' --requestedcpus 2 --cores 4
