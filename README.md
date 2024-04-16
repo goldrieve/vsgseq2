@@ -5,6 +5,8 @@ An updated  pipeline, implemented using nextflow, for analysing VSG-seq data. Or
 ```
 git pull https://github.com/goldrieve/vsgseq2
 cd vsgseq2
+conda create --file vsgseq2.yml
+conda activate vsgseq2
 nextflow run vsgseq2.nf
 ```
 
