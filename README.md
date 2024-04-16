@@ -10,7 +10,7 @@ nextflow run vsgseq2.nf
 
 You can adjust various parameters for your run. Read about all of the options using `nextflow run vsgseq2.nf --help`.
 
-
+```
 |====================|
 | V S G S E Q 2 - N F|
 |====================|
@@ -42,7 +42,7 @@ Optional arguments:
                 [default: 0.98]
   --outdir        VSGSeq outdir.
                 [default: results]
-
+```
 ## Dependencies
 
 Dependencies should be installed using anaconda
