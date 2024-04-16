@@ -43,6 +43,10 @@ Optional arguments:
   --outdir        VSGSeq outdir.
                 [default: results]
 ```
+## DAG
+
+![DAG](dag-20240416-41516350.html)
+
 ## Dependencies
 
 Dependencies should be installed using anaconda
