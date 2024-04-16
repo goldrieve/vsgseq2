@@ -50,7 +50,10 @@ Dependencies should be installed using anaconda
 
 ## Input Files
 
-vsgseq2 has been updated to allow to submissiong of paired-end sequencing reads, in FASTQ format. Place the FASTQ files in the directory data/reads and the pipeline will do the rest. If you want to run the pipeline on a subset of these reads, add the flag --reads 'dir/*{1,2}.fq.gz' specifiying the location and names of files you would like to analyse.
+vsgseq2 has been updated to allow to submissiong of paired-end sequencing reads, in FASTQ format. Place the FASTQ files in the directory data/reads and the pipeline will do the rest. If you want to run the pipeline on a subset of these reads, add the following flag specifiying the location and names of files you would like to analyse.
+```
+--reads 'dir/*{1,2}.fq.gz'
+``` 
 
 ## BLAST Databases for Identifying VSGs
 
@@ -59,11 +62,14 @@ You can use any reference you want to identify VSGs. We have a few options avail
 We provide the VSG database:
 * Combined database of BOTH Lister427 and EATRO1125 (`concatAntattb427`)
 
-To create your own, place the fasta file in the data/blastdb/ directory, index it with blast and provide the following flag upon job submission --vsg_db new_db
+To create your own, place the fasta file in the data/blastdb/ directory, index it with blast and provide the following flag upon job submission 
+```
+--vsg_db new_db
+```
 
 There is one 'NonVSG' database (`NOTvsgs`). This database has been cobbled together after multiple iterations of assembling expressed VSGs, inspecting them by hand, and identifying common false positives (e.g., certain ESAGs assemble frequently and this will filter those out). If you run the pipeline using this filter (the default), you'll need this database available for BLAST.  
 
 ## Output Files
 
-Output files are saved in one folder '--outdir results'. A summary file shows the expression of each VSG in each sample, both in terms of TPM and percentage of the population (TPM for that VSG/total TPM).
+Output files are saved in one folder. A summary file shows the expression of each VSG in each sample, both in terms of TPM and percentage of the population (TPM for that VSG/total TPM).
 
