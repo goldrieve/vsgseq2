@@ -1,4 +1,5 @@
 data/reads/BRACA2/
 work/
+results/
 .nextflow*
 .nextflow/
