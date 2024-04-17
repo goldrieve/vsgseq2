@@ -82,8 +82,8 @@ process ASSEMBLE {
     """
 }
 
-process LONG_ORF {
-    tag "LONG_ORF on $sample_id"
+process ORF {
+    tag "ORF on $sample_id"
     publishDir params.outdir, mode:'copy'
 
     input:
@@ -204,7 +204,7 @@ process INDEX {
 }
 
 process QUANTIFY {
-    tag "QUANTIFY on $sample_id"
+    tag "QUANTIFY on $trimmed"
     publishDir params.outdir, mode:'copy'
 
     input:
@@ -230,7 +230,7 @@ workflow {
         .set { read_pairs_ch }
 
     assemble_ch = ASSEMBLE(read_pairs_ch, params.cores, params.trinitymem)
-    longorf_ch = LONG_ORF(assemble_ch.trinity_fasta, params.cdslength)
+    longorf_ch = ORF(assemble_ch.trinity_fasta, params.cdslength)
     blastvsg_ch = BLAST_VSG(longorf_ch, params.vsg_db)
     blastnot_ch = BLAST_NOT(blastvsg_ch, params.notvsg_db)
     indivcdhit_ch = INDIVIDUAL_CDHIT(blastnot_ch, params.cdhitid)
