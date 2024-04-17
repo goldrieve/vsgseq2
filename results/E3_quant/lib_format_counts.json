@@ -1,0 +1,22 @@
+{
+    "read_files": "[ E3_1.fq.gz.P.qtrim.gz, E3_2.fq.gz.P.qtrim.gz]",
+    "expected_format": "IU",
+    "compatible_fragment_ratio": 1.0,
+    "num_compatible_fragments": 6919,
+    "num_assigned_fragments": 6919,
+    "num_frags_with_concordant_consistent_mappings": 6574,
+    "num_frags_with_inconsistent_or_orphan_mappings": 388,
+    "strand_mapping_bias": 0.4925463948889565,
+    "MSF": 0,
+    "OSF": 0,
+    "ISF": 3238,
+    "MSR": 0,
+    "OSR": 0,
+    "ISR": 3336,
+    "SF": 172,
+    "SR": 216,
+    "MU": 0,
+    "OU": 0,
+    "IU": 0,
+    "U": 0
+}

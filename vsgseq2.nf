@@ -6,7 +6,6 @@
 params.reads = "$projectDir/data/reads/*{1,2}.fq.gz"
 params.vsg_db = "concatAnTattb427.fa"
 params.notvsg_db = "NOTvsgs.fa"
-params.bait = "TriTrypDB-67_TbruceiEATRO1125_Genome"
 params.cores = "4"
 params.trinitymem = "20"
 params.cdslength = "100"
@@ -39,8 +38,6 @@ if ( params.help ) {
              |                [default: ${params.vsg_db}]
              |  --NOTVSG_db Location of NOTVSGdb
              |                [default: ${params.notvsg_db}]
-             |  --bait Location of reference genome to be used as bait for salmon quantification
-             |                [default: ${params.bait}]
              |
              |Optional arguments:
              |
@@ -87,6 +84,7 @@ process ASSEMBLE {
 
 process LONG_ORF {
     tag "LONG_ORF on $sample_id"
+    publishDir params.outdir, mode:'copy'
 
     input:
     path (sample_id)
@@ -158,6 +156,7 @@ process CONCATENATE_VSGS {
     tag "CONCATENATE_VSGS on $sample_id"
 
     input:
+    val vsg_db
     path (sample_id)
 
     output:
@@ -165,7 +164,7 @@ process CONCATENATE_VSGS {
 
     script:
     """
-    cat ${sample_id} > concatenated_vsgs.fasta
+    cat ../../../data/blastdb/$vsg_db ${sample_id} > concatenated_vsgs.fasta
     """
 }
 
@@ -192,7 +191,6 @@ process INDEX {
     input:
     path (vsgs)
     val cores
-    val bait
 
     output:
     path "salmon_index"
@@ -200,8 +198,8 @@ process INDEX {
 
     script:
     """
-    cat $vsgs ../../../data/genome/${bait}.fasta > gentrome.fasta
-    salmon index --threads $cores -t gentrome.fasta -d ../../../data/genome/${bait}_decoys.txt -i salmon_index --gencode
+    cat $vsgs ../../../data/blastdb/decoys.fasta > gentrome.fasta
+    salmon index --threads $cores -t gentrome.fasta -d ../../../data/blastdb/decoys.txt -i salmon_index --gencode
     """
 }
 
@@ -236,9 +234,9 @@ workflow {
     blastvsg_ch = BLAST_VSG(longorf_ch, params.vsg_db)
     blastnot_ch = BLAST_NOT(blastvsg_ch, params.notvsg_db)
     indivcdhit_ch = INDIVIDUAL_CDHIT(blastnot_ch, params.cdhitid)
-    population_ch = CONCATENATE_VSGS((indivcdhit_ch).collect())
+    population_ch = CONCATENATE_VSGS(params.vsg_db, (indivcdhit_ch).collect())
     catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
-    index_ch = INDEX(catcdhit_ch, params.cores, params.bait)
+    index_ch = INDEX(catcdhit_ch, params.cores)
     quant_ch = QUANTIFY(index_ch, params.cores, assemble_ch.trimmed, assemble_ch.dir)
 }
 
