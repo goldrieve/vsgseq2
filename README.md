@@ -47,7 +47,7 @@ Optional arguments:
 ```
 ## DAG
 
-![DAG](vsgseq2_dag.png)
+![DAG](dag/vsgseq2_dag.png)
 
 ## Dependencies
 
