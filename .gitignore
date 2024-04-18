@@ -1,5 +1,6 @@
 data/reads/BRACA2/
 work/
 results/
+salmon_test/
 .nextflow*
 .nextflow/
