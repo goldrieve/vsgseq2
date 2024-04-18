@@ -199,8 +199,8 @@ process INDEX {
 
     script:
     """
-    cat $vsgs ../../../data/blastdb/decoys.fasta > gentrome.fasta
-    salmon index --threads $cores -t gentrome.fasta -d ../../../data/blastdb/decoys.txt -i salmon_index --gencode
+    cat $vsgs ../../../data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome.fasta > gentrome.fasta
+    salmon index --threads $cores -t gentrome.fasta -d ../../../data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome_decoys.txt -i salmon_index --gencode
     """
 }
 

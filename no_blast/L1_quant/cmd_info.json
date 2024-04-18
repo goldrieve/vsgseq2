@@ -1,0 +1,11 @@
+{
+    "salmon_version": "1.10.3",
+    "libType": "A",
+    "threads": "4",
+    "index": "salmon_index",
+    "mates1": "L1_1.fq.gz.P.qtrim.gz",
+    "mates2": "L1_2.fq.gz.P.qtrim.gz",
+    "validateMappings": [],
+    "output": "L1_quant",
+    "auxDir": "aux_info"
+}

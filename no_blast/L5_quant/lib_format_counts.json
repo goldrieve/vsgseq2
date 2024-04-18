@@ -1,0 +1,22 @@
+{
+    "read_files": "[ L5_1.fq.gz.P.qtrim.gz, L5_2.fq.gz.P.qtrim.gz]",
+    "expected_format": "IU",
+    "compatible_fragment_ratio": 1.0,
+    "num_compatible_fragments": 1392,
+    "num_assigned_fragments": 1392,
+    "num_frags_with_concordant_consistent_mappings": 1288,
+    "num_frags_with_inconsistent_or_orphan_mappings": 123,
+    "strand_mapping_bias": 0.5124223602484472,
+    "MSF": 0,
+    "OSF": 0,
+    "ISF": 660,
+    "MSR": 0,
+    "OSR": 0,
+    "ISR": 628,
+    "SF": 70,
+    "SR": 53,
+    "MU": 0,
+    "OU": 0,
+    "IU": 0,
+    "U": 0
+}
