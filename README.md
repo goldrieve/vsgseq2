@@ -1,5 +1,5 @@
 # vsgseq2
-An updated  pipeline, implemented using nextflow, for analysing VSG-seq data. Originally descrived in this [paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4514441/).
+An updated  pipeline for analysing VSG-seq data. Originally described in this [paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4514441/).
 
 ## Basic Usage 
 ```
@@ -42,6 +42,7 @@ Optional arguments:
                 [default: 0.98]
   --outdir        VSGSeq outdir.
                 [default: results]
+  --help        Print this message.
 ```
 ## DAG
 

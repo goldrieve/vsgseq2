@@ -1,0 +1,11 @@
+{
+    "salmon_version": "1.10.3",
+    "index": "salmon_test/concat_index",
+    "libType": "A",
+    "validateMappings": [],
+    "threads": "16",
+    "output": "salmon_test/L8_quant",
+    "mates1": "data/reads/L8_1.fq.gz",
+    "mates2": "data/reads/L8_2.fq.gz",
+    "auxDir": "aux_info"
+}

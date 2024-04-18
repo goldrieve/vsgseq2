@@ -1,0 +1,43 @@
+[2024-04-18 09:11:05.377] [puff::index::jointLog] [info] Running fixFasta
+[2024-04-18 09:11:05.391] [puff::index::jointLog] [error] In FixFasta, two references with the same name but different sequences: gi. We require that all input records have a unique name up to the first whitespace (or user-provided separator) character.
+[2024-04-18 09:14:46.717] [puff::index::jointLog] [info] Running fixFasta
+[2024-04-18 09:14:46.906] [puff::index::jointLog] [warning] Removed 159 transcripts that were sequence duplicates of indexed transcripts.
+[2024-04-18 09:14:46.906] [puff::index::jointLog] [warning] If you wish to retain duplicate transcripts, please use the `--keepDuplicates` flag
+[2024-04-18 09:14:46.907] [puff::index::jointLog] [info] Replaced 275 non-ATCG nucleotides
+[2024-04-18 09:14:46.907] [puff::index::jointLog] [info] Clipped poly-A tails from 0 transcripts
+[2024-04-18 09:14:46.938] [puff::index::jointLog] [info] Filter size not provided; estimating from number of distinct k-mers
+[2024-04-18 09:14:47.090] [puff::index::jointLog] [info] ntHll estimated 4771056 distinct k-mers, setting filter size to 2^27
+[2024-04-18 09:14:49.714] [puff::index::jointLog] [info] Starting the Pufferfish indexing by reading the GFA binary file.
+[2024-04-18 09:14:49.714] [puff::index::jointLog] [info] Setting the index/BinaryGfa directory concat_index
+[2024-04-18 09:14:49.739] [puff::index::jointLog] [info] Done wrapping the rank vector with a rank9sel structure.
+[2024-04-18 09:14:49.741] [puff::index::jointLog] [info] contig count for validation: 99,797
+[2024-04-18 09:14:49.753] [puff::index::jointLog] [info] Total # of Contigs : 99,797
+[2024-04-18 09:14:49.753] [puff::index::jointLog] [info] Total # of numerical Contigs : 99,797
+[2024-04-18 09:14:49.754] [puff::index::jointLog] [info] Total # of contig vec entries: 218,494
+[2024-04-18 09:14:49.754] [puff::index::jointLog] [info] bits per offset entry 18
+[2024-04-18 09:14:49.756] [puff::index::jointLog] [info] Done constructing the contig vector. 99798
+[2024-04-18 09:14:49.771] [puff::index::jointLog] [info] # segments = 99,797
+[2024-04-18 09:14:49.771] [puff::index::jointLog] [info] total length = 7,811,216
+[2024-04-18 09:14:49.772] [puff::index::jointLog] [info] Reading the reference files ...
+[2024-04-18 09:14:49.797] [puff::index::jointLog] [info] positional integer width = 23
+[2024-04-18 09:14:49.797] [puff::index::jointLog] [info] seqSize = 7,811,216
+[2024-04-18 09:14:49.797] [puff::index::jointLog] [info] rankSize = 7,811,216
+[2024-04-18 09:14:49.797] [puff::index::jointLog] [info] edgeVecSize = 0
+[2024-04-18 09:14:49.797] [puff::index::jointLog] [info] num keys = 4,817,306
+[2024-04-18 09:14:49.984] [puff::index::jointLog] [info] mphf size = 3.00967 MB
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk size = 650,935
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 0 = [0, 650,960)
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 1 = [650,960, 1,301,914)
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 2 = [1,301,914, 1,952,849)
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 3 = [1,952,849, 2,603,809)
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 4 = [2,603,809, 3,254,744)
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 5 = [3,254,744, 3,905,684)
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 6 = [3,905,684, 4,556,643)
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 7 = [4,556,643, 5,207,600)
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 8 = [5,207,600, 5,858,535)
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 9 = [5,858,535, 6,509,470)
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 10 = [6,509,470, 7,160,405)
+[2024-04-18 09:14:49.991] [puff::index::jointLog] [info] chunk 11 = [7,160,405, 7,811,186)
+[2024-04-18 09:14:50.063] [puff::index::jointLog] [info] finished populating pos vector
+[2024-04-18 09:14:50.063] [puff::index::jointLog] [info] writing index components
+[2024-04-18 09:14:50.148] [puff::index::jointLog] [info] finished writing dense pufferfish index

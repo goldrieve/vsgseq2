@@ -52,7 +52,8 @@ if ( params.help ) {
              |  --cdhitid       Define sequence identiy threshold - how much the alignment has to match (0.0 - 1.0).
              |                [default: ${params.cdhitid}]
              |  --outdir        VSGSeq outdir. 
-             |                [default: ${params.outdir}]""".stripMargin()
+             |                [default: ${params.outdir}]
+	         |  --help         Print this message.""".stripMargin()
     // Print the help with the stripped margin and exit
     println(help)
     exit(0)

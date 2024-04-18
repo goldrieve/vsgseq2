@@ -1,0 +1,22 @@
+{
+    "read_files": "[ data/reads/L4_1.fq.gz, data/reads/L4_2.fq.gz]",
+    "expected_format": "IU",
+    "compatible_fragment_ratio": 1.0,
+    "num_compatible_fragments": 91,
+    "num_assigned_fragments": 91,
+    "num_frags_with_concordant_consistent_mappings": 85,
+    "num_frags_with_inconsistent_or_orphan_mappings": 6,
+    "strand_mapping_bias": 0.4823529411764706,
+    "MSF": 0,
+    "OSF": 0,
+    "ISF": 41,
+    "MSR": 0,
+    "OSR": 0,
+    "ISR": 44,
+    "SF": 4,
+    "SR": 2,
+    "MU": 0,
+    "OU": 0,
+    "IU": 0,
+    "U": 0
+}
