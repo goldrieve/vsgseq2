@@ -8,7 +8,7 @@ params.vsg_db = "concatAnTattb427.fa"
 params.notvsg_db = "NOTvsgs.fa"
 params.cores = "4"
 params.trinitymem = "20"
-params.cdslength = "100"
+params.cdslength = "300"
 params.cdhitid = "0.98"
 params.outdir = "results"
 params.help = ""
@@ -76,7 +76,7 @@ process ASSEMBLE {
 
     script:
     """
-    Trinity --seqType fq --left ${reads[0]}  --right ${reads[1]} --CPU ${cores} --max_memory ${trinitymem}G --no_path_merging --no_normalize_reads --trimmomatic --output ${sample_id}_trinity
+    Trinity --seqType fq --left ${reads[0]}  --right ${reads[1]} --CPU ${cores} --max_memory ${trinitymem}G --no_path_merging --min_kmer_cov 2 --no_parallel_norm_stats --trimmomatic --output ${sample_id}_trinity
     mv ${sample_id}_trinity/${sample_id}*.fq.gz.P.qtrim.gz ./
     rm -r ${sample_id}_trinity
     mkdir ${sample_id}
@@ -97,7 +97,7 @@ process ORF {
     script:
     """
     TransDecoder.LongOrfs -m ${cdslength} -t ${sample_id}
-    TransDecoder.Predict --single_best_only -t ${sample_id}
+    TransDecoder.Predict --no_refine_starts --single_best_only -t ${sample_id}
     seqkit replace ${sample_id}.transdecoder.cds -p "(.+)" -r "${sample_id}{nr}" > ${sample_id}_sample.fasta
     seqkit replace ${sample_id}_sample.fasta -p "Trinity.fasta" -r '' > ${sample_id}_renamed.fasta
     """
@@ -105,6 +105,7 @@ process ORF {
 
 process BLAST_VSG {
     tag "BLAST_VSG on $sample_id"
+    publishDir params.outdir, mode:'copy'
 
     input:
     path (sample_id)
@@ -122,6 +123,7 @@ process BLAST_VSG {
 
 process BLAST_NOT {
     tag "BLAST_NOT on $sample_id"
+    publishDir params.outdir, mode:'copy'
 
     input:
     path (sample_id)
@@ -139,6 +141,7 @@ process BLAST_NOT {
 
 process INDIVIDUAL_CDHIT {
     tag "INDIVIDUAL_CDHIT on $sample_id"
+    publishDir params.outdir, mode:'copy'
 
     input:
     path (sample_id)
@@ -155,6 +158,7 @@ process INDIVIDUAL_CDHIT {
 
 process CONCATENATE_VSGS {
     tag "CONCATENATE_VSGS on $sample_id"
+    publishDir params.outdir, mode:'copy'
 
     input:
     val vsg_db
@@ -182,12 +186,13 @@ process CONCATENATED_CDHIT {
 
     script:
     """
-    cd-hit-est -i ${vsgs} -o VSGome.fasta -d 0 -c ${cdhitid} -n 8 -G 1 -g 1 -s 0.0 -aL 0.0 -M 50
+    cd-hit-est -i ${vsgs} -o VSGome.fasta -d 0 -c ${cdhitid} -n 8 -G 1 -g 1 -s 0.0 -aL 0.0 -M 5000
     """
 }
 
 process INDEX {
     tag "INDEX is running"
+    publishDir params.outdir, mode:'copy'
 
     input:
     path (vsgs)
@@ -200,13 +205,14 @@ process INDEX {
     script:
     """
     cat $vsgs ../../../data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome.fasta > gentrome.fasta
-    salmon index --threads $cores -t gentrome.fasta -d ../../../data/genome//TriTrypDB-67_TbruceiEATRO1125_Genome_decoys.txt -i salmon_index --gencode
+    salmon index --threads $cores -t gentrome.fasta -d ../../../data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome_decoys.txt -i salmon_index --gencode
     """
 }
 
 process QUANTIFY {
     tag "QUANTIFY on $trimmed"
     publishDir params.outdir, mode:'copy'
+    cpus = params.requestedcpus
 
     input:
     path (index)

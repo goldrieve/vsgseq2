@@ -1,3 +1,4 @@
+normalise
 data/reads/BRACA2/
 work/
 results/
@@ -5,3 +6,6 @@ salmon_test/
 no_blast/
 .nextflow*
 .nextflow/
+cow*
+all_downsample
+change_cds
