@@ -59,6 +59,19 @@ if ( params.help ) {
     exit(0)
 }
 
+process TRIM {
+    input:
+    tuple val(sample_id), path(reads)
+
+    output:
+    path "${reads[0].baseName.replace("_1.fq","")}_trimmed_{1,2}.fq.gz", emit: trimmed
+
+    script:
+    """
+    trimmomatic PE ${reads[0]} ${reads[1]} ${reads[0].baseName.replace("_1.fq","")}_trimmed_1.fq.gz ${reads[0].baseName}_unpaired.fq.gz ${reads[0].baseName.replace("_1.fq","")}_trimmed_2.fq.gz ${reads[0].baseName}_unpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:5 LEADING:5 TRAILING:5 MINLEN:25
+    """
+}
+
 process ASSEMBLE {
     tag "ASSEMBLE on $sample_id"
     publishDir params.outdir, pattern: '*trinity.Trinity.fasta', mode:'copy'
@@ -76,7 +89,7 @@ process ASSEMBLE {
 
     script:
     """
-    Trinity --seqType fq --left ${reads[0]}  --right ${reads[1]} --CPU ${cores} --max_memory ${trinitymem}G --no_path_merging --min_kmer_cov 2 --no_parallel_norm_stats --trimmomatic --output ${sample_id}_trinity
+    Trinity --seqType fq --left ${reads[0]}  --right ${reads[1]} --CPU ${cores} --max_memory ${trinitymem}G --no_path_merging --min_kmer_cov 2 --no_parallel_norm_stats --output ${sample_id}_trinity
     mv ${sample_id}_trinity/${sample_id}*.fq.gz.P.qtrim.gz ./
     rm -r ${sample_id}_trinity
     mkdir ${sample_id}
@@ -92,50 +105,14 @@ process ORF {
     val cdslength
 
     output:
-    path "${sample_id}_renamed.fasta"
+    path "${sample_id}_ORF.fasta"
 
     script:
     """
     TransDecoder.LongOrfs -m ${cdslength} -t ${sample_id}
     TransDecoder.Predict --no_refine_starts --single_best_only -t ${sample_id}
     seqkit replace ${sample_id}.transdecoder.cds -p "(.+)" -r "${sample_id}{nr}" > ${sample_id}_sample.fasta
-    seqkit replace ${sample_id}_sample.fasta -p "Trinity.fasta" -r '' > ${sample_id}_renamed.fasta
-    """
-}
-
-process BLAST_VSG {
-    tag "BLAST_VSG on $sample_id"
-    publishDir params.outdir, mode:'copy'
-
-    input:
-    path (sample_id)
-    val vsg_db
-
-    output:
-    path "${sample_id}_VSGBLAST.fasta"
-
-    script:
-    """
-    blastn -db ../../../data/blastdb/$vsg_db -query ${sample_id} -outfmt "6 qseqid" -qcov_hsp_perc 30 -perc_identity 90 -evalue 1.0e-10 -max_target_seqs 1 -out ${sample_id}_BLAST_VSG.txt
-    seqkit grep -f ${sample_id}_BLAST_VSG.txt ${sample_id} -o ${sample_id}_VSGBLAST.fasta
-    """
-}
-
-process BLAST_NOT {
-    tag "BLAST_NOT on $sample_id"
-    publishDir params.outdir, mode:'copy'
-
-    input:
-    path (sample_id)
-    val notvsg_db
-
-    output:
-    path "${sample_id}_NOTBLAST.fasta"
-
-    script:
-    """
-    blastn -db ../../../data/blastdb/$notvsg_db -query ${sample_id} -outfmt "6 qseqid" -qcov_hsp_perc 30 -perc_identity 90 -evalue 1.0e-10 -max_target_seqs 1 -out ${sample_id}_BLAST_NOT.txt
-    seqkit grep -v -f ${sample_id}_BLAST_NOT.txt ${sample_id} -o ${sample_id}_NOTBLAST.fasta
+    seqkit replace ${sample_id}_sample.fasta -p "Trinity.fasta" -r '' > ${sample_id}_ORF.fasta
     """
 }
 
@@ -153,6 +130,45 @@ process INDIVIDUAL_CDHIT {
     script:
     """
     cd-hit-est -i ${sample_id} -o ${sample_id}_sample.fasta -d 0 -c ${cdhitid} -n 8 -G 1 -g 1 -s 0.0 -aL 0.0 -M 50
+    """
+}
+
+process BLAST {
+    tag "BLAST on $sample_id"
+    publishDir params.outdir, mode:'copy'
+
+    input:
+    path (sample_id)
+    val vsg_db
+    val notvsg_db
+
+    output:
+    path "${sample_id}.xml", emit: vsgblast
+    path "${sample_id}.nonVSG.xml", emit: notvsgblast
+
+
+    script:
+    """
+    blastn -db ../../../data/blastdb/$vsg_db -query ${sample_id} -outfmt 5 -out ${sample_id}.xml
+    blastn -db ../../../data/blastdb/$notvsg_db -query ${sample_id} -outfmt 5 -out ${sample_id}.nonVSG.xml
+    """
+}
+
+process PROCESS_BLAST {
+    tag "PROCESS_BLAST on $sample_id"
+    publishDir params.outdir, mode:'copy'
+
+    input:
+    path (dir)
+    path (vsgblast)
+    path (notvsgblast)
+
+    output:
+    path "${sample_id}_VSGs.fasta"
+
+    script:
+    """
+    python ../../../bin/process_vsgs.py ${dir}
     """
 }
 
@@ -238,10 +254,10 @@ workflow {
 
     assemble_ch = ASSEMBLE(read_pairs_ch, params.cores, params.trinitymem)
     longorf_ch = ORF(assemble_ch.trinity_fasta, params.cdslength)
-    blastvsg_ch = BLAST_VSG(longorf_ch, params.vsg_db)
-    blastnot_ch = BLAST_NOT(blastvsg_ch, params.notvsg_db)
-    indivcdhit_ch = INDIVIDUAL_CDHIT(blastnot_ch, params.cdhitid)
-    population_ch = CONCATENATE_VSGS(params.vsg_db, (indivcdhit_ch).collect())
+    indivcdhit_ch = INDIVIDUAL_CDHIT(longorf_ch, params.cdhitid)
+    blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
+    process_blast_ch = PROCESS_BLAST (assemble_ch.dir, blast_ch.vsgblast, blast_ch.notvsgblast)
+    population_ch = CONCATENATE_VSGS(params.vsg_db, (process_blast_ch).collect())
     catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
     index_ch = INDEX(catcdhit_ch, params.cores)
     quant_ch = QUANTIFY(index_ch, params.cores, assemble_ch.trimmed, assemble_ch.dir)
