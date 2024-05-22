@@ -9,3 +9,6 @@ no_blast/
 cow*
 all_downsample
 change_cds
+analyse_test
+assemblies
+small_bleed_cow
