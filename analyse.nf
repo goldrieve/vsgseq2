@@ -8,7 +8,6 @@ params.assemblies = "$projectDir/assemblies/*_trinity.Trinity.fasta"
 params.vsg_db = "$projectDir/data/blastdb/concatAnTattb427.fa"
 params.notvsg_db = "$projectDir/data/blastdb/NOTvsgs.fa"
 params.cores = "1"
-params.trinitymem = "20"
 params.cdslength = "300"
 params.cdhitid = "0.98"
 params.outdir = "results"
@@ -34,6 +33,8 @@ if ( params.help ) {
              |   
              |Required arguments:
              |
+             |  --assemblies Location of assemblies
+             |                [default: ${params.assemblies}]
              |  --reads Location of reads, if not in reads dir
              |                [default: ${params.reads}]
              |  --vsg_db    Location of VSGdb
@@ -47,8 +48,6 @@ if ( params.help ) {
              |                [default: ${params.requestedcpus}]
              |  --cores  Define number of cores Trinity will use.
              |                [default: ${params.cores}]
-             |  --trinitymem    Define mem Trinity will use.
-             |                [default: ${params.trinitymem}]
              |  --cdslength    Define minimium CDS length (amino acids).
              |                [default: ${params.cdslength}]
              |  --cdhitid       Define sequence identiy threshold - how much the alignment has to match (0.0 - 1.0).
@@ -174,7 +173,7 @@ process QUANTIFY {
     input:
     path (index)
     val cores
-    path (reads)
+    tuple val(sample_id), path(reads)
 
     output:
     path "${reads[0].baseName.replace("_trimmed_1.fq","")}_quant", emit: quants
