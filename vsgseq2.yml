@@ -5,7 +5,7 @@ channels:
   - conda-forge
 dependencies:
   - blast=2.15.0
-  - bowtie2=2.5.2
+  - bowtie2
   - cd-hit=4.8.1
   - salmon=1.10.3
   - samtools=1.18
