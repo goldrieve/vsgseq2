@@ -3,7 +3,7 @@ An updated  pipeline for analysing VSG-seq data. Originally described in this [p
 
 ## Basic Usage 
 ```
-git pull https://github.com/goldrieve/vsgseq2
+git clone https://github.com/goldrieve/vsgseq2.git
 cd vsgseq2
 conda create --file vsgseq2.yml
 conda activate vsgseq2
