@@ -6,7 +6,7 @@ library(pheatmap)
 
 #Read in the meta data and modify it for tximport
 stats <- read.csv("~/Google Drive/My Drive/vsg/vsgseq2/mouse_metadata.csv")
-my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/vsgseq2/change_cds", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
+my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/mouse_big_bleed_analysis", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
 tpm <- lapply(Sys.glob(my.files), read.table, header = TRUE)
 
 scientific_10 <- function(x) {
@@ -82,8 +82,8 @@ coul <- append(coul, "black")
 long <- merge(x=stats, y=long, by.x="isolate", by.y="variable")[]
 
 png("/Users/goldriev/Google Drive/My Drive/vsg/vsgseq2/full_vsg.png", units="in", width=12, height=12, res=300)
-ggbarplot(long, x = "isolate", y = "value", color = "Name", fill = "Name", legend = "right") +
-  facet_wrap(type ~ stage, scales = 'free_x', ncol = 2) +
+ggbarplot(long, x = "variable", y = "value", color = "Name", fill = "Name", legend = "right") +
+  #facet_wrap(type ~ stage, scales = 'free_x', ncol = 2) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
   scale_fill_manual(values = coul) +
   scale_color_manual(values = coul)

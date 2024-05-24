@@ -51,13 +51,14 @@ process TRIM {
     publishDir params.outdir, mode:'copy'
     input:
     tuple val(sample_id), path(reads)
+    val cores
 
     output:
     path "${reads[0].baseName.replace("_1.fq","")}_trimmed_{1,2}.fq.gz", emit: trimmed
 
     script:
     """
-    trimmomatic PE ${reads[0]} ${reads[1]} ${reads[0].baseName.replace("_1.fq","")}_trimmed_1.fq.gz ${reads[0].baseName}_unpaired.fq.gz ${reads[0].baseName.replace("_1.fq","")}_trimmed_2.fq.gz ${reads[0].baseName}_unpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:5 LEADING:5 TRAILING:5 MINLEN:25
+    trimmomatic PE ${reads[0]} ${reads[1]} ${reads[0].baseName.replace("_1.fq","")}_trimmed_1.fq.gz ${reads[0].baseName}_unpaired.fq.gz ${reads[0].baseName.replace("_1.fq","")}_trimmed_2.fq.gz ${reads[0].baseName}_unpaired.fq.gz ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:5 LEADING:5 TRAILING:5 MINLEN:25 -threads ${cores}
     """
 }
 
@@ -72,12 +73,12 @@ process ASSEMBLE {
     val trinitymem
 
     output:
-    path "${sample_id}_trinity.Trinity.fasta", emit: trinity_fasta
+    path "${trimmed[0].baseName.replace("_trimmed_2.fq.gz","")}_trinity", emit: trinity_fasta
 
     script:
     """
-    Trinity --seqType fq --left ${reads[0]}  --right ${reads[1]} --CPU ${cores} --max_memory ${trinitymem}G --no_path_merging --min_kmer_cov 2 --no_parallel_norm_stats --output ${sample_id}_trinity
-    rm -r ${sample_id}_trinity
+    Trinity --seqType fq --left ${trimmed[0]}  --right ${trimmed[1]} --CPU ${cores} --max_memory ${trinitymem}G --no_path_merging --min_kmer_cov 2 --no_parallel_norm_stats --output ${trimmed[0].baseName.replace("_trimmed_2.fq.gz","")}_trinity
+    rm -r ${trimmed}_trinity
     """
 }
 
@@ -86,7 +87,7 @@ workflow {
         .fromFilePairs(params.reads, checkIfExists: true)
         .set { read_pairs_ch }
 
-    trim_ch = TRIM(read_pairs_ch, params.cores, params.trinitymem)
+    trim_ch = TRIM(read_pairs_ch, params.cores)
     assemble_ch = ASSEMBLE(trim_ch, params.cores, params.trinitymem)
 }
 

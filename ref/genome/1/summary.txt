@@ -1,0 +1,13 @@
+#Summary
+#Generated on	Fri May 24 09:43:00 BST 2024
+#Version	5
+chroms	1
+bases	10660432
+defined	7531105
+undefined	3129327
+contigs	6227
+scaffolds	6227
+interpad	500
+source	/Users/goldriev/pkgs/vsgseq2/data/blastdb/NOTvsgs_concatAnTattb427_mashed.fa
+bytes	8003423
+last modified	1716536014722
