@@ -5,7 +5,7 @@ An updated  pipeline for analysing VSG-seq data. Originally described in this [p
 ```
 git clone https://github.com/goldrieve/vsgseq2.git
 cd vsgseq2
-conda create --file vsgseq2.yml
+conda env create --file vsgseq2.yml -n vsgseq2
 conda activate vsgseq2
 nextflow run vsgseq2.nf
 ```

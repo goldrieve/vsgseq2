@@ -1,4 +1,3 @@
-name: vsgseq2
 channels:
   - anaconda
   - bioconda
