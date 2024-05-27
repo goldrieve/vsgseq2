@@ -63,7 +63,6 @@ process TRIM {
 }
 
 process ASSEMBLE {
-    tag "ASSEMBLE on $sample_id"
     publishDir params.outdir, pattern: '*trinity.Trinity.fasta', mode:'copy'
     cpus = params.requestedcpus
     
