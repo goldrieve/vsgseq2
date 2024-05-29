@@ -3,10 +3,14 @@ library(RColorBrewer)
 library(reshape)
 library(ggpubr)
 library(pheatmap)
+library(tidyverse)
 
 #Read in the meta data and modify it for tximport
-stats <- read.csv("~/Google Drive/My Drive/vsg/vsgseq2/mouse_metadata.csv")
-my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/mouse_big_bleed_analysis", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
+stats <- read.csv("~/Google Drive/My Drive/vsg/vsgseq2/meta.csv")
+orthogroups <- read.csv("~/Desktop/Orthogroups.csv")
+orthogroups_long <- orthogroups %>% separate_rows(Name, sep = ",")
+
+my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/salmon", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
 tpm <- lapply(Sys.glob(my.files), read.table, header = TRUE)
 
 scientific_10 <- function(x) {
@@ -27,7 +31,6 @@ tpm2 <- lapply(tpm, tpm_per)
 wide_tpm <- dplyr:::reduce(tpm2, full_join, by = "Name")
 names <- append(names, 'Name', after = 0)
 colnames(wide_tpm) <- names
-#write.csv(wide_tpm, '~/Google Drive/My Drive/vsg/vsgseq2/mouse_percent.csv', row.names=FALSE)
 
 tpm_select <- function(DF) {
   DF <- DF %>% select(Name, TPM)
@@ -37,34 +40,8 @@ tpm_select <- function(DF) {
 tpm_selected <- lapply(tpm, tpm_select)
 wide_tpm_selected <- dplyr:::reduce(tpm_selected, full_join, by = "Name")
 colnames(wide_tpm_selected) <- names
-#write.csv(wide_tpm_selected, '~/Google Drive/My Drive/vsg/vsgseq2/mouse_tpm.csv', row.names=FALSE)
 
-# Why we should keep all VSGs!
-keep_tpm <- wide_tpm %>%
-  mutate(Names = if_all(where(is.numeric), ~ . < 0.01, Name))
-
-keep_tpm <- keep_tpm %>% mutate(Name = if_else(Names != "TRUE", Name, "zVSGome"))
-
-keep_tpm <- subset(keep_tpm, select = -c(Names) )
-
-long <- melt(keep_tpm, id.vars = c("Name"), variable.name = "Percent", value.name = "P")
-
-coul <- brewer.pal(12,"Set3") 
-coul <- colorRampPalette(coul)(-1 + length(unique(long$Name)))
-coul <- append(coul, "black")
-
-long <- merge(x=stats, y=long, by.x="isolate", by.y="variable")[]
-
-png("/Users/goldriev/Google Drive/My Drive/vsg/vsgseq2/keep_all_vsg.png", units="in", width=12, height=12, res=300)
-ggbarplot(long, x = "isolate", y = "value", color = "Name", fill = "Name", legend = "right") +
-  facet_wrap(type ~ stage, scales = 'free_x', ncol = 2) +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
-  scale_fill_manual(values = coul) +
-  scale_color_manual(values = coul) + 
-  theme(legend.position = "none") 
-dev.off()
-
-# Main plot
+#write.csv(wide_tpm_selected, '~/Desktop/wide_tpm.csv', row.names=FALSE)
 
 keep_tpm <- wide_tpm %>%
   mutate(Names = if_any(where(is.numeric), ~ . > 10, Name))
@@ -74,20 +51,132 @@ keep_tpm <- keep_tpm %>% mutate(Name = if_else(Names == "TRUE", Name, "zVSGome")
 keep_tpm <- subset(keep_tpm, select = -c(Names) )
 
 long <- melt(keep_tpm, id.vars = c("Name"), variable.name = "isolate", value.name = "P")
+long <- merge(x=stats, y=long, by.x="isolate", by.y="variable")[]
+long <- merge(x = long, y = orthogroups_long, by.x = "Name", by.y = "Name", all.x = TRUE)
+long <- long %>% replace_na(list(col1 = "Other", col2 = "Other"))
 
 coul <- brewer.pal(12,"Set3") 
 coul <- colorRampPalette(coul)(-1 + length(unique(long$Name)))
 coul <- append(coul, "black")
 
-long <- merge(x=stats, y=long, by.x="isolate", by.y="variable")[]
+cow_comb <- long[long$host == 'cow', ]
+mouse_comb <- long[long$host == 'mouse', ]
+cow_comb$test <- as.numeric(cow_comb$test)
 
-png("/Users/goldriev/Google Drive/My Drive/vsg/vsgseq2/full_vsg.png", units="in", width=12, height=12, res=300)
-ggbarplot(long, x = "variable", y = "value", color = "Name", fill = "Name", legend = "right") +
-  #facet_wrap(type ~ stage, scales = 'free_x', ncol = 2) +
+ggbarplot(long, x = "test", y = "value", color = "Name", fill = "Name", legend = "right") +
+  facet_wrap(type + host ~ stage, scales = 'free_x', ncol = 2) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
+  scale_fill_manual(values = coul) +
+  scale_color_manual(values = coul)
+
+png("~/Desktop/combined_cow.png", units="in", width=12, height=12, res=300)
+ggbarplot(cow_comb, x = "test", y = "value", color = "Orthogroup", fill = "Orthogroup", legend = "right") +
+  facet_wrap(type + host ~ stage, scales = 'free_x', ncol = 2) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
   scale_fill_manual(values = coul) +
   scale_color_manual(values = coul)
 dev.off()
+
+png("~/Desktop/combined_mouse.png", units="in", width=12, height=12, res=300)
+ggbarplot(mouse_comb, x = "test", y = "value", color = "Name", fill = "Name", legend = "right") +
+  facet_wrap(type + host ~ stage, scales = 'free_x', ncol = 2) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
+  scale_fill_manual(values = coul) +
+  scale_color_manual(values = coul)
+dev.off()
+
+#Read in the meta data and modify it for tximport
+
+my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/full_cds/mouse", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
+tpm <- lapply(Sys.glob(my.files), read.table, header = TRUE)
+
+scientific_10 <- function(x) {
+  parse(text=gsub("e", " %*% 10^", scales::scientific_format()(x)))
+}
+
+names <- sapply(strsplit(my.files, split="\\/"), function(x)x[8])
+names <- gsub("_quant", "", names)
+names(tpm) <- names
+
+tpm_per <- function(DF) {
+  DF$Percent <- (DF$TPM /(sum(DF$TPM)))*100
+  DF <- DF %>% select(Name, Percent)
+  return(DF)
+}
+
+tpm2 <- lapply(tpm, tpm_per)
+wide_tpm <- dplyr:::reduce(tpm2, full_join, by = "Name")
+names <- append(names, 'Name', after = 0)
+colnames(wide_tpm) <- names
+
+keep_tpm <- wide_tpm %>%
+  mutate(Names = if_any(where(is.numeric), ~ . > 10, Name))
+
+keep_tpm <- keep_tpm %>% mutate(Name = if_else(Names == "TRUE", Name, "zVSGome"))
+
+keep_tpm <- subset(keep_tpm, select = -c(Names) )
+
+long <- melt(keep_tpm, id.vars = c("Name"), variable.name = "isolate", value.name = "P")
+long <- merge(x=stats, y=long, by.x="isolate", by.y="variable")[]
+
+coul <- brewer.pal(12,"Set3") 
+coul <- colorRampPalette(coul)(-1 + length(unique(long$Name)))
+coul <- append(coul, "black")
+
+png("~/Desktop/mouse.png", units="in", width=12, height=12, res=300)
+ggbarplot(long, x = "test", y = "value", color = "Name", fill = "Name", legend = "right") +
+  facet_wrap(type + host ~ stage, scales = 'free_x', ncol = 2) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
+  scale_fill_manual(values = coul) +
+  scale_color_manual(values = coul)
+dev.off()
+
+#
+my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/full_cds/cow", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
+tpm <- lapply(Sys.glob(my.files), read.table, header = TRUE)
+
+scientific_10 <- function(x) {
+  parse(text=gsub("e", " %*% 10^", scales::scientific_format()(x)))
+}
+
+names <- sapply(strsplit(my.files, split="\\/"), function(x)x[8])
+names <- gsub("_quant", "", names)
+names(tpm) <- names
+
+tpm_per <- function(DF) {
+  DF$Percent <- (DF$TPM /(sum(DF$TPM)))*100
+  DF <- DF %>% select(Name, Percent)
+  return(DF)
+}
+
+tpm2 <- lapply(tpm, tpm_per)
+wide_tpm <- dplyr:::reduce(tpm2, full_join, by = "Name")
+names <- append(names, 'Name', after = 0)
+colnames(wide_tpm) <- names
+
+keep_tpm <- wide_tpm %>%
+  mutate(Names = if_any(where(is.numeric), ~ . > 10, Name))
+
+keep_tpm <- keep_tpm %>% mutate(Name = if_else(Names == "TRUE", Name, "zVSGome"))
+
+keep_tpm <- subset(keep_tpm, select = -c(Names) )
+
+long <- melt(keep_tpm, id.vars = c("Name"), variable.name = "isolate", value.name = "P")
+long <- merge(x=stats, y=long, by.x="isolate", by.y="variable")[]
+
+coul <- brewer.pal(12,"Set3") 
+coul <- colorRampPalette(coul)(-1 + length(unique(long$Name)))
+coul <- append(coul, "black")
+long$test <- as.numeric(long$test)
+
+png("~/Desktop/cow.png", units="in", width=12, height=12, res=300)
+ggbarplot(long, x = "test", y = "value", color = "Name", fill = "Name", legend = "right") +
+  facet_wrap(type + host ~ stage, scales = 'free_x', ncol = 2) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
+  scale_fill_manual(values = coul) +
+  scale_color_manual(values = coul)
+dev.off()
+
 
 filter_tpm <- filter(keep_tpm, Name != "zVSGome")
 row.names(filter_tpm) <- filter_tpm$'Name'
