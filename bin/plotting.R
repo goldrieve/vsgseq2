@@ -9,15 +9,15 @@ library(tidyverse)
 stats <- read.csv("~/Google Drive/My Drive/vsg/vsgseq2/meta.csv")
 orthogroups <- read.csv("~/Desktop/Orthogroups.csv")
 orthogroups_long <- orthogroups %>% separate_rows(Name, sep = ",")
-
-my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/salmon", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
+orthogroups_long
+my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/full_cds/mouse_big_bleed_complete_orf", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
 tpm <- lapply(Sys.glob(my.files), read.table, header = TRUE)
 
 scientific_10 <- function(x) {
   parse(text=gsub("e", " %*% 10^", scales::scientific_format()(x)))
 }
 
-names <- sapply(strsplit(my.files, split="\\/"), function(x)x[7])
+names <- sapply(strsplit(my.files, split="\\/"), function(x)x[8])
 names <- gsub("_quant", "", names)
 names(tpm) <- names
 
@@ -55,19 +55,26 @@ long <- merge(x=stats, y=long, by.x="isolate", by.y="variable")[]
 long <- merge(x = long, y = orthogroups_long, by.x = "Name", by.y = "Name", all.x = TRUE)
 long <- long %>% replace_na(list(col1 = "Other", col2 = "Other"))
 
-coul <- brewer.pal(12,"Set3") 
-coul <- colorRampPalette(coul)(-1 + length(unique(long$Name)))
-coul <- append(coul, "black")
+png("~/Desktop/orthogroup.png", units="in", width=15, height=15, res=300)
+ggboxplot(mouse_comb, x = "type", y = "value",
+          add.params = list(size = 2), color = "stage",
+          add = "jitter") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  facet_wrap("Orthogroup", scales = 'free_x') 
+dev.off()
 
 cow_comb <- long[long$host == 'cow', ]
 mouse_comb <- long[long$host == 'mouse', ]
+mouse_comb <- mouse_comb[mouse_comb$type == 'WT', ]
 cow_comb$test <- as.numeric(cow_comb$test)
 
+png("~/Desktop/wt_mouse.png", units="in", width=1, height=6, res=300)
 ggbarplot(long, x = "test", y = "value", color = "Name", fill = "Name", legend = "right") +
   facet_wrap(type + host ~ stage, scales = 'free_x', ncol = 2) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
   scale_fill_manual(values = coul) +
   scale_color_manual(values = coul)
+dev.off()
 
 png("~/Desktop/combined_cow.png", units="in", width=12, height=12, res=300)
 ggbarplot(cow_comb, x = "test", y = "value", color = "Orthogroup", fill = "Orthogroup", legend = "right") +
@@ -77,9 +84,9 @@ ggbarplot(cow_comb, x = "test", y = "value", color = "Orthogroup", fill = "Ortho
   scale_color_manual(values = coul)
 dev.off()
 
-png("~/Desktop/combined_mouse.png", units="in", width=12, height=12, res=300)
+png("~/Desktop/pacbio_combined_mouse.png", units="in", width=12, height=12, res=300)
 ggbarplot(mouse_comb, x = "test", y = "value", color = "Name", fill = "Name", legend = "right") +
-  facet_wrap(type + host ~ stage, scales = 'free_x', ncol = 2) +
+  facet_wrap(type + host ~ stage + tech, scales = 'free_x', ncol = 2) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
   scale_fill_manual(values = coul) +
   scale_color_manual(values = coul)
