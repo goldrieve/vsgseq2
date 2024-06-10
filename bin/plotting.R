@@ -11,6 +11,7 @@ orthogroups <- read.csv("~/Desktop/Orthogroups.csv")
 orthogroups_long <- orthogroups %>% separate_rows(Name, sep = ",")
 orthogroups_long
 my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/full_cds/mouse_big_bleed_complete_orf", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
+
 tpm <- lapply(Sys.glob(my.files), read.table, header = TRUE)
 
 scientific_10 <- function(x) {
@@ -199,45 +200,22 @@ pheatmap(mat, show_rownames=FALSE, color = colorRampPalette(rev(brewer.pal(n = 7
 
 assembly <- subset(stats, select = c("isolate", "type", "stage","assembled_transcripts", "orf", "vsg_blast", "not_blast", "cd.hit", "parasites"))
 long <- melt(assembly, id.vars = c("isolate","type", "stage", "parasites"), variable.name = "transcripts", value.name = "transcripts")
+mouse_stats <- stats[stats$host == 'mouse', ]
 
-a <- ggboxplot(long, x = "variable", y = "value", color = "type", fill = "stage", legend = "right") +
+a <- ggboxplot(mouse_stats, x = "type", y = "mapping", color = "stage", fill = "stage", legend = "right") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  ylab("Transcript count") +
-  scale_fill_manual(values = c("lightgrey", "white")) 
+  ylab("Mapping rate")
 
-b <- ggboxplot(long, x = "variable", y = "log(value)", color = "type", fill = "stage", legend = "right") +
+b <- ggboxplot(mouse_stats, x = "type", y = "vsgs", color = "stage", fill = "stage", legend = "right") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  ylab("Transcript count (log)") +
-  scale_fill_manual(values = c("lightgrey", "white")) 
+  ylab("VSG count")
 
-vsgs <- filter(long,variable == 'cd.hit')
-
-c <- ggboxplot(vsgs, x = "type", y = "log(value)", color = "type", fill = "stage", legend = "right") +
+c <- ggboxplot(mouse_stats, x = "type", y = "log(parasites/vsgs)", color = "stage", fill = "stage", legend = "right") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  ylab("Transcript count (log)") +
-  scale_fill_manual(values = c("lightgrey", "white")) 
+  ylab("log(parasite count/ VSG count")
 
-d <- ggboxplot(vsgs, x = "type", y = "log(parasites/value)", color = "type", fill = "stage", legend = "right") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  ylab("Parasite count/ transcript count (log)") +
-  scale_fill_manual(values = c("lightgrey", "white")) 
-
-mapping <- subset(stats, select = c("isolate", "type", "stage","vsgseq2_mapping", "VSGSeq_mapping", "parasites"))
-long <- melt(mapping, id.vars = c("isolate","type", "stage", "parasites"), variable.name = "transcripts", value.name = "transcripts")
-
-e <- ggboxplot(long, x = "type", y = "value", color = "variable", fill = "stage", legend = "right") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  ylab("Mapping rate (%)") +
-  scale_fill_manual(values = c("lightgrey", "white")) 
-
-f <- ggboxplot(vsgs, x = "type", y = "(parasites)", color = "type", fill = "stage", legend = "right") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  ylab("Parasite count") +
-  scale_fill_manual(values = c("lightgrey", "white")) +
-  scale_y_continuous(label=scientific_10) 
-
-png("~/Desktop/vsg_transcripts.png", units="in", width=12, height=12, res=300)
-ggarrange(a,b, ncol = 1, nrow = 2,  common.legend = F, legend="right", align = c("hv"), labels = "auto", font.label = list(size = 14, color = "black", face = "bold", family = NULL))
+png("~/Desktop/vsgseq2_summary.png", units="in", width=12, height=12, res=300)
+ggarrange(a,b,c, ncol = 2, nrow = 2,  common.legend = F, legend="right", align = c("hv"), labels = "auto", font.label = list(size = 14, color = "black", face = "bold", family = NULL))
 dev.off()
 
 png("~/Desktop/vsg_summary.png", units="in", width=12, height=10, res=300)
