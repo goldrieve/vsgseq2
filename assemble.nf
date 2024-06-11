@@ -48,7 +48,7 @@ if ( params.help ) {
 }
 
 process TRIM {
-    publishDir params.outdir, mode:'copy'
+    publishDir "${params.outdir}/trimmed_reads", mode:'copy'
     input:
     tuple val(sample_id), path(reads)
     val cores
@@ -64,7 +64,7 @@ process TRIM {
 
 process ASSEMBLE {
     tag "ASSEMBLE on $sample_id"
-    publishDir params.outdir, pattern: '*trinity.Trinity.fasta', mode:'copy'
+    publishDir "${params.outdir}/assemblies", pattern: '*trinity.Trinity.fasta', mode:'copy'
     cpus = params.requestedcpus
     
     input:

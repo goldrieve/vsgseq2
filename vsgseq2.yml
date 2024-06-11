@@ -15,4 +15,5 @@ dependencies:
   - trimmomatic=0.39
   - trinity=2.15.1
   - nextflow=23.10.1-0
-  - biopython=1.83	
+  - biopython=1.83
+  - r-pacman

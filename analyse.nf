@@ -61,8 +61,6 @@ if ( params.help ) {
 }
 
 process ORF {
-    publishDir params.outdir, mode:'copy'
-
     input:
     path (assemblies)
     val cdslength
@@ -80,8 +78,6 @@ process ORF {
 }
 
 process INDIVIDUAL_CDHIT {
-    publishDir params.outdir, mode:'copy'
-
     input:
     path (assemblies)
     val cdhitid
@@ -96,8 +92,7 @@ process INDIVIDUAL_CDHIT {
 }
 
 process BLAST {
-    publishDir params.outdir, mode:'copy'
-
+    publishDir "${params.outdir}/VSGs", mode:'copy', pattern: '*_VSGs.fasta'
     input:
     path (assemblies)
     val (vsg_db)
@@ -117,10 +112,8 @@ process BLAST {
 }
 
 process CONCATENATE_VSGS {
-    publishDir params.outdir, mode:'copy'
-
+    publishDir "${params.outdir}/VSGs", mode:'copy'
     input:
-    val vsg_db
     path (vsgome)
 
     output:
@@ -128,12 +121,12 @@ process CONCATENATE_VSGS {
 
     script:
     """
-    cat $vsg_db ${vsgome} > concatenated_vsgs.fasta
+    cat ${vsgome} > concatenated_vsgs.fasta
     """
 }
 
 process CONCATENATED_CDHIT {
-    publishDir params.outdir, mode:'copy'
+    publishDir "${params.outdir}/VSGs", mode:'copy'
 
     input:
     path (vsgs)
@@ -149,8 +142,6 @@ process CONCATENATED_CDHIT {
 }
 
 process INDEX {
-    publishDir params.outdir, mode:'copy'
-
     input:
     path (vsgs)
     val cores
@@ -167,9 +158,7 @@ process INDEX {
 }
 
 process QUANTIFY {
-    publishDir params.outdir, mode:'copy'
     cpus = params.requestedcpus
-
     input:
     path (index)
     val cores
@@ -186,7 +175,7 @@ process QUANTIFY {
 }
 
 process MULTIQC {
-    publishDir params.outdir, mode:'copy'
+    publishDir "${params.outdir}/summary", mode:'copy'
     cpus = params.requestedcpus
 
     input:
@@ -202,6 +191,24 @@ process MULTIQC {
     """
 }
 
+process SUMMARISE {
+    publishDir "${params.outdir}/summary", mode:'copy'
+    input:
+    val quants
+    val vsgs
+
+    output:
+    path "tph.csv"
+    path "vsg_count.csv"
+
+
+    script:
+    """
+    Rscript $projectDir/bin/summarise_quant.R "${quants}"
+    Rscript $projectDir/bin/summarise_vsgs.R "${vsgs}"
+    """
+}
+
 
 workflow {
     Channel
@@ -212,11 +219,12 @@ workflow {
     longorf_ch = ORF(assemblies_ch, params.cdslength)
     indivcdhit_ch = INDIVIDUAL_CDHIT(longorf_ch.fasta, params.cdhitid)
     blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
-    population_ch = CONCATENATE_VSGS(params.vsg_db, (blast_ch.vsgs).collect())
+    population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect())
     catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
     index_ch = INDEX(catcdhit_ch, params.cores)
     quant_ch = QUANTIFY(index_ch, params.cores, files_ch)
     multiqc_ch = MULTIQC((quant_ch.quants).collect())
+    summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
 }
 
 workflow.onComplete {
