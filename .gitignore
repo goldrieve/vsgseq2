@@ -1,4 +1,5 @@
-data/reads/*
+data/reads/fastqc
+data/reads/sub
 work/
 results/
 .nextflow*
