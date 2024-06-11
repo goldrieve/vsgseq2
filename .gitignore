@@ -1,4 +1,4 @@
-data/reads/
+data/reads/*
 work/
 results/
 .nextflow*
