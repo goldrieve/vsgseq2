@@ -21,22 +21,22 @@ tpm <- lapply(my.files, function(file) {
 
 # Define a function that adds a 'Percent' column to a data frame, which is the percentage of 'TPM' in the total 'TPM'
 tpm_per <- function(DF) {
-  DF$Percent <- (DF$TPM /(sum(DF$TPM)))*100
-  DF <- DF %>% select(Name, Percent)
+  #DF$Percent <- (DF$TPM /(sum(DF$TPM)))*100
+  DF <- DF %>% select(Name, TPM)
   return(DF)
 }
 
 # Apply the 'tpm_per' function to each data frame in the list
-tpm_percentage <- lapply(tpm, tpm_per)
+tpm <- lapply(tpm, tpm_per)
 
 # Extract the last element from each file path and assign these names to the list of data frames
 names <- sapply(strsplit(quant_dirs, split="\\/"), function(x) tail(x, n=1))
-names(tpm_percentage) <- names
+names(tpm) <- names
 
 # Join all data frames in the list into a single wide data frame
-wide_tpm <- dplyr:::reduce(tpm_percentage, full_join, by = "Name")
+wide_tpm <- dplyr:::reduce(tpm, full_join, by = "Name")
 names <- append(names, 'Name', after = 0)
 colnames(wide_tpm) <- names
 
 # Write the wide data frame to a CSV file
-write.csv(wide_tpm, './tph.csv', row.names=FALSE)
+write.csv(wide_tpm, './tpm.csv', row.names=FALSE)

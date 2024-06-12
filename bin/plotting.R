@@ -6,11 +6,10 @@ library(pheatmap)
 library(tidyverse)
 
 #Read in the meta data and modify it for tximport
-stats <- read.csv("~/Google Drive/My Drive/vsg/vsgseq2/meta.csv")
-orthogroups <- read.csv("~/Desktop/Orthogroups.csv")
+stats <- read.csv("~/Google Drive/My Drive/vsg/vsgseq2/data/meta.csv")
+orthogroups <- read.csv("~/pkgs/analyse/orthofinder/protein/all_samples/OrthoFinder/Results_May31/Orthogroups/Orthogroups.csv")
 orthogroups_long <- orthogroups %>% separate_rows(Name, sep = ",")
-orthogroups_long
-my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/full_cds/mouse_big_bleed_complete_orf", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
+my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/all_data_results", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
 
 tpm <- lapply(Sys.glob(my.files), read.table, header = TRUE)
 
@@ -18,7 +17,7 @@ scientific_10 <- function(x) {
   parse(text=gsub("e", " %*% 10^", scales::scientific_format()(x)))
 }
 
-names <- sapply(strsplit(my.files, split="\\/"), function(x)x[8])
+names <- sapply(strsplit(my.files, split="\\/"), function(x)x[7])
 names <- gsub("_quant", "", names)
 names(tpm) <- names
 
@@ -65,9 +64,10 @@ ggboxplot(mouse_comb, x = "type", y = "value",
 dev.off()
 
 cow_comb <- long[long$host == 'cow', ]
+cow_comb <- cow_comb[cow_comb$bleed == 'small', ]
 mouse_comb <- long[long$host == 'mouse', ]
 mouse_comb <- mouse_comb[mouse_comb$type == 'WT', ]
-cow_comb$test <- as.numeric(cow_comb$test)
+cow_comb$stage <- as.numeric(cow_comb$stage)
 
 png("~/Desktop/wt_mouse.png", units="in", width=1, height=6, res=300)
 ggbarplot(long, x = "test", y = "value", color = "Name", fill = "Name", legend = "right") +
@@ -77,9 +77,14 @@ ggbarplot(long, x = "test", y = "value", color = "Name", fill = "Name", legend =
   scale_color_manual(values = coul)
 dev.off()
 
-png("~/Desktop/combined_cow.png", units="in", width=12, height=12, res=300)
-ggbarplot(cow_comb, x = "test", y = "value", color = "Orthogroup", fill = "Orthogroup", legend = "right") +
-  facet_wrap(type + host ~ stage, scales = 'free_x', ncol = 2) +
+coul <- brewer.pal(12,"Set3") 
+coul <- colorRampPalette(coul)(-1 + length(unique(cow_comb$Name)))
+coul <- append(coul, "black")
+cow_comb$stage <- as.numeric(cow_comb$stage)
+
+png("~/Desktop/cow_small.png", units="in", width=20, height=10, res=300)
+ggbarplot(cow_comb, x = "stage", y = "value", color = "Name", fill = "Name", legend = "right") +
+  facet_wrap(~type, scales = 'free_x', ncol = 2) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
   scale_fill_manual(values = coul) +
   scale_color_manual(values = coul)

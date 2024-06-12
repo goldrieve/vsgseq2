@@ -198,7 +198,7 @@ process SUMMARISE {
     val vsgs
 
     output:
-    path "tph.csv"
+    path "tpm.csv"
     path "vsg_count.csv"
 
 

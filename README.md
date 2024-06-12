@@ -1,17 +1,22 @@
 # vsgseq2
-An updated  pipeline for analysing VSG-seq data. Originally described in this [paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4514441/).
+An updated  pipeline for analysing VSG-seq data. The original VSGSeq pipeline is described in this [paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4514441/) and [repository](https://github.com/mugnierlab/VSGSeqPipeline).
 
-## Installation 
+## Installation  
 ```
 git clone https://github.com/goldrieve/vsgseq2.git
 cd vsgseq2
 conda env create --file vsgseq2.yml -n vsgseq2
 conda activate vsgseq2
-nextflow run assemble.nf
-nextflow run analyse.nf
 ```
 
-As the Trinity assembly stage takes substantially longer to run than the analyse step, I have split these to processes into two nextflow files. You can assemble your transcripts and then run analysis, with rapid changes to settings if required.
+## Quick start 
+vsgseq2 is implemented using Nextflow, which is installed as part of the vsgseq2.yml. The vsgseq2 pipeline is split into two commands:
+1) assembly
+2) analyse 
+
+To test the installation, I have created synthetic Illumina data for 5 'samples' which are stored in data/reads. These paired end fastq files were synthesised with bbmap, using 10 transcripts as a reference (4 VSGs and 6 random _T. brucei_ transcripts).
+
+Run VSG
 
 ```
 |======================================|
