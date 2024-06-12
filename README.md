@@ -29,7 +29,7 @@ This will create the directory __tutorial_results__ which will contain 4 subdire
         - concatenated list of all assembled VSGs (concatenated_vsgs.fasta). 
         - final VSG database, after removing duplicate VSGs with cd-hit (VSGome.fasta).
 2) assemblies - Trinity assembly for each sample.
-3) summary - salmon alingment information (multiqc_report.html).
+3) summary - salmon alignment information (multiqc_report.html).
            - quantification summary for each sample (tpm.csv).
            - predicted VSG count for each sample (vsg_count.csv).
 4) trimmed_reads - trimmed reads for each sample.
@@ -108,7 +108,7 @@ Optional arguments:
 
 ## Input Files
 
-assemble.nf takes paired-end sequencing reads, in FASTQ format. Place the FASTQ files in the directory data/reads and the pipeline will do the rest. If you want to run the pipeline on a subset of these reads, add the following flag specifiying the location and names of files you would like to analyse.
+assemble.nf takes paired-end sequencing reads, in FASTQ format. Place the FASTQ files in the directory data/reads and the pipeline will do the rest. If you want to run the pipeline on a subset of these reads, add the following flag specifying the location and names of files you would like to analyse.
 ```
 --reads 'dir/*{1,2}.fq.gz'
 ``` 
