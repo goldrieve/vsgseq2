@@ -1,7 +1,7 @@
 # vsgseq2
 An updated  pipeline for analysing VSG-seq data. The original VSGSeq pipeline is described in this [paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4514441/) and [repository](https://github.com/mugnierlab/VSGSeqPipeline).
 
-## Installation  
+## Installation and environment setup 
 ```
 git clone https://github.com/goldrieve/vsgseq2.git
 cd vsgseq2
@@ -38,7 +38,11 @@ To visualise the expression data and number of assembled VSGs, use the R script 
 Running the code will produce the figure below
 ![tutorial_figure](figures/tutorial_summary.png)
 
+You can alter the run parameters using the following flags. A detailed DAG highlights where these flags will take effect.
+
 ```
+nextflow run assemble.nf 
+
 |======================================|
 | V S G S E Q 2 - N F - A S S E M B L E|
 |======================================|
@@ -63,7 +67,10 @@ Optional arguments:
   --help         Print this message.
 ```
 
+![DAG](figures/assemble_dag.png)
+
 ```
+nextflow run analyse.nf 
 |====================================|
 | V S G S E Q 2 - A N A L Y S E - N F|
 |====================================|
@@ -95,23 +102,12 @@ Optional arguments:
                 [default: results]
   --help         Print this message.
 ```
-## DAG
 
-![DAG](figures/vsgseq2_dag.png)
-
-## Dependencies
-
-Dependencies should be installed using the conda yml found in the Git repository.
-
+![DAG](figures/analyse_dag.png)
 
 ## Input Files
 
-assemble.nf has been updated to allow to submissiong of paired-end sequencing reads, in FASTQ format. Place the FASTQ files in the directory data/reads and the pipeline will do the rest. If you want to run the pipeline on a subset of these reads, add the following flag specifiying the location and names of files you would like to analyse.
+assemble.nf takes paired-end sequencing reads, in FASTQ format. Place the FASTQ files in the directory data/reads and the pipeline will do the rest. If you want to run the pipeline on a subset of these reads, add the following flag specifiying the location and names of files you would like to analyse.
 ```
 --reads 'dir/*{1,2}.fq.gz'
 ``` 
-
-## Output Files
-
-Output files are saved in one folder. A summary file shows the expression of each VSG in each sample, both in terms of TPM and percentage of the population (TPM for that VSG/total TPM).
-
