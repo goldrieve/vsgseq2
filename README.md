@@ -14,11 +14,28 @@ vsgseq2 is implemented using Nextflow, which is installed as part of the vsgseq2
 1) assembly
 2) analyse 
 
-To test the installation, I have created synthetic Illumina data for 5 'samples' which are stored in data/reads. These paired end fastq files were synthesised with bbmap, using 10 transcripts as a reference (4 VSGs and 6 random _T. brucei_ transcripts).
+To test the installation, I created synthetic Illumina data for 5 'samples' which are stored in data/reads/(1-5_1.fq.gz 1-5_2.fq.gz). These paired end fastq files were synthesised with bbmap, using 10 transcripts as a reference (4 VSGs and 6 random _T. brucei_ transcripts).
 
-Run VSG
+To run vsgseq2 on the tutorial data, simply enter
 
 ```
+nextflow run assemble.nf --outdir tutorial_results
+nextflow run analyse.nf --assemblies 'tutorial_results/assemblies/*_trinity.Trinity.fasta' --reads 'tutorial_results/trimmed_reads/*{1,2}.fq.gz' --outdir tutorial_results
+```
+
+This will create the directory __tutorial_results__ which will contain 4 subdirectories
+
+1) VSGs - VSGs predicted for each sample (e.g. 1_VSGs.fasta).  
+        - concatenated list of all assembled VSGs (concatenated_vsgs.fasta). 
+        - final VSG database, after removing duplicate VSGs with cd-hit (VSGome.fasta).
+2) assemblies - Trinity assembly for each sample.
+3) summary - salmon alingment information (multiqc_report.html).
+           - quantification summary for each sample (tpm.csv).
+           - predicted VSG count for each sample (vsg_count.csv).
+4) trimmed_reads - trimmed reads for each sample.
+```
+To visualise the expression data, I have included an R script to plot the data.
+
 |======================================|
 | V S G S E Q 2 - N F - A S S E M B L E|
 |======================================|
@@ -77,7 +94,7 @@ Optional arguments:
 ```
 ## DAG
 
-![DAG](dag/vsgseq2_dag.png)
+![DAG](figures/vsgseq2_dag.png)
 
 ## Dependencies
 
