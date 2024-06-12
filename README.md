@@ -14,7 +14,7 @@ vsgseq2 is implemented using Nextflow, which is installed as part of the vsgseq2
 1) assembly
 2) analyse 
 
-To test the installation, I created synthetic Illumina data for 5 'samples' which are stored in data/reads/(1-5_1.fq.gz 1-5_2.fq.gz). These paired end fastq files were synthesised with bbmap, using 10 transcripts as a reference (4 VSGs and 6 random _T. brucei_ transcripts).
+To test the installation, use the synthetic Illumina data which are stored in data/reads/(1-5_1.fq.gz 1-5_2.fq.gz).
 
 To run vsgseq2 on the tutorial data, simply enter
 
