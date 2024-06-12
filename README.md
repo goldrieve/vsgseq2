@@ -33,9 +33,12 @@ This will create the directory __tutorial_results__ which will contain 4 subdire
            - quantification summary for each sample (tpm.csv).
            - predicted VSG count for each sample (vsg_count.csv).
 4) trimmed_reads - trimmed reads for each sample.
-```
-To visualise the expression data, I have included an R script to plot the data.
 
+To visualise the expression data and number of assembled VSGs, use the R script bin/plot_script.R
+Running the code will produce the figure below
+![tutorial_figure](figures/tutorial_summary.png)
+
+```
 |======================================|
 | V S G S E Q 2 - N F - A S S E M B L E|
 |======================================|
