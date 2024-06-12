@@ -41,7 +41,7 @@ Running the code will produce the figure below
 You can alter the run parameters using the following flags. A detailed DAG highlights where these flags will take effect.
 
 ```
-nextflow run assemble.nf 
+nextflow run assemble.nf --help
 
 |======================================|
 | V S G S E Q 2 - N F - A S S E M B L E|
@@ -70,7 +70,8 @@ Optional arguments:
 ![DAG](figures/assemble_dag.png)
 
 ```
-nextflow run analyse.nf 
+nextflow run analyse.nf --help
+
 |====================================|
 | V S G S E Q 2 - A N A L Y S E - N F|
 |====================================|
