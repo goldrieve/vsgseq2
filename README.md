@@ -52,7 +52,7 @@ VSGSEQ2.nf: A pipeline for analysing VSGSeq data
 Required arguments:
 
   --reads Location of reads, if not in reads dir
-                [default: /Users/goldriev/pkgs/vsgseq2/data/reads/*{1,2}.fq.gz]
+                [default: /vsgseq2/data/reads/*{1,2}.fq.gz]
 
 Optional arguments:
 
@@ -80,13 +80,13 @@ VSGSEQ2.nf: A pipeline for analysing VSGSeq data
 Required arguments:
 
   --assemblies Location of assemblies
-                [default: /Users/goldriev/pkgs/vsgseq2/assemblies/*_trinity.Trinity.fasta]
+                [default: /vsgseq2/assemblies/*_trinity.Trinity.fasta]
   --reads Location of reads, if not in reads dir
-                [default: /Users/goldriev/pkgs/vsgseq2/data/reads/*{1,2}.fq.gz]
+                [default: /vsgseq2/data/reads/*{1,2}.fq.gz]
   --vsg_db    Location of VSGdb
-                [default: /Users/goldriev/pkgs/vsgseq2/data/blastdb/concatAnTattb427.fa]
+                [default: /vsgseq2/data/blastdb/concatAnTattb427.fa]
   --NOTVSG_db Location of NOTVSGdb
-                [default: /Users/goldriev/pkgs/vsgseq2/data/blastdb/NOTvsgs.fa]
+                [default: /vsgseq2/data/blastdb/NOTvsgs.fa]
 
 Optional arguments:
 
