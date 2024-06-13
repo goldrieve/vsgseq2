@@ -4,3 +4,4 @@ work/
 results/
 .nextflow*
 .nextflow/
+.DS_Store
