@@ -2,6 +2,9 @@
 An updated  pipeline for analysing VSG-seq data. The original VSGSeq pipeline is described in this [paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4514441/) and [repository](https://github.com/mugnierlab/VSGSeqPipeline).
 
 ## Installation and environment setup 
+
+conda is used to set up the environment, please ensure you are using a recent conda version (anaconda 2024.02 and conda 24.3.0 work well).
+
 ```
 git clone https://github.com/goldrieve/vsgseq2.git
 cd vsgseq2
