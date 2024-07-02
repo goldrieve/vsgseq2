@@ -5,7 +5,7 @@ process TRIM {
     val cores
 
     output:
-        path "*trimmed*.fq.gz", emit: trimmed_reads
+    tuple val(meta), path("*trimmed*.fq.gz"), emit: trimmed_reads
 
 
     script:
