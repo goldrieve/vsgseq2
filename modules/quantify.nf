@@ -11,7 +11,7 @@ process QUANTIFY {
     script:
     if(meta.single_end){
         """
-        salmon quant --libType A --threads $cores -i $index -r ${trimmed} --validateMappings -o ${trimmed.baseName.replace(".fq","")}_quant
+        salmon quant --libType A --threads $cores -i $index -r ${trimmed} --validateMappings -o ${trimmed.baseName.replace("_trimmed.fq","")}_quant
         """
     } else {
         """

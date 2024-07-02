@@ -3,5 +3,5 @@ early_1,/Users/goldriev/pkgs/vsgseq2/data/reads/early_1_1.fq.gz,/Users/goldriev/
 early_2,/Users/goldriev/pkgs/vsgseq2/data/reads/early_2_1.fq.gz,/Users/goldriev/pkgs/vsgseq2/data/reads/early_2_2.fq.gz
 late_1,/Users/goldriev/pkgs/vsgseq2/data/reads/late_1_1.fq.gz,/Users/goldriev/pkgs/vsgseq2/data/reads/late_1_2.fq.gz
 late_2,/Users/goldriev/pkgs/vsgseq2/data/reads/late_2_1.fq.gz,/Users/goldriev/pkgs/vsgseq2/data/reads/late_2_2.fq.gz
-early_single,/Users/goldriev/pkgs/vsgseq2/data/reads/early_single.fq.gz,
-late_single,/Users/goldriev/pkgs/vsgseq2/data/reads/late_single.fq.gz,
+earlysingle,/Users/goldriev/pkgs/vsgseq2/data/reads/earlysingle.fq.gz,
+latesingle,/Users/goldriev/pkgs/vsgseq2/data/reads/latesingle.fq.gz,
