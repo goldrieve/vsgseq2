@@ -26,14 +26,21 @@ nextflow run main.nf --outdir tutorial_results
 
 This will create the directory __tutorial_results__ which will contain 4 subdirectories
 
-1) VSGs - VSGs predicted for each sample (e.g. 1_VSGs.fasta).  
-        - concatenated list of all assembled VSGs (concatenated_vsgs.fasta). 
-        - final VSG database, after removing duplicate VSGs with cd-hit (VSGome.fasta).
-2) assemblies - Trinity assembly for each sample.
-3) summary - salmon alignment information (multiqc_report.html).
-           - quantification summary for each sample (tpm.csv).
-           - predicted VSG count for each sample (vsg_count.csv).
-4) trimmed_reads - trimmed reads for each sample.
+1) VSGs 
+- VSGs predicted for each sample (e.g. 1_VSGs.fasta).  
+- concatenated list of all assembled VSGs (concatenated_vsgs.fasta). 
+- final VSG database, after removing duplicate VSGs with cd-hit (VSGome.fasta).
+
+2) assemblies 
+- Trinity assembly for each sample.
+
+3) summary 
+- salmon alignment information (multiqc_report.html).
+- quantification summary for each sample (tpm.csv).
+- predicted VSG count for each sample (vsg_count.csv).
+
+4) trimmed_reads 
+- trimmed reads for each sample.
 
 To visualise the expression data and number of assembled VSGs, use the R script bin/plot_script.R
 Running the code will produce the figure below
