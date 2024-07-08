@@ -1,9 +1,10 @@
 nextflow.enable.dsl = 2
 
-params.assemblies = "$projectDir/assemblies/*_trinity.Trinity.fasta"
+params.assemblies = "$projectDir/results/assemblies/*_trinity.Trinity.fasta"
 params.reads = "$projectDir/data/reads/*{1,2}.fq.gz"
 params.vsg_db = "$projectDir/data/blastdb/concatAnTattb427.fa"
 params.notvsg_db = "$projectDir/data/blastdb/NOTvsgs.fa"
+params.vsgome = "$projectDir/data/blastdb/concatAnTattb427.fa"
 params.requestedcpus = 4
 params.cores = "4"
 params.trinitymem = "20"
@@ -12,6 +13,7 @@ params.cdhitid = "0.98"
 params.outdir = "results"
 params.samplesheet = "samplesheet.csv"
 params.help = ""
+params.mode = "full"
 
 if (params.help) {
     help = """VSGSEQ2.nf: A pipeline for analysing VSGSeq data
@@ -26,6 +28,8 @@ if (params.help) {
              |                [default: ${params.vsg_db}]
              |  --notvsg_db Location of NOTVSGdb
              |                [default: ${params.notvsg_db}]
+             |  --vsgome    Location of VSGome
+             |                [default: ${params.vsgome}]
              |
              |Optional arguments:
              |
@@ -60,6 +64,7 @@ include { INDEX } from './modules/index'
 include { QUANTIFY } from './modules/quantify'
 include { MULTIQC } from './modules/multiqc'
 include { SUMMARISE } from './modules/summarise'
+include { SUMMARISEVSGOME } from './modules/summarise_vsgome'
 
 ch_samplesheet = Channel.fromPath(params.samplesheet)
 
@@ -77,17 +82,53 @@ ch_reads = ch_samplesheet.splitCsv(header:true).map {
 }
 
 workflow {
-   trimmed_reads_ch = TRIM(ch_reads, params.cores)
-   assemble_ch = ASSEMBLE(trimmed_reads_ch, params.cores, params.trinitymem)
-   orf_ch = ORF(assemble_ch, params.cdslength)
-   indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhitid)
-   blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
-   population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect())
-   catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
-   index_ch = INDEX(catcdhit_ch, params.cores)
-   quant_ch = QUANTIFY(index_ch, params.cores, trimmed_reads_ch)
-   multiqc_ch = MULTIQC((quant_ch.quants).collect())
-   summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
+    if (params.mode == "full") {
+        trimmed_reads_ch = TRIM(ch_reads, params.cores)
+        assemble_ch = ASSEMBLE(trimmed_reads_ch, params.cores, params.trinitymem)
+        orf_ch = ORF(assemble_ch, params.cdslength)
+        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhitid)
+        blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
+        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect())
+        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
+        index_ch = INDEX(catcdhit_ch, params.cores)
+        quant_ch = QUANTIFY(index_ch, params.cores, trimmed_reads_ch)
+        multiqc_ch = MULTIQC((quant_ch.quants).collect())
+        summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
+    }  
+    else if (params.mode == "assemble"){
+        trimmed_reads_ch = TRIM(ch_reads, params.cores)
+        assemble_ch = ASSEMBLE(trimmed_reads_ch, params.cores, params.trinitymem)
+    }
+    else if (params.mode == "predictvsgs"){
+        assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
+        orf_ch = ORF(assemblies_ch, params.cdslength)
+        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhitid)
+        blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
+        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect())
+        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
+    }
+    else if (params.mode == "quantify"){
+        index_ch = INDEX(params.vsgome, params.cores)
+        quant_ch = QUANTIFY(index_ch, params.cores, ch_reads)
+        multiqc_ch = MULTIQC((quant_ch.quants).collect())
+        summarise_ch = SUMMARISEVSGOME((quant_ch.quants).collect())
+    }
+    else if (params.mode == "analyse"){
+        assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
+        orf_ch = ORF(assemblies_ch, params.cdslength)
+        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhitid)
+        blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
+        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect())
+        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
+        index_ch = INDEX(catcdhit_ch, params.cores)
+        quant_ch = QUANTIFY(index_ch, params.cores, ch_reads)
+        multiqc_ch = MULTIQC((quant_ch.quants).collect())
+        summarise_ch = SUMMARISE((quant_ch.quants).collect())
+    }
+    else {
+        log.error("Invalid mode selected. Please select one of the following: full, assemble, predictvsgs, quantify, analyse.")
+        System.exit(1)
+}
 }
 
 workflow.onComplete {
