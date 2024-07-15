@@ -9,7 +9,11 @@ library(tidyverse)
 stats <- read.csv("Google Drive/My Drive/vsg/vsgseq2/data/meta.csv")
 orthogroups <- read.csv("~/pkgs/analyse/all_data_results_no_vsgdb/protein/OrthoFinder/Results_Jun18/Orthogroups/Orthogroups.csv")
 orthogroups_long <- orthogroups %>% separate_rows(Orthogroup, sep = ",")
-my.files <-  list.files(list.dirs(path = "Desktop/minion", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
+tpm <- read.csv("pkgs/vsgseq2/results/final/summary/tpm.csv", check.names = FALSE)
+numeric_columns <- sapply(tpm[-1], is.numeric)
+column_sums <- colSums(tpm[-1][, numeric_columns])
+tpm <- tpm
+tpm[-1][, numeric_columns] <- tpm[-1][, numeric_columns] / column_sums * 100
 
 long_data <- orthogroups %>% 
   gather(key = "sample", value = "value", -Orthogroup)
@@ -19,223 +23,99 @@ long_data <- long_data %>%
 
 long_data$value <- sub("_1$", "", long_data$value)
 
-tpm <- lapply(Sys.glob(my.files), read.table, header = TRUE)
-
 scientific_10 <- function(x) {
   parse(text=gsub("e", " %*% 10^", scales::scientific_format()(x)))
 }
 
-names <- sapply(strsplit(my.files, split="\\/"), function(x)x[4])
-names <- gsub("_quant", "", names)
-names(tpm) <- names
+tpm$id <- tpm$vsg_id
 
-tpm_per <- function(DF) {
-  DF$Percent <- (DF$TPM /(sum(DF$TPM)))*100
-  DF <- DF %>% select(Name, Percent)
-  return(DF)
-}
+tpm <- tpm %>%
+  mutate(Names = if_any(where(is.numeric), ~ . > 10, vsg_id))
 
-tpm2 <- lapply(tpm, tpm_per)
-wide_tpm <- dplyr:::reduce(tpm2, full_join, by = "Name")
-names <- append(names, 'Name', after = 0)
-colnames(wide_tpm) <- names
+tpm <- tpm %>% mutate(vsg_id = if_else(Names == "TRUE", vsg_id, "other"))
+tpm <- subset(tpm, select = -c(Names) )
+tpm$vsg_id <- factor(tpm$vsg_id, levels = c(unique(tpm$vsg_id[tpm$vsg_id != "other"]), "other"))
 
-tpm_select <- function(DF) {
-  DF <- DF %>% select(Name, TPM)
-  return(DF)
-}
-
-tpm_selected <- lapply(tpm, tpm_select)
-wide_tpm_selected <- dplyr:::reduce(tpm_selected, full_join, by = "Name")
-colnames(wide_tpm_selected) <- names
-
-#write.csv(wide_tpm_selected, '~/Desktop/wide_tpm.csv', row.names=FALSE)
-
-keep_tpm <- wide_tpm %>%
-  mutate(Names = if_any(where(is.numeric), ~ . > 10, Name))
-
-keep_tpm <- keep_tpm %>% mutate(Name = if_else(Names == "TRUE", Name, "zVSGome"))
-
-keep_tpm <- subset(keep_tpm, select = -c(Names) )
-
-long <- melt(keep_tpm, id.vars = c("Name"), variable.name = "isolate", value.name = "P")
+long <- melt(tpm, id.vars = c("id", "vsg_id"), variable.name = "isolate", value.name = "P")
 long <- merge(x=stats, y=long, by.x="isolate", by.y="variable")[]
-long <- merge(x = long, y = long_data, by.x = "Name", by.y = "value", all.x = TRUE)
+long <- merge(x = long, y = long_data, by.x = "id", by.y = "value", all.x = TRUE)
 long <- long %>% replace_na(list(col1 = "Other", col2 = "Other"))
 
-png("~/Desktop/minion.png", units="in", width=10, height=8, res=300)
-ggbarplot(long, x = "isolate", y = "value",
-          add.params = list(size = 2), color = "Name", fill = "Name") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
-  facet_wrap("old_stage", scales = 'free_x') +
+long$value_log <- log(1+ long$value)
+cow_long <- long[long$host == 'cow', ]
+mouse_long <- long[long$host == 'mouse', ]
+cow_long$stage <- as.numeric(cow_long$old_stage)
+
+coul <- brewer.pal(12,"Set3") 
+coul <- colorRampPalette(coul)(-1 + length(unique(long$vsg_id)))
+coul <- append(coul, "black")
+
+cow_long <- cow_long %>%
+  mutate(numeric_value = as.numeric(x_axis))
+
+# Step 2: Arrange the dataframe by the new column in descending order
+cow_long <- cow_long %>%
+  arrange((numeric_value))
+
+png("Google Drive/My Drive/vsg/vsgseq2/report/figures/cow.png", units="in", width=15, height=10, res=300)
+ggbarplot(cow_long, x = "x_axis", y = "value", color = "vsg_id", fill = "vsg_id", legend = "right") +
+  facet_wrap(~ old_stage, scales = 'free_x', ncol = 2) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))  +
   scale_fill_manual(values = coul) +
-  scale_color_manual(values = coul)
+  scale_color_manual(values = coul) +
+  xlab ("DPI") +
+  ylab ("TPM")
 dev.off()
 
-cow_comb <- long[long$host == 'cow', ]
-cow_comb <- cow_comb[cow_comb$bleed == 'small', ]
-mouse_comb <- long[long$host == 'mouse', ]
-mouse_comb <- mouse_comb[mouse_comb$type == 'WT', ]
-cow_comb$stage <- as.numeric(cow_comb$stage)
-
-
-a <- ggbarplot(long, x = "sample", y = "value", color = "Name", fill = "Name", legend = "right") +
-  facet_wrap(~ cow, scales = 'free_x', ncol = 2) +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
-
-b <- ggbarplot(long, x = "sample", y = "value", color = "Name", fill = "Name", legend = "right") +
-  facet_wrap(~ pool, scales = 'free_x', ncol = 2) +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
-
-png("~/Desktop/minion.png", units="in", width=10, height=10, res=300)
-ggarrange(a,b, ncol = 1, nrow = 2,  common.legend = F, legend="right", align = c("hv"), labels = "auto", font.label = list(size = 14, color = "black", face = "bold", family = NULL))
+png("Google Drive/My Drive/vsg/vsgseq2/report/figures/mouse.png", units="in", width=15, height=10, res=300)
+ggbarplot(mouse_long, x = "x_axis", y = "value", color = "vsg_id", fill = "vsg_id", legend = "right") +
+  facet_wrap(type ~ old_stage, scales = 'free_x', ncol = 2) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))  +
+  scale_fill_manual(values = coul) +
+  scale_color_manual(values = coul) +
+  xlab ("Sample") +
+  ylab ("TPM")
 dev.off()
 
 coul <- brewer.pal(12,"Set3") 
 coul <- colorRampPalette(coul)(-1 + length(unique(long$Orthogroup)))
 coul <- append(coul, "black")
 
-
-long <- long %>%
-  mutate(numeric_value = as.numeric(x_axis))
-
-# Step 2: Arrange the dataframe by the new column in descending order
-long <- long %>%
-  arrange((numeric_value))
-
-
-a <- ggbarplot(long, x = "x_axis", y = "value.x", color = "Orthogroup", fill = "Orthogroup", legend = "right") +
+png("Google Drive/My Drive/vsg/vsgseq2/report/figures/cow_orthogroup_colour.png", units="in", width=15, height=10, res=300)
+ggbarplot(cow_long, x = "x_axis", y = "value", color = "Orthogroup", fill = "Orthogroup", legend = "right") +
   facet_wrap(type~old_stage, scales = 'free_x', ncol = 2) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
   scale_fill_manual(values = coul) +
   scale_color_manual(values = coul)
+dev.off()
 
-b <- ggbarplot(long, x = "x_axis", y = "value", color = "Orthogroup", fill = "Orthogroup", legend = "right") +
+png("Google Drive/My Drive/vsg/vsgseq2/report/figures/mouse_orthogroup_colour.png", units="in", width=15, height=10, res=300)
+ggbarplot(mouse_long, x = "x_axis", y = "value", color = "Orthogroup", fill = "Orthogroup", legend = "right") +
   facet_wrap(type~old_stage, scales = 'free_x', ncol = 2) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
   scale_fill_manual(values = coul) +
   scale_color_manual(values = coul)
-
-ggarrange(a,b, ncol = 1, nrow = 2,  common.legend = F, legend="right", align = c("hv"), labels = "auto", font.label = list(size = 14, color = "black", face = "bold", family = NULL))
-
-png("~/Desktop/orthogroup_major.png", units="in", width=15, height=15, res=300)
-a
 dev.off()
 
-png("~/Desktop/orthogroup_all.png", units="in", width=15, height=15, res=300)
-b
+coul <- brewer.pal(5,"Set3") 
+
+png("Google Drive/My Drive/vsg/vsgseq2/report/figures/cow_orthogroup.png", units="in", width=15, height=10, res=300)
+ggdotplot(cow_long, x = "x_axis", y = "value_log", color = "type",
+       add = c("scatter"), facet.by = c("Orthogroup")) +
+  scale_fill_manual(values = coul) +
+  scale_color_manual(values = coul) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
 dev.off()
 
-png("~/Desktop/pacbio_combined_mouse.png", units="in", width=12, height=12, res=300)
-ggbarplot(mouse_comb, x = "test", y = "value", color = "Name", fill = "Name", legend = "right") +
-  facet_wrap(type + host ~ stage + tech, scales = 'free_x', ncol = 2) +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
+coul <- brewer.pal(3,"Set3")
+mouse_long$old_stage <- factor(mouse_long$old_stage, levels = c("Early", "Late"))
+
+png("Google Drive/My Drive/vsg/vsgseq2/report/figures/mouse_orthogroup.png", units="in", width=15, height=10, res=300)
+ggline(mouse_long, x = "old_stage", y = "value_log", color = "type",
+       add = c("boxplot"), facet.by = "Orthogroup") +
   scale_fill_manual(values = coul) +
   scale_color_manual(values = coul)
 dev.off()
-
-#Read in the meta data and modify it for tximport
-
-my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/full_cds/mouse", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
-tpm <- lapply(Sys.glob(my.files), read.table, header = TRUE)
-
-scientific_10 <- function(x) {
-  parse(text=gsub("e", " %*% 10^", scales::scientific_format()(x)))
-}
-
-names <- sapply(strsplit(my.files, split="\\/"), function(x)x[8])
-names <- gsub("_quant", "", names)
-names(tpm) <- names
-
-tpm_per <- function(DF) {
-  DF$Percent <- (DF$TPM /(sum(DF$TPM)))*100
-  DF <- DF %>% select(Name, Percent)
-  return(DF)
-}
-
-tpm2 <- lapply(tpm, tpm_per)
-wide_tpm <- dplyr:::reduce(tpm2, full_join, by = "Name")
-names <- append(names, 'Name', after = 0)
-colnames(wide_tpm) <- names
-
-keep_tpm <- wide_tpm %>%
-  mutate(Names = if_any(where(is.numeric), ~ . > 10, Name))
-
-keep_tpm <- keep_tpm %>% mutate(Name = if_else(Names == "TRUE", Name, "zVSGome"))
-
-keep_tpm <- subset(keep_tpm, select = -c(Names) )
-
-long <- melt(keep_tpm, id.vars = c("Name"), variable.name = "isolate", value.name = "P")
-long <- merge(x=stats, y=long, by.x="isolate", by.y="variable")[]
-
-coul <- brewer.pal(6,"Set3") 
-coul <- colorRampPalette(coul)(-1 + length(unique(long$Name)))
-coul <- append(coul, "black")
-
-png("~/Desktop/mouse.png", units="in", width=12, height=12, res=300)
-ggbarplot(long, x = "test", y = "value", color = "Name", fill = "Name", legend = "right") +
-  facet_wrap(type + host ~ stage, scales = 'free_x', ncol = 2) +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
-  scale_fill_manual(values = coul) +
-  scale_color_manual(values = coul)
-dev.off()
-
-#
-my.files <-  list.files(list.dirs(path = "/Users/goldriev/pkgs/analyse/full_cds/cow", full.names = TRUE, recursive = TRUE), pattern = "quant.sf", full.names = TRUE)
-tpm <- lapply(Sys.glob(my.files), read.table, header = TRUE)
-
-scientific_10 <- function(x) {
-  parse(text=gsub("e", " %*% 10^", scales::scientific_format()(x)))
-}
-
-names <- sapply(strsplit(my.files, split="\\/"), function(x)x[8])
-names <- gsub("_quant", "", names)
-names(tpm) <- names
-
-tpm_per <- function(DF) {
-  DF$Percent <- (DF$TPM /(sum(DF$TPM)))*100
-  DF <- DF %>% select(Name, Percent)
-  return(DF)
-}
-
-tpm2 <- lapply(tpm, tpm_per)
-wide_tpm <- dplyr:::reduce(tpm2, full_join, by = "Name")
-names <- append(names, 'Name', after = 0)
-colnames(wide_tpm) <- names
-
-keep_tpm <- wide_tpm %>%
-  mutate(Names = if_any(where(is.numeric), ~ . > 10, Name))
-
-keep_tpm <- keep_tpm %>% mutate(Name = if_else(Names == "TRUE", Name, "zVSGome"))
-
-keep_tpm <- subset(keep_tpm, select = -c(Names) )
-
-long <- melt(keep_tpm, id.vars = c("Name"), variable.name = "isolate", value.name = "P")
-long <- merge(x=stats, y=long, by.x="isolate", by.y="variable")[]
-
-coul <- brewer.pal(12,"Set3") 
-coul <- colorRampPalette(coul)(-1 + length(unique(long$Name)))
-coul <- append(coul, "black")
-long$test <- as.numeric(long$test)
-
-png("~/Desktop/cow.png", units="in", width=12, height=12, res=300)
-ggbarplot(long, x = "test", y = "value", color = "Name", fill = "Name", legend = "right") +
-  facet_wrap(type + host ~ stage, scales = 'free_x', ncol = 2) +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
-  scale_fill_manual(values = coul) +
-  scale_color_manual(values = coul)
-dev.off()
-
-
-filter_tpm <- filter(keep_tpm, Name != "zVSGome")
-row.names(filter_tpm) <- filter_tpm$'Name'
-filter_tpm <- filter_tpm[,-1]
-mat <- filter_tpm - rowMeans(filter_tpm)
-mat <- log(mat)
-mat[is.na(mat)] = 0
-breaksList = seq(-7, 7)
-
-pheatmap(mat, show_rownames=FALSE, color = colorRampPalette(rev(brewer.pal(n = 7, name = "RdBu")))(length(breaksList)), breaks = breaksList)
 
 # QC stats
 

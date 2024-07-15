@@ -5,6 +5,7 @@ params.reads = "$projectDir/data/reads/*{1,2}.fq.gz"
 params.vsg_db = "$projectDir/data/blastdb/concatAnTattb427.fa"
 params.notvsg_db = "$projectDir/data/blastdb/NOTvsgs.fa"
 params.vsgome = "$projectDir/data/blastdb/concatAnTattb427.fa"
+params.full_vsg_db = ""
 params.requestedcpus = 4
 params.cores = "4"
 params.trinitymem = "20"
@@ -30,6 +31,9 @@ if (params.help) {
              |                [default: ${params.notvsg_db}]
              |  --vsgome    Location of VSGome
              |                [default: ${params.vsgome}]
+             |  --full_vsg_db    Location of a database to add into the VSGome (such as data/blastdb/concatAnTattb427_full.fa). 
+             |                    Default will only include the assembled VSGome.
+             |                
              |
              |Optional arguments:
              |
@@ -88,7 +92,7 @@ workflow {
         orf_ch = ORF(assemble_ch, params.cdslength)
         indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhitid)
         blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
-        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect())
+        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
         catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
         index_ch = INDEX(catcdhit_ch, params.cores)
         quant_ch = QUANTIFY(index_ch, params.cores, trimmed_reads_ch)
@@ -104,7 +108,7 @@ workflow {
         orf_ch = ORF(assemblies_ch, params.cdslength)
         indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhitid)
         blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
-        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect())
+        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
         catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
     }
     else if (params.mode == "quantify"){
@@ -118,12 +122,12 @@ workflow {
         orf_ch = ORF(assemblies_ch, params.cdslength)
         indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhitid)
         blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
-        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect())
+        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
         catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
         index_ch = INDEX(catcdhit_ch, params.cores)
         quant_ch = QUANTIFY(index_ch, params.cores, ch_reads)
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
-        summarise_ch = SUMMARISE((quant_ch.quants).collect())
+        summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
     }
     else {
         log.error("Invalid mode selected. Please select one of the following: full, assemble, predictvsgs, quantify, analyse.")
