@@ -117,6 +117,40 @@ ggline(mouse_long, x = "old_stage", y = "value_log", color = "type",
   scale_color_manual(values = coul)
 dev.off()
 
+cow_filtered <- cow_long[cow_long$value > 0.1, ]
+
+top <- cow_long %>%
+  group_by(Orthogroup, x_axis) %>%
+  slice(which.max(value))
+
+cow_long$x_axis <- as.numeric(as.character(cow_long$x_axis))
+
+dodge <- position_dodge(width = 0.9)
+
+ggplot(cow_filtered, aes(x = factor(x_axis), y = (value+1), fill = type)) +
+  geom_point(aes(color = type), alpha = 0.1)+
+  geom_smooth(aes(group = type, color = type), method = "loess", se = FALSE) +  # Corrected color mapping
+  theme_minimal() +
+  labs(title = "Violin Plot of Values by Group",
+       x = "Group",
+       y = "Value (log-transformed)") +
+  scale_fill_brewer(palette = "Pastel1") +
+  facet_wrap(~Orthogroup)
+
+ggplot(cow_filtered, aes(x = x_axis, y = (value))) +
+  geom_point(aes(color = type), alpha = 0.1)+
+  geom_smooth(method= lm, se = F, color = "black") + 
+  facet_wrap(~Orthogroup) + 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
+
+ggplot(cow_filtered, aes(x = x_axis, y = log(value), colour = type)) +
+  geom_point(alpha = 0.1)+
+  geom_smooth(method= lm, se = F) + 
+  facet_wrap(~Orthogroup) + 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
+
 # QC stats
 
 assembly <- subset(stats, select = c("isolate", "type", "stage","assembled_transcripts", "orf", "vsg_blast", "not_blast", "cd.hit", "parasites"))
