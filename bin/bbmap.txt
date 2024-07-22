@@ -1,4 +1,0 @@
-randomreads.sh maxsnps=0 adderrors=false ref=late.fasta out1=late_2_1.fq.gz out2=late_2_2.fq.gz reads=100000 minlength=130 maxlength=150 seed=2 illuminanames=t paired=t
-randomreads.sh maxsnps=0 adderrors=false ref=late.fasta out1=late_1_1.fq.gz out2=late_1_2.fq.gz reads=100000 minlength=130 maxlength=150 seed=1 illuminanames=t paired=t
-randomreads.sh maxsnps=0 adderrors=false ref=early.fasta out1=early_1_1.fq.gz out2=early_1_2.fq.gz reads=100000 minlength=130 maxlength=150 seed=1 illuminanames=t paired=t\randomreads.sh maxsnps=0 adderrors=false ref=early.fasta out1=early_2_1.fq.gz out2=early_2_2.fq.gz reads=10000 minlength=130 maxlength=150 seed=2 illuminanames=t paired=t
-randomreads.sh maxsnps=0 adderrors=false ref=early.fasta out1=early_2_1.fq.gz out2=early_2_2.fq.gz reads=100000 minlength=130 maxlength=150 seed=2 illuminanames=t paired=t

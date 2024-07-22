@@ -1,9 +1,10 @@
 # vsgseq2
-An updated  pipeline for analysing VSG-seq data. The original VSGSeq pipeline is described in this [paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4514441/) and [repository](https://github.com/mugnierlab/VSGSeqPipeline).
 
-## Installation and environment setup 
+An updated pipeline for analyzing VSG-seq data. The original VSGSeq pipeline is described in this [paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4514441/) and [repository](https://github.com/mugnierlab/VSGSeqPipeline).
 
-conda is used to set up the environment, please ensure you are using a recent conda version (anaconda 2024.02 and conda 24.3.0 work well).
+## Installation and Environment Setup
+
+We use Conda to manage the environment. Please ensure you are using a recent version of Conda (Anaconda 2024.02 and Conda 24.3.0 are recommended).
 
 ```
 git clone https://github.com/goldrieve/vsgseq2.git
@@ -15,8 +16,8 @@ conda activate vsgseq2
 ## Quick start 
 vsgseq2 is implemented using Nextflow, which is installed as part of the vsgseq2.yml.
 To test the installation, use synthetic Illumina data for six samples which are stored in data/reads:
-- paired reads:2 early, 2 late.
-- single end reads: 1 early and 1 late.
+- Paired reads:2 early, 2 late.
+- Single end reads: 1 early and 1 late.
 
 To run vsgseq2 on the tutorial data, simply enter
 
@@ -46,7 +47,9 @@ To visualise the expression data and number of assembled VSGs, use the R script 
 Running the code will produce the figure below
 ![tutorial_figure](figures/tutorial_summary.png)
 
-You can alter the run parameters using the following flags. A detailed DAG highlights where these flags will take effect - update!
+## Customising analysis
+
+You can alter the run parameters using specific flags. A detailed Directed Acyclic Graph (DAG) is available to highlight where these flags will take effect. Please refer to the documentation for more details.
 
 ## Input Files
 
