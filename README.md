@@ -98,8 +98,6 @@ Required arguments:
 
   --assemblies Location of assemblies
                 [default: data/tutorial_assemblies/*_trinity.Trinity.fasta]
-  --reads Location of reads, if not in reads dir
-                [default: data/reads/*{1,2}.fq.gz]
   --vsg_db    Location of VSGdb
                 [default: data/blastdb/concatAnTattb427.fa]
   --notvsg_db Location of NOTVSGdb
