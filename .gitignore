@@ -2,6 +2,7 @@ data/reads/fastqc/
 data/reads/sub/
 analysis/
 work/
+tutorial_results/
 results/
 .nextflow*
 .nextflow/
