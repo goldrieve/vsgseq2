@@ -64,7 +64,7 @@ The default tutorial data run, including all vsgseq2 steps:
 nextflow run main.nf --outdir tutorial_results
 ```
 
-This is the same as running
+This is the same as running:
 ```
 nextflow run main.nf --outdir tutorial_results --mode full
 ```
@@ -90,10 +90,10 @@ To quantify the expression of predicted VSGs:
 nextflow run main.nf --outdir tutorial_results --mode quantify
 ```
 
+## Edit the pipeline execution using the following flags
 ```
 VSGSEQ2.nf: A pipeline for analysing VSGSeq data
 
-## Edit the pipeline execution using the following flags
 Required arguments:
 
   --assemblies Location of assemblies
