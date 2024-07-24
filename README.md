@@ -49,7 +49,11 @@ Running the code will produce the figure below
 
 ## Customising analysis
 
-You can alter the run parameters using specific flags. A detailed Directed Acyclic Graph (DAG) is available to highlight where these flags will take effect. Please refer to the documentation for more details.
+The dag below summarises each step of vsgseq2. It is possible to run seperate vsgseq2 in different modes using the --mode flag. Default is to run the whole pipeline, but say you have assembled the transcripts on a first run and wish to change a single flag in the analysis section, you can feed in the pre-assembled transcripts and start the pipeline from the analysis section. 
+
+![dag](figures/vsgseq2.dag)
+
+You can alter the run parameters using specific flags.
 
 ## Input Files
 
