@@ -9,7 +9,8 @@ params.requestedcpus = 4
 params.cores = "4"
 params.trinitymem = "20"
 params.cdslength = "300"
-params.cdhitid = "0.98"
+params.cdhit_id = "0.94"
+params.cdhit_as = "0.80"
 params.outdir = "results"
 params.samplesheet = "samplesheet.csv"
 params.help = ""
@@ -44,8 +45,10 @@ if (params.help) {
              |                [default: ${params.trinitymem} Gb]
              |  --cdslength    Define minimum CDS length (amino acids).
              |                [default: ${params.cdslength}]
-             |  --cdhitid       Define sequence identity threshold - how much the alignment has to match (0.0 - 1.0).
-             |                [default: ${params.cdhitid}]
+             |  --cdhit_id       Define sequence identity threshold - how much the alignment has to match (0.0 - 1.0).
+             |                [default: ${params.cdhit_id}]
+             |  --cdhit_as       Define alignment coverage for the shorter sequence (0.0 - 1.0).
+             |                [default: ${params.cdhit_as}]
              |  --outdir        VSGSeq output directory. 
              |                [default: ${params.outdir}]
              |  --samplesheet  Define the path to the samplesheet.
@@ -89,10 +92,10 @@ workflow {
         trimmed_reads_ch = TRIM(ch_reads, params.cores)
         assemble_ch = ASSEMBLE(trimmed_reads_ch, params.cores, params.trinitymem)
         orf_ch = ORF(assemble_ch, params.cdslength)
-        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhitid)
+        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhit_id, params.cdhit_as)
         blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
         population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
-        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
+        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)
         index_ch = INDEX(catcdhit_ch, params.cores)
         quant_ch = QUANTIFY(index_ch, params.cores, trimmed_reads_ch)
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
@@ -105,10 +108,10 @@ workflow {
     else if (params.mode == "predictvsgs"){
         assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
         orf_ch = ORF(assemblies_ch, params.cdslength)
-        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhitid)
+        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhit_id, params.cdhit_as)
         blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
         population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
-        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
+        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)
     }
     else if (params.mode == "quantify"){
         index_ch = INDEX(params.vsgome, params.cores)
@@ -119,10 +122,10 @@ workflow {
     else if (params.mode == "analyse"){
         assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
         orf_ch = ORF(assemblies_ch, params.cdslength)
-        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhitid)
+        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhit_id, params.cdhit_as)
         blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
         population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
-        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhitid)
+        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)
         index_ch = INDEX(catcdhit_ch, params.cores)
         quant_ch = QUANTIFY(index_ch, params.cores, ch_reads)
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
