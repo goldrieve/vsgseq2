@@ -1,10 +1,11 @@
+name: vsgseq2-env
+
 channels:
-  - anaconda
-  - bioconda
-  - defaults
   - conda-forge
+  - bioconda
+  - nodefaults
 dependencies:
-  - r-base
+  - r-base=4.3.3
   - blast=2.15.0
   - bowtie2
   - cd-hit=4.8.1
