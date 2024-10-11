@@ -1,4 +1,5 @@
 process SUMMARISE {
+    conda "$projectDir/vsgseq2.yml"
     publishDir "${params.outdir}/summary", mode:'copy'
     input:
     val quants

@@ -1,4 +1,5 @@
 process BLAST {
+    conda "$projectDir/vsgseq2.yml" 
     publishDir "${params.outdir}/VSGs", mode:'copy', pattern: '*_VSGs.fasta'
     input:
     path (assemblies)

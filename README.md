@@ -4,13 +4,10 @@ An updated pipeline for analyzing VSG-seq data. The original VSGSeq pipeline is 
 
 ## Installation and Environment Setup
 
-We use Conda to manage the environment. Please ensure you are using a recent version of Conda (Anaconda 2024.02 and Conda 24.3.0 are recommended).
+We use Nextflow/Conda to install dependencies, please install Nextflow as described [here](https://nf-co.re/docs/usage/installation) then run:
 
 ```
-git clone https://github.com/goldrieve/vsgseq2.git
-cd vsgseq2
-conda env create --file vsgseq2.yml -n vsgseq2
-conda activate vsgseq2
+nextflow run goldrieve/vsgseq2 -r main --help
 ```
 
 ## Input Files

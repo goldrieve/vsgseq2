@@ -1,4 +1,5 @@
 process ORF {
+    conda "$projectDir/vsgseq2.yml" 
     input:
     path (assemblies)
     val cdslength

@@ -1,4 +1,5 @@
 process INDEX {
+    conda "$projectDir/vsgseq2.yml" 
     input:
     path (vsgs)
     val cores

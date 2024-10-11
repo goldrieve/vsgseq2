@@ -1,4 +1,5 @@
 process TRIM {
+    conda "$projectDir/vsgseq2.yml" 
     publishDir "${params.outdir}/trimmed", mode:'copy'
     input:
     tuple val(meta), path(reads)

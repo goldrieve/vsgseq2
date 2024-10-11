@@ -1,4 +1,5 @@
 process CONCATENATED_CDHIT {
+    conda "$projectDir/vsgseq2.yml" 
     publishDir "${params.outdir}/VSGs", mode:'copy'
 
     input:

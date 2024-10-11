@@ -1,4 +1,5 @@
 process INDIVIDUAL_CDHIT {
+    conda "$projectDir/vsgseq2.yml" 
     input:
     path (assemblies)
     val cdhit_id

@@ -1,4 +1,5 @@
 process QUANTIFY {
+    conda "$projectDir/vsgseq2.yml" 
     cpus = params.requestedcpus
     input:
     path (index)
