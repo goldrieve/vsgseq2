@@ -5,6 +5,7 @@ work/
 minion/
 tutorial_results/
 results/
+WOR/
 .nextflow*
 .nextflow/
 .DS_Store

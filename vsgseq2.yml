@@ -15,7 +15,7 @@ dependencies:
   - trimmomatic=0.39
   - trinity=2.15.1
   - nextflow=23.10.1-0
-  - biopython=1.83
+  - biopython=1.78
   - r-pacman
   - conda-forge::boost=1.85.0
   - multiqc=1.21
