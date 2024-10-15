@@ -7,25 +7,25 @@ An updated pipeline for analyzing VSG-seq data. The original VSGSeq pipeline is 
 We use Nextflow/Conda to install dependencies, please install Nextflow as described [here](https://nf-co.re/docs/usage/installation) then run the following command to ensure everything is working:
 
 ```
-nextflow run goldrieve/vsgseq2 -r main
+nextflow run goldrieve/vsgseq2 -r main --outdir results
 ```
 
 This will produce a directory called results which will contain analysis of synthetic demo data, described in detail below.
 
-## Input Files
-
-main.nf takes both single and paired-end sequencing reads, in FASTQ format. Define the location of the reads in the samplesheet.csv and start the run!
+vsgseq2 takes both single and paired-end sequencing reads, in FASTQ format. Define the location of the reads in the samplesheet.csv and start the run!
 
 ## Quick start 
-vsgseq2 is implemented using Nextflow, which is installed as part of the vsgseq2.yml.
-To test the installation, use synthetic Illumina data for six samples which are stored in data/reads:
+vsgseq2 is implemented using Nextflow which will install dependencies via conda.
+
+To test the installation, use synthetic Illumina data for six samples. vsgseq2 will run on these files by default, unless specified otherwise.
+
 - Paired reads:2 early, 2 late.
 - Single end reads: 1 early and 1 late.
 
-To run vsgseq2 on the tutorial data, simply enter
+To run vsgseq2 on the tutorial data, run:
 
 ```
-nextflow run main.nf --outdir tutorial_results
+nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results
 ```
 
 This will create the directory __tutorial_results__ which will contain 4 subdirectories
@@ -60,33 +60,33 @@ It is possible to run sections of vsgseq2 using the --mode flag. The default is 
 
 The default tutorial data run, including all vsgseq2 steps:
 ```
-nextflow run main.nf --outdir tutorial_results
+nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results
 ```
 
 This is the same as running:
 ```
-nextflow run main.nf --outdir tutorial_results --mode full
+nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode full
 ```
 
 If you want to run the assembly step alone:
 ```
-nextflow run main.nf --outdir tutorial_results --mode assemble
+nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode assemble
 ```
 
 To run the entire analysis steps, post assembly:
 ```
-nextflow run main.nf --outdir tutorial_results --mode analyse
+nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode analyse
 ```
 
 The analyse steps can be broken down even further.
 To predict VSGs from assemblies:
 ```
-nextflow run main.nf --outdir tutorial_results --mode predictvsgs
+nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode predictvsgs
 ```
 
 To quantify the expression of predicted VSGs:
 ```
-nextflow run main.nf --outdir tutorial_results --mode quantify
+nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode quantify
 ```
 
 ## Edit the pipeline execution using the following flags
