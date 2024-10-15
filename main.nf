@@ -12,7 +12,7 @@ params.cdslength = "300"
 params.cdhit_id = "0.94"
 params.cdhit_as = "0.80"
 params.outdir = "results"
-params.samplesheet = "samplesheet.csv"
+params.samplesheet = "$projectDir/samplesheet.csv"
 params.help = ""
 params.mode = "full"
 
