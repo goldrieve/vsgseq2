@@ -4,11 +4,13 @@ An updated pipeline for analyzing VSG-seq data. The original VSGSeq pipeline is 
 
 ## Installation and Environment Setup
 
-We use Nextflow/Conda to install dependencies, please install Nextflow as described [here](https://nf-co.re/docs/usage/installation) then run the pipeline on demo data to ensure everything is working:
+We use Nextflow/Conda to install dependencies, please install Nextflow as described [here](https://nf-co.re/docs/usage/installation) then run the following command to ensure everything is working:
 
 ```
 nextflow run goldrieve/vsgseq2 -r main
 ```
+
+This will produce a directory called results which will contain analysis of synthetic demo data, described in detail below.
 
 ## Input Files
 
