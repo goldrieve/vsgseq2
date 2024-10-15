@@ -7,25 +7,20 @@ An updated pipeline for analyzing VSG-seq data. The original VSGSeq pipeline is 
 We use Nextflow/Conda to install dependencies, please install Nextflow as described [here](https://nf-co.re/docs/usage/installation) then run the following command to ensure everything is working:
 
 ```
-nextflow run goldrieve/vsgseq2 -r main --outdir results
+nextflow run goldrieve/vsgseq2 -r main --help
 ```
 
-This will produce a directory called results which will contain analysis of synthetic demo data, described in detail below.
-
-vsgseq2 takes both single and paired-end sequencing reads, in FASTQ format. Define the location of the reads in the samplesheet.csv and start the run!
-
-## Quick start 
-vsgseq2 is implemented using Nextflow which will install dependencies via conda.
-
-To test the installation, use synthetic Illumina data for six samples. vsgseq2 will run on these files by default, unless specified otherwise.
-
-- Paired reads:2 early, 2 late.
-- Single end reads: 1 early and 1 late.
-
-To run vsgseq2 on the tutorial data, run:
+Next, run the pipeline on synthetic demo data to ensure all dependencies have been installed. These can be downloaded, along with an example samplesheet.
 
 ```
-nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results
+wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads/reads.tar
+tar -xvf reads.tar
+```
+
+Now edit the samples.csv to point to the explicit location of the demo reads you just downloaded and run nextflow
+
+```
+nextflow run goldrieve/vsgseq2 -r main --samplesheet samples.csv
 ```
 
 This will create the directory __tutorial_results__ which will contain 4 subdirectories
