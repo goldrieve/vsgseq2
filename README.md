@@ -4,10 +4,10 @@ An updated pipeline for analyzing VSG-seq data. The original VSGSeq pipeline is 
 
 ## Installation and Environment Setup
 
-We use Nextflow/Conda to install dependencies, please install Nextflow as described [here](https://nf-co.re/docs/usage/installation) then run:
+We use Nextflow/Conda to install dependencies, please install Nextflow as described [here](https://nf-co.re/docs/usage/installation) then run the pipeline on demo data to ensure everything is working:
 
 ```
-nextflow run goldrieve/vsgseq2 -r main --help
+nextflow run goldrieve/vsgseq2 -r main
 ```
 
 ## Input Files
