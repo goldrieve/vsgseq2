@@ -1,4 +1,5 @@
-graph TD
+```mermaid
+graph TD;
     A[Start] --> B{Mode}
     B -->|full| C[TRIM]
     B -->|assemble| C[TRIM]
