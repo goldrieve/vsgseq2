@@ -74,18 +74,21 @@ include { SUMMARISEVSGOME } from './modules/summarise_vsgome'
 
 ch_samplesheet = Channel.fromPath(params.samplesheet)
 
-ch_reads = ch_samplesheet.splitCsv(header:true).map {
+ch_reads = ch_samplesheet
+    .splitCsv(header:true)
+    .map { row -> 
+        def meta = [:]
+        meta.id = row.sample
+        meta.single_end = row.r2.toString().isEmpty()
+        
+        def reads = []
+        reads.add(file(row.r1, checkIfExists: true))
+        if (!meta.single_end) {
+            reads.add(file(row.r2, checkIfExists: true))
+        }
 
-    r1 = it['r1']
-    r2 = it['r2']
-
-    is_singleEnd = r2.toString()=='' ? true : false
-
-    meta = [id: it['sample'], single_end: is_singleEnd]
-
-    r2.toString()=='' ? [meta, [r1]] : [meta, [r1, r2]]
-
-}
+        [ meta, reads ]
+    }
 
 workflow {
     if (params.mode == "full") {
