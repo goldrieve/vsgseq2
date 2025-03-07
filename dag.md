@@ -1,0 +1,46 @@
+```mermaid
+graph TD;
+    A[Start] --> B{Mode}
+    B -->|full| C[TRIM]
+    B -->|assemble| C[TRIM]
+    B -->|predictvsgs| J[ORF]
+    B -->|quantify| Q[INDEX]
+    B -->|analyse| J[ORF]
+
+    C --> D[ASSEMBLE]
+    D --> E[ORF]
+    E --> F[INDIVIDUAL_CDHIT]
+    F --> G[BLAST]
+    G --> H[CONCATENATE_VSGS]
+    H --> I[CONCATENATED_CDHIT]
+    I --> J[INDEX]
+    J --> K[QUANTIFY]
+    K --> L[MULTIQC]
+    K --> M[SUMMARISE]
+    K --> N[SUMMARISEVSGOME]
+
+    Q --> R[QUANTIFY]
+    R --> L
+    R --> N
+
+    J --> F
+    F --> G
+    G --> H
+    H --> I
+
+    A --> O[End]
+
+    C --> O
+    D --> O
+    E --> O
+    F --> O
+    G --> O
+    H --> O
+    I --> O
+    J --> O
+    K --> O
+    L --> O
+    M --> O
+    N --> O
+    Q --> O
+    R --> O
