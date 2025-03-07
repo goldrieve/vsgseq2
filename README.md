@@ -10,17 +10,10 @@ We use Nextflow/Conda to install dependencies, please install Nextflow as descri
 nextflow run goldrieve/vsgseq2 -r main --help
 ```
 
-Next, run the pipeline on synthetic demo data to ensure all dependencies have been installed. These can be downloaded, along with an example samplesheet.
+Next, run the pipeline on synthetic demo data that has been packaged within the vsgseq2 directory.
 
 ```
-wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads/reads.tar
-tar -xvf reads.tar
-```
-
-Now edit the samples.csv to point to the explicit location of the demo reads you just downloaded and run nextflow
-
-```
-nextflow run goldrieve/vsgseq2 -r main --samplesheet samples.csv
+nextflow run goldrieve/vsgseq2 -r main
 ```
 
 This will create the directory __tutorial_results__ which will contain 4 subdirectories
