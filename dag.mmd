@@ -1,5 +1,6 @@
-```mermaid
-graph TD;
+graph LR
+    classDef largeFontSize font-size:30px;
+
     A[Start] --> B{Mode}
     B -->|full| C[TRIM]
     B -->|assemble| C[TRIM]
@@ -44,3 +45,5 @@ graph TD;
     N --> O
     Q --> O
     R --> O
+
+    class A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,Q,R largeFontSize;
