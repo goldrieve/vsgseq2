@@ -6,14 +6,14 @@ channels:
   - nodefaults
 dependencies:
   - r-base=4.3.3
-  - blast=2.15.0
+  - blast
   - bowtie2
   - cd-hit=4.8.1
   - salmon=1.10.3
-  - samtools=1.18
-  - seqkit=2.8.1
+  - samtools
+  - seqkit
   - seqtk=1.4
-  - transdecoder=5.7.1
+  - transdecoder
   - trimmomatic=0.39
   - trinity=2.15.1
   - biopython=1.78
