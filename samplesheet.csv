@@ -1,7 +1,7 @@
 sample,r1,r2
-early_1,/Users/goldriev/pkgs/vsgseq2/data/reads/early_1_1.fq.gz,/Users/goldriev/pkgs/vsgseq2/data/reads/early_1_2.fq.gz
-early_2,/Users/goldriev/pkgs/vsgseq2/data/reads/early_2_1.fq.gz,/Users/goldriev/pkgs/vsgseq2/data/reads/early_2_2.fq.gz
-late_1,/Users/goldriev/pkgs/vsgseq2/data/reads/late_1_1.fq.gz,/Users/goldriev/pkgs/vsgseq2/data/reads/late_1_2.fq.gz
-late_2,/Users/goldriev/pkgs/vsgseq2/data/reads/late_2_1.fq.gz,/Users/goldriev/pkgs/vsgseq2/data/reads/late_2_2.fq.gz
-earlysingle,/Users/goldriev/pkgs/vsgseq2/data/reads/earlysingle.fq.gz,
-latesingle,/Users/goldriev/pkgs/vsgseq2/data/reads/latesingle.fq.gz,
+early_1,data/reads/early_1_1.fq.gz,data/reads/early_1_2.fq.gz
+early_2,data/reads/early_2_1.fq.gz,data/reads/early_2_2.fq.gz
+late_1,data/reads/late_1_1.fq.gz,data/reads/late_1_2.fq.gz
+late_2,data/reads/late_2_1.fq.gz,data/reads/late_2_2.fq.gz
+earlysingle,data/reads/earlysingle.fq.gz,
+latesingle,data/reads/latesingle.fq.gz,
