@@ -1,5 +1,6 @@
 process ASSEMBLE {
-    conda "$projectDir/vsgseq2.yml" 
+    conda "$projectDir/vsgseq2.yml"
+    container 'goldrieve/vsgseq2:latest'
     publishDir "${params.outdir}/assemblies", pattern: '*trinity.Trinity.fasta', mode:'copy'
     cpus = params.requestedcpus
     

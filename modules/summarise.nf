@@ -1,5 +1,6 @@
 process SUMMARISE {
     conda "$projectDir/vsgseq2.yml"
+    container 'goldrieve/vsgseq2:latest'
     publishDir "${params.outdir}/summary", mode:'copy'
     input:
     val quants

@@ -1,5 +1,6 @@
 process CONCATENATE_VSGS {
-    conda "$projectDir/vsgseq2.yml" 
+    conda "$projectDir/vsgseq2.yml"
+    container 'goldrieve/vsgseq2:latest'
     publishDir "${params.outdir}/VSGs", mode:'copy'
     input:
     path (vsgome)

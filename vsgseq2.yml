@@ -6,6 +6,8 @@ channels:
   - nodefaults
 dependencies:
   - r-base=4.3.3
+  - numpy
+  - python>=3.8
   - blast
   - bowtie2
   - cd-hit=4.8.1

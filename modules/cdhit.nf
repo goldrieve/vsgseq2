@@ -1,5 +1,6 @@
 process INDIVIDUAL_CDHIT {
-    conda "$projectDir/vsgseq2.yml" 
+    conda "$projectDir/vsgseq2.yml"
+    container 'goldrieve/vsgseq2:latest'
     input:
     path (assemblies)
     val cdhit_id

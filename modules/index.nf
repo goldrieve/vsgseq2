@@ -1,5 +1,6 @@
 process INDEX {
-    conda "$projectDir/vsgseq2.yml" 
+    conda "$projectDir/vsgseq2.yml"
+    container 'goldrieve/vsgseq2:latest'
     input:
     path (vsgs)
     val cores

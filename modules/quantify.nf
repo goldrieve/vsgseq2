@@ -1,5 +1,6 @@
 process QUANTIFY {
-    conda "$projectDir/vsgseq2.yml" 
+    conda "$projectDir/vsgseq2.yml"
+    container 'goldrieve/vsgseq2:latest'
     cpus = params.requestedcpus
     input:
     path (index)

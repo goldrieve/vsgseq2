@@ -1,5 +1,6 @@
 process MULTIQC {
-    conda "$projectDir/vsgseq2.yml" 
+    conda "$projectDir/vsgseq2.yml"
+    container 'goldrieve/vsgseq2:latest' 
     publishDir "${params.outdir}/summary", mode:'copy'
     cpus = params.requestedcpus
 

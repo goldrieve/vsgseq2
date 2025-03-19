@@ -1,5 +1,6 @@
 process BLAST {
-    conda "$projectDir/vsgseq2.yml" 
+    conda "$projectDir/vsgseq2.yml"
+    container 'goldrieve/vsgseq2:latest'
     publishDir "${params.outdir}/VSGs", mode:'copy', pattern: '*_VSGs.fasta'
     input:
     path (assemblies)
