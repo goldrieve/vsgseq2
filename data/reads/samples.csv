@@ -1,7 +1,7 @@
 sample,r1,r2
-early_1,/home/goldriev/scratch/early_1_1.fq.gz,/home/goldriev/scratch/early_1_2.fq.gz
-early_2,/home/goldriev/scratch/early_2_1.fq.gz,/home/goldriev/scratch/early_2_2.fq.gz
-late_1,/home/goldriev/scratch/late_1_1.fq.gz,/home/goldriev/scratch/late_1_2.fq.gz
-earlysingle,/home/goldriev/scratch/earlysingle.fq.gz,
-latesingle,/home/goldriev/scratch/latesingle.fq.gz,
-
+early_1,early_1_1.fq.gz,early_1_2.fq.gz
+early_2,early_2_1.fq.gz,early_2_2.fq.gz
+late_1,late_1_1.fq.gz,late_1_2.fq.gz
+earlysingle,earlysingle.fq.gz,
+latesingle,latesingle.fq.gz,
+fastq,early_test_1.fastq.gz,early_test_2.fastq.gz
