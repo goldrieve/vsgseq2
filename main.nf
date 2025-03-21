@@ -82,9 +82,34 @@ ch_reads = ch_samplesheet
         meta.single_end = row.r2.toString().isEmpty()
         
         def reads = []
-        reads.add(file(row.r1, checkIfExists: true))
+        // Convert .fastq.gz to .fq.gz for r1
+        def r1 = file(row.r1, checkIfExists: true)
+        if (r1.name.endsWith('.fastq.gz')) {
+            def newName = r1.name.replace('.fastq.gz', '.fq.gz')
+            file("${r1.parent}/${newName}").withOutputStream { out ->
+                r1.withInputStream { input ->
+                    out << input
+                }
+            }
+            reads.add(file("${r1.parent}/${newName}"))
+        } else {
+            reads.add(r1)
+        }
+
+        // Handle r2 if paired-end
         if (!meta.single_end) {
-            reads.add(file(row.r2, checkIfExists: true))
+            def r2 = file(row.r2, checkIfExists: true)
+            if (r2.name.endsWith('.fastq.gz')) {
+                def newName = r2.name.replace('.fastq.gz', '.fq.gz')
+                file("${r2.parent}/${newName}").withOutputStream { out ->
+                    r2.withInputStream { input ->
+                        out << input
+                    }
+                }
+                reads.add(file("${r2.parent}/${newName}"))
+            } else {
+                reads.add(r2)
+            }
         }
 
         [ meta, reads ]
