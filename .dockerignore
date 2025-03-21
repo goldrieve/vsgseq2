@@ -1,0 +1,14 @@
+work/
+.nextflow*
+results/
+.git/
+.gitignore
+data/reads/fastqc/
+data/reads/sub/
+analysis/
+work/
+minion/
+tutorial_results/
+results/
+WOR/
+.DS_Store

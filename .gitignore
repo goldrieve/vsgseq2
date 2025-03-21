@@ -1,0 +1,11 @@
+data/reads/fastqc/
+data/reads/sub/
+analysis/
+work/
+minion/
+tutorial_results/
+results/
+WOR/
+.nextflow*
+.nextflow/
+.DS_Store

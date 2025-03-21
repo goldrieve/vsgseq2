@@ -1,0 +1,22 @@
+channels:
+  - anaconda
+  - bioconda
+  - defaults
+  - conda-forge
+dependencies:
+  - blast=2.15.0
+  - bowtie2
+  - cd-hit=4.8.1
+  - salmon=1.10.3
+  - samtools=1.18
+  - seqkit=2.8.1
+  - seqtk=1.4
+  - transdecoder=5.7.1
+  - trimmomatic=0.39
+  - trinity=2.15.1
+  - nextflow=23.10.1-0
+  - biopython=1.78
+  - r-pacman
+  - conda-forge::boost=1.85.0
+  - multiqc=1.21
+  - typing_extensions

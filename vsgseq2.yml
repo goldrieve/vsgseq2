@@ -1,0 +1,25 @@
+name: vsgseq2-env
+
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - r-base=4.3.3
+  - numpy
+  - python>=3.8
+  - blast
+  - bowtie2
+  - cd-hit=4.8.1
+  - salmon=1.10.3
+  - samtools
+  - seqkit
+  - seqtk=1.4
+  - transdecoder
+  - trimmomatic=0.39
+  - trinity=2.15.1
+  - biopython=1.78
+  - r-pacman
+  - conda-forge::boost=1.85.0
+  - multiqc=1.21
+  - typing_extensions
