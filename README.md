@@ -4,16 +4,24 @@ An updated pipeline for analyzing VSG-seq data. The original VSGSeq pipeline is 
 
 ## Installation and Environment Setup
 
-We use Nextflow/Conda to install dependencies, please install Nextflow as described [here](https://nf-co.re/docs/usage/installation) then run the following command to ensure everything is working:
+We use Nextflow in combination with Docker, Singularity or Conda to install dependencies. Please install Nextflow and your choice of Docker, Singularity or Conda then run the following command to ensure everything is working:
 
 ```
 nextflow run goldrieve/vsgseq2 -r main --help
 ```
 
-Next, run the pipeline on synthetic demo data that has been packaged within the vsgseq2 directory.
+Next, download syntehtic VSGSeq data to test the installation:
 
 ```
-nextflow run goldrieve/vsgseq2 -r main
+wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.gz
+tar -xzf reads.tar.gz
+cd reads
+```
+
+Once you have navigated to the synthetic reads directory, run vsgseq2 on the data with the provided samplesheet. Here we use Docker, Conda and Singularity are also options which we describe below.
+
+```
+nextflow run goldrieve/vsgseq2 -r main -with-docker --samplesheet samples.csv
 ```
 
 This will create the directory __tutorial_results__ which will contain 4 subdirectories
