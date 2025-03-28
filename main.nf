@@ -11,8 +11,9 @@ params.trinitymem = "20"
 params.cdslength = "300"
 params.cdhit_id = "0.94"
 params.cdhit_as = "0.80"
-params.outdir = "results"
-params.samplesheet = "$projectDir/samplesheet.csv"
+def timestamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())
+params.outdir = "results/${timestamp}"
+params.samplesheet = "$projectDir/data/reads/samples.csv"
 params.help = ""
 params.mode = "full"
 
@@ -63,49 +64,72 @@ if (params.help) {
 def validateParams() {
     def errors = []
 
-    if (!file(params.assemblies).exists()) {
-        errors << "The assemblies path '${params.assemblies}' does not exist."
-    }
-    if (!file(params.vsg_db).exists()) {
-        errors << "The VSG database path '${params.vsg_db}' does not exist."
-    }
-    if (!file(params.notvsg_db).exists()) {
-        errors << "The NOTVSG database path '${params.notvsg_db}' does not exist."
-    }
-    if (!file(params.vsgome).exists()) {
-        errors << "The VSGome path '${params.vsgome}' does not exist."
-    }
-    if (params.full_vsg_db && !file(params.full_vsg_db).exists()) {
-        errors << "The full VSG database path '${params.full_vsg_db}' does not exist."
-    }
-    if (!file(params.samplesheet).exists()) {
-        errors << "The samplesheet path '${params.samplesheet}' does not exist."
-    }
-    if (!["full", "assemble", "predictvsgs", "quantify", "analyse"].contains(params.mode)) {
-        errors << "Invalid mode '${params.mode}'. Allowed values are: full, assemble, predictvsgs, quantify, analyse."
-    }
-    if (params.requestedcpus <= 0) {
-        errors << "The requested CPUs '${params.requestedcpus}' must be greater than 0."
-    }
-    if (params.cores <= 0) {
-        errors << "The cores '${params.cores}' must be greater than 0."
-    }
-    if (params.trinitymem.toInteger() <= 0) {
-        errors << "The Trinity memory '${params.trinitymem}' must be greater than 0."
-    }
-    if (params.cdslength.toInteger() <= 0) {
+    // Validate file existence using file() method
+    try {
+        if (file(params.assemblies).isEmpty()) {
+            errors << "The assemblies path '${params.assemblies}' does not exist or is empty."
+        }
+        
+        def vsg_db = file(params.vsg_db)
+        if (!vsg_db.exists()) {
+            errors << "The VSG database path '${params.vsg_db}' does not exist."
+        }
+        
+        def notvsg_db = file(params.notvsg_db)
+        if (!notvsg_db.exists()) {
+            errors << "The NOTVSG database path '${params.notvsg_db}' does not exist."
+        }
+        
+        def vsgome = file(params.vsgome)
+        if (!vsgome.exists()) {
+            errors << "The VSGome path '${params.vsgome}' does not exist."
+        }
+        
+        if (params.full_vsg_db) {
+            def full_vsg_db = file(params.full_vsg_db)
+            if (!full_vsg_db.exists()) {
+                errors << "The full VSG database path '${params.full_vsg_db}' does not exist."
+            }
+        }
+        
+        def samplesheet = file(params.samplesheet)
+        if (!samplesheet.exists()) {
+            errors << "The samplesheet path '${params.samplesheet}' does not exist."
+        }
+        
+        // Validate mode
+        if (!["full", "assemble", "predictvsgs", "quantify", "analyse", "new_pipe"].contains(params.mode)) {
+            errors << "Invalid mode '${params.mode}'. Allowed values are: full, assemble, predictvsgs, quantify, analyse."
+        }
+        if (params.requestedcpus <= 0) {
+            errors << "The requested CPUs '${params.requestedcpus}' must be greater than 0."
+        }
+        if (params.cores <= 0) {
+            errors << "The cores '${params.cores}' must be greater than 0."
+        }
+        if (params.trinitymem.toInteger() <= 0) {
+            errors << "The Trinity memory '${params.trinitymem}' must be greater than 0."
+        }
+        if (params.cdslength.toInteger() <= 0) {
         errors << "The CDS length '${params.cdslength}' must be greater than 0."
-    }
-    if (params.cdhit_id.toFloat() < 0.0 || params.cdhit_id.toFloat() > 1.0) {
-        errors << "The CD-HIT identity threshold '${params.cdhit_id}' must be between 0.0 and 1.0."
-    }
-    if (params.cdhit_as.toFloat() < 0.0 || params.cdhit_as.toFloat() > 1.0) {
-        errors << "The CD-HIT alignment coverage '${params.cdhit_as}' must be between 0.0 and 1.0."
+        }
+        if (params.cdhit_id.toFloat() < 0.0 || params.cdhit_id.toFloat() > 1.0) {
+            errors << "The CD-HIT identity threshold '${params.cdhit_id}' must be between 0.0 and 1.0."
+        }
+        if (params.cdhit_as.toFloat() < 0.0 || params.cdhit_as.toFloat() > 1.0) {
+            errors << "The CD-HIT alignment coverage '${params.cdhit_as}' must be between 0.0 and 1.0."
+        }
+
+    } catch (Exception e) {
+        errors << "Error validating parameters: ${e.message}"
     }
 
     if (errors) {
-        log.error("Parameter validation failed with the following errors:")
-        errors.each { log.error("- ${it}") }
+        log.info("Parameter validation failed with the following errors:")
+        errors.each { error -> 
+            // Print error message without the log file reference
+            System.err.println("ERROR: ${error}")
+        }
         System.exit(1)
     }
 }
@@ -213,6 +237,19 @@ workflow {
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
         summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
     }
+    else if (params.mode == "new_pipe") {
+        trimmed_reads_ch = TRIM(ch_reads, params.cores)
+        assemble_ch = ASSEMBLE(trimmed_reads_ch, params.cores, params.trinitymem)
+        orf_ch = ORF(assemble_ch, params.cdslength)
+        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhit_id, params.cdhit_as)
+        blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
+        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
+        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)
+        index_ch = INDEX(population_ch, params.cores)
+        quant_ch = QUANTIFY(index_ch, params.cores, trimmed_reads_ch)
+        multiqc_ch = MULTIQC((quant_ch.quants).collect())
+        summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
+    }  
     else {
         log.error("Invalid mode selected. Please select one of the following: full, assemble, predictvsgs, quantify, analyse.")
         System.exit(1)
