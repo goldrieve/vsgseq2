@@ -59,6 +59,60 @@ if (params.help) {
     exit(0)
 }
 
+// Add a step to validate parameters
+def validateParams() {
+    def errors = []
+
+    if (!file(params.assemblies).exists()) {
+        errors << "The assemblies path '${params.assemblies}' does not exist."
+    }
+    if (!file(params.vsg_db).exists()) {
+        errors << "The VSG database path '${params.vsg_db}' does not exist."
+    }
+    if (!file(params.notvsg_db).exists()) {
+        errors << "The NOTVSG database path '${params.notvsg_db}' does not exist."
+    }
+    if (!file(params.vsgome).exists()) {
+        errors << "The VSGome path '${params.vsgome}' does not exist."
+    }
+    if (params.full_vsg_db && !file(params.full_vsg_db).exists()) {
+        errors << "The full VSG database path '${params.full_vsg_db}' does not exist."
+    }
+    if (!file(params.samplesheet).exists()) {
+        errors << "The samplesheet path '${params.samplesheet}' does not exist."
+    }
+    if (!["full", "assemble", "predictvsgs", "quantify", "analyse"].contains(params.mode)) {
+        errors << "Invalid mode '${params.mode}'. Allowed values are: full, assemble, predictvsgs, quantify, analyse."
+    }
+    if (params.requestedcpus <= 0) {
+        errors << "The requested CPUs '${params.requestedcpus}' must be greater than 0."
+    }
+    if (params.cores <= 0) {
+        errors << "The cores '${params.cores}' must be greater than 0."
+    }
+    if (params.trinitymem.toInteger() <= 0) {
+        errors << "The Trinity memory '${params.trinitymem}' must be greater than 0."
+    }
+    if (params.cdslength.toInteger() <= 0) {
+        errors << "The CDS length '${params.cdslength}' must be greater than 0."
+    }
+    if (params.cdhit_id.toFloat() < 0.0 || params.cdhit_id.toFloat() > 1.0) {
+        errors << "The CD-HIT identity threshold '${params.cdhit_id}' must be between 0.0 and 1.0."
+    }
+    if (params.cdhit_as.toFloat() < 0.0 || params.cdhit_as.toFloat() > 1.0) {
+        errors << "The CD-HIT alignment coverage '${params.cdhit_as}' must be between 0.0 and 1.0."
+    }
+
+    if (errors) {
+        log.error("Parameter validation failed with the following errors:")
+        errors.each { log.error("- ${it}") }
+        System.exit(1)
+    }
+}
+
+// Call the validation function before the workflow starts
+validateParams()
+
 include { TRIM } from './modules/trim'
 include { ASSEMBLE } from './modules/assemble'
 include { ORF } from './modules/orf'
