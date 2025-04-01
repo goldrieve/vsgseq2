@@ -98,8 +98,8 @@ def validateParams() {
         }
         
         // Validate mode
-        if (!["full", "assemble", "predictvsgs", "quantify", "analyse", "new_pipe"].contains(params.mode)) {
-            errors << "Invalid mode '${params.mode}'. Allowed values are: full, assemble, predictvsgs, quantify, analyse."
+        if (!["full", "assemble", "predictvsgs", "quantify", "analyse", "new_full", "new_analyse"].contains(params.mode)) {
+            errors << "Invalid mode '${params.mode}'. Allowed values are: full, assemble, predictvsgs, quantify, analyse, new_full and new_analyse."
         }
         if (params.requestedcpus <= 0) {
             errors << "The requested CPUs '${params.requestedcpus}' must be greater than 0."
@@ -237,16 +237,26 @@ workflow {
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
         summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
     }
-    else if (params.mode == "new_pipe") {
+    else if (params.mode == "new_full") {
         trimmed_reads_ch = TRIM(ch_reads, params.cores)
         assemble_ch = ASSEMBLE(trimmed_reads_ch, params.cores, params.trinitymem)
         orf_ch = ORF(assemble_ch, params.cdslength)
-        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhit_id, params.cdhit_as)
-        blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
+        blast_ch = BLAST(orf_ch, params.vsg_db, params.notvsg_db)
         population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
         catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)
         index_ch = INDEX(population_ch, params.cores)
         quant_ch = QUANTIFY(index_ch, params.cores, trimmed_reads_ch)
+        multiqc_ch = MULTIQC((quant_ch.quants).collect())
+        summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
+    }
+    else if (params.mode == "new_analyse"){
+        assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
+        orf_ch = ORF(assemblies_ch, params.cdslength)
+        blast_ch = BLAST(orf_ch, params.vsg_db, params.notvsg_db)
+        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
+        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)
+        index_ch = INDEX(population_ch, params.cores)
+        quant_ch = QUANTIFY(index_ch, params.cores, ch_reads)
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
         summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
     }  
