@@ -1,15 +1,25 @@
 import sys
+import os
 from Bio.Blast import NCBIXML
 from Bio import SeqIO
 
 def parseVSGblast(inputfile): 
     v = inputfile+'.xml'
     n = inputfile+'_nonVSG.xml' 
-    s = inputfile+"_cdhit.fasta"
-    
+    fasta_file = inputfile+'.fasta'
+    cdhit_fasta_file = inputfile+'_cdhit.fasta'
+
+    # Check which file exists
+    if os.path.exists(cdhit_fasta_file):
+        s = cdhit_fasta_file
+    elif os.path.exists(fasta_file):
+        s = fasta_file
+    else:
+        raise FileNotFoundError("Neither .fasta nor _cdhit.fasta file found.")
+
     result_handle = open(v)
     blast_records = NCBIXML.parse(result_handle) 
-    record_dict = SeqIO.index(s,"fasta")
+    record_dict = SeqIO.index(s, "fasta")
     
     outfile = open(inputfile.split('.')[0]+'_VSGs.fasta', 'w')
     hit_list = []
