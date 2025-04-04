@@ -258,7 +258,7 @@ workflow {
         index_ch = INDEX(population_ch, params.cores)
         quant_ch = QUANTIFY(index_ch, params.cores, ch_reads)
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
-        summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
+        summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect(), catcdhit_ch.clstr)
     }  
     else {
         log.error("Invalid mode selected. Please select one of the following: full, assemble, predictvsgs, quantify, analyse.")

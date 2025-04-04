@@ -9,8 +9,8 @@ process CONCATENATED_CDHIT {
     val cdhit_as
 
     output:
-    path "VSGome.fasta"
-    path "VSGome.fasta.clstr"
+    path "VSGome.fasta", emit: vsgome
+    path "VSGome.fasta.clstr", emit: clstr
 
     script:
     """

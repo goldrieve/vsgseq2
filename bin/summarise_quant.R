@@ -36,7 +36,73 @@ names(tpm) <- names
 wide_tpm <- dplyr:::reduce(tpm, full_join, by = "Name")
 names <- append(names, 'vsg_id', after = 0)
 names <- gsub("_quant", "", names)
+
+# Remove '1.fq' from column names if present
+names <- gsub("_1\\.fq", "", names)
+
 colnames(wide_tpm) <- names
 
 # Write the wide data frame to a CSV file
 write.csv(wide_tpm, './tpm.csv', row.names=FALSE)
+
+#Reads
+
+
+# Read each 'quant.sf' file into a data frame and store them in a list
+reads <- lapply(my.files, function(file) {
+  # Read the file
+  read.table(file, header = TRUE)
+})
+
+# Extract TPM
+reads_extract <- function(DF) {
+  DF <- DF %>% select(Name, NumReads)
+  return(DF)
+}
+
+# Apply the 'tpm_extract' function to each data frame in the list
+reads <- lapply(reads, reads_extract)
+
+# Extract the last element from each file path and assign these names to the list of data frames
+names <- sapply(strsplit(quant_dirs, split="\\/"), function(x) tail(x, n=1))
+names(reads) <- names
+
+# Join all data frames in the list into a single wide data frame
+wide_reads <- dplyr:::reduce(reads, full_join, by = "Name")
+names <- append(names, 'vsg_id', after = 0)
+names <- gsub("_quant", "", names)
+
+# Remove '1.fq' from column names if present
+names <- gsub("_1\\.fq", "", names)
+
+colnames(wide_reads) <- names
+
+# Write the wide data frame to a CSV file
+write.csv(wide_reads, './num_reads.csv', row.names=FALSE)
+
+# Exclude the 'vsg_id' column and calculate the total sum of read counts for each sample
+total_read_counts <- colSums(wide_reads[ , -1], na.rm = TRUE)
+total_read_counts <- round(total_read_counts)
+
+# Convert the result to a data frame for better readability
+total_read_counts_df <- data.frame(Sample = names(total_read_counts), TotalReads = total_read_counts)
+
+# Print a warning message for samples with total read counts below 100,000
+low_read_samples <- total_read_counts_df %>% filter(TotalReads < 100000)
+if (nrow(low_read_samples) > 0) {
+  warning("The following samples have total read counts below 100,000:\n",
+          paste(low_read_samples$Sample, collapse = ", "))
+}
+
+# Optionally, write the result to a CSV file
+write.csv(total_read_counts_df, './total_read_counts.csv', row.names = FALSE)
+
+# Get the list of low-read samples
+low_read_sample_names <- low_read_samples$Sample
+
+# Filter out the low-read samples from the tpm_data
+filtered_tpm_data <- wide_tpm %>%
+  select(-all_of(low_read_sample_names))  # Remove columns corresponding to low-read samples
+
+# Write the filtered data to a new CSV file
+write.csv(filtered_tpm_data, './filtered_tpm.csv', row.names = FALSE)
