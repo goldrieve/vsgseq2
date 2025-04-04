@@ -7,6 +7,8 @@ args <- commandArgs(trailingOnly = TRUE)
 # Remove the square brackets and split the argument into a list by a comma
 quant_dirs <- strsplit(gsub("\\[|\\]", "", args[1]), split = ",")[[1]]
 
+threshold <- as.numeric(args[2])
+
 # Trim leading and trailing whitespaces from the file paths
 quant_dirs <- trimws(quant_dirs)
 
@@ -87,12 +89,8 @@ total_read_counts <- round(total_read_counts)
 # Convert the result to a data frame for better readability
 total_read_counts_df <- data.frame(Sample = names(total_read_counts), TotalReads = total_read_counts)
 
-# Print a warning message for samples with total read counts below 100,000
-low_read_samples <- total_read_counts_df %>% filter(TotalReads < 100000)
-if (nrow(low_read_samples) > 0) {
-  warning("The following samples have total read counts below 100,000:\n",
-          paste(low_read_samples$Sample, collapse = ", "))
-}
+# Print a warning message for samples with total read counts below defined value
+low_read_samples <- total_read_counts_df %>% filter(TotalReads < threshold)
 
 # Optionally, write the result to a CSV file
 write.csv(total_read_counts_df, './total_read_counts.csv', row.names = FALSE)
