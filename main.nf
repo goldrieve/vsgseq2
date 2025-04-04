@@ -11,6 +11,7 @@ params.trinitymem = "20"
 params.cdslength = "300"
 params.cdhit_id = "0.94"
 params.cdhit_as = "0.80"
+params.threshold = "100000"
 def timestamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())
 params.outdir = "results/${timestamp}"
 params.samplesheet = "$projectDir/data/reads/samples.csv"
@@ -205,7 +206,7 @@ workflow {
         index_ch = INDEX(catcdhit_ch, params.cores)
         quant_ch = QUANTIFY(index_ch, params.cores, trimmed_reads_ch)
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
-        summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
+        summarise_ch = SUMMARISE((quant_ch.quants).collect(), params.threshold, (blast_ch.vsgs).collect(), catcdhit_ch.clstr)
     }  
     else if (params.mode == "assemble"){
         trimmed_reads_ch = TRIM(ch_reads, params.cores)
@@ -235,7 +236,7 @@ workflow {
         index_ch = INDEX(catcdhit_ch, params.cores)
         quant_ch = QUANTIFY(index_ch, params.cores, ch_reads)
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
-        summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
+        summarise_ch = SUMMARISE((quant_ch.quants).collect(), params.threshold, (blast_ch.vsgs).collect(), catcdhit_ch.clstr)
     }
     else if (params.mode == "new_full") {
         trimmed_reads_ch = TRIM(ch_reads, params.cores)
@@ -247,7 +248,7 @@ workflow {
         index_ch = INDEX(population_ch, params.cores)
         quant_ch = QUANTIFY(index_ch, params.cores, trimmed_reads_ch)
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
-        summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect())
+        summarise_ch = SUMMARISE((quant_ch.quants).collect(), params.threshold, (blast_ch.vsgs).collect(), catcdhit_ch.clstr)
     }
     else if (params.mode == "new_analyse"){
         assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
@@ -258,7 +259,7 @@ workflow {
         index_ch = INDEX(population_ch, params.cores)
         quant_ch = QUANTIFY(index_ch, params.cores, ch_reads)
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
-        summarise_ch = SUMMARISE((quant_ch.quants).collect(), (blast_ch.vsgs).collect(), catcdhit_ch.clstr)
+        summarise_ch = SUMMARISE((quant_ch.quants).collect(), params.threshold, (blast_ch.vsgs).collect(), catcdhit_ch.clstr)
     }  
     else {
         log.error("Invalid mode selected. Please select one of the following: full, assemble, predictvsgs, quantify, analyse.")

@@ -4,6 +4,7 @@ process SUMMARISE {
     publishDir "${params.outdir}/summary", mode:'copy'
     input:
     val quants
+    val threshold
     val vsgs
     val clstr
 
@@ -18,7 +19,7 @@ process SUMMARISE {
 
     script:
     """
-    Rscript $projectDir/bin/summarise_quant.R "${quants}"
+    Rscript $projectDir/bin/summarise_quant.R "${quants}" ${threshold}
     Rscript $projectDir/bin/summarise_vsgs.R "${vsgs}"
     python $projectDir/bin/add_cluster.py filtered_tpm.csv ${clstr} filtered_tpm_clusters.csv
     """
