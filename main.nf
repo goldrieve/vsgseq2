@@ -35,6 +35,10 @@ if (params.help) {
              |                    Default will only include the assembled VSGome.
              |  --mode    The mode to run the pipeline in. Options are full, assemble, predictvsgs, quantify, analyse.
              |                [default: ${params.mode}]
+             |  --outdir        VSGSeq output directory. 
+             |                [default: ${params.outdir}]
+             |  --samplesheet  Define the path to the samplesheet.
+             |                [default: ${params.samplesheet}]
              |                
              |
              |Optional arguments:
@@ -51,10 +55,8 @@ if (params.help) {
              |                [default: ${params.cdhit_id}]
              |  --cdhit_as       Define alignment coverage for the shorter sequence (0.0 - 1.0).
              |                [default: ${params.cdhit_as}]
-             |  --outdir        VSGSeq output directory. 
-             |                [default: ${params.outdir}]
-             |  --samplesheet  Define the path to the samplesheet.
-             |                [default: ${params.samplesheet}]
+             |  --threshold       Define the lowest number of reads a sample must have mapped to the VSGome to include in the filtered tpm.csv.
+             |                [default: ${params.threshold}]
              |  --help         Print this message.""".stripMargin()
     // Print the help with the stripped margin and exit
     println(help)
