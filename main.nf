@@ -2,7 +2,7 @@ nextflow.enable.dsl = 2
 
 params.assemblies = "$projectDir/data/tutorial_assemblies/*_trinity.Trinity.fasta"
 params.vsg_db = "$projectDir/data/blastdb/concatAnTattb427.fa"
-params.notvsg_db = "$projectDir/data/blastdb/NOTvsgs.fa"
+params.notvsg_db = "$projectDir/data/blastdb/catNOTvsgs.fa"
 params.vsgome = "$projectDir/data/blastdb/concatAnTattb427.fa"
 params.full_vsg_db = ""
 params.requestedcpus = 4
