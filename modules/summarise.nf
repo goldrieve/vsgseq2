@@ -7,6 +7,7 @@ process SUMMARISE {
     val threshold
     val vsgs
     val clstr
+    val fasta
 
     output:
     path "tpm.csv"
@@ -15,6 +16,7 @@ process SUMMARISE {
     path "vsg_count.csv"
     path "filtered_tpm.csv"
     path "filtered_tpm_clusters.csv"
+    path "length.csv"
 
 
     script:
@@ -22,5 +24,6 @@ process SUMMARISE {
     Rscript $projectDir/bin/summarise_quant.R "${quants}" ${threshold}
     Rscript $projectDir/bin/summarise_vsgs.R "${vsgs}"
     python $projectDir/bin/add_cluster.py filtered_tpm.csv ${clstr} filtered_tpm_clusters.csv
+    python $projectDir/bin/length.py "${fasta}" length.csv
     """
 }
