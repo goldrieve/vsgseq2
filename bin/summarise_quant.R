@@ -92,7 +92,7 @@ total_read_counts_df <- data.frame(Sample = names(total_read_counts), TotalReads
 # Print a warning message for samples with total read counts below defined value
 low_read_samples <- total_read_counts_df %>% filter(TotalReads < threshold)
 
-# Optionally, write the result to a CSV file
+# Write the result to a CSV file
 write.csv(total_read_counts_df, './total_read_counts.csv', row.names = FALSE)
 
 # Get the list of low-read samples
