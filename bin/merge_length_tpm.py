@@ -3,7 +3,8 @@ import argparse
 
 def add_length_to_tpm(tpm_file, length_file, output_file):
     """
-    Adds the length column from the VSG length count file to the TPM file based on vsg_id.
+    Adds the length column from the VSG length count file to the TPM file based on vsg_id,
+    placing the length column in the second position.
 
     Args:
         tpm_file (str): Path to the input TPM file.
@@ -25,13 +26,22 @@ def add_length_to_tpm(tpm_file, length_file, output_file):
     # Merge the TPM DataFrame with the length DataFrame on 'vsg_id'
     merged_df = pd.merge(tpm_df, length_df, on='vsg_id', how='left')
 
+    # Get the list of columns
+    cols = list(merged_df.columns)
+
+    # Move 'sequence_length' to the second position
+    if 'length' in cols:
+        cols.remove('length')
+        cols.insert(1, 'length')  # Insert at index 1 (second position)
+        merged_df = merged_df[cols]
+
     # Save the updated DataFrame to the output file
     merged_df.to_csv(output_file, index=False)
     print(f"Updated TPM file with lengths saved to {output_file}")
 
 if __name__ == "__main__":
     # Set up argument parser
-    parser = argparse.ArgumentParser(description="Add VSG sequence lengths to a TPM file based on vsg_id.")
+    parser = argparse.ArgumentParser(description="Add VSG sequence lengths to a TPM file based on vsg_id, placing length in the second column.")
     parser.add_argument("tpm_file", help="Path to the input TPM file.")
     parser.add_argument("length_file", help="Path to the VSG length count file.")
     parser.add_argument("output_file", help="Path to the output TPM file with lengths added.")
