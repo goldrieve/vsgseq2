@@ -25,3 +25,4 @@ dependencies:
   - multiqc=1.21
   - typing_extensions
   - nextflow
+  - anaconda::pandas
