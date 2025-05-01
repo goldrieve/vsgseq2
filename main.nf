@@ -2,7 +2,7 @@ nextflow.enable.dsl = 2
 
 params.assemblies = "$projectDir/data/tutorial_assemblies/*_trinity.Trinity.fasta"
 params.vsg_db = "$projectDir/data/blastdb/concatAnTattb427.fa"
-params.notvsg_db = "$projectDir/data/blastdb/catNOTvsgs.fa"
+params.notvsg_db = "$projectDir/data/blastdb/vsgseq2NOTvsgs.fa"
 params.vsgome = "$projectDir/data/blastdb/concatAnTattb427.fa"
 params.full_vsg_db = ""
 params.requestedcpus = 4
@@ -16,7 +16,7 @@ def timestamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new Dat
 params.outdir = "results/${timestamp}"
 params.samplesheet = "$projectDir/data/reads/samples.csv"
 params.help = ""
-params.mode = "full"
+params.mode = "new_full"
 
 if (params.help) {
     help = """VSGSEQ2.nf: A pipeline for analysing VSGSeq data

@@ -17,7 +17,7 @@ def count_vsg_lengths(fasta_file, csv_file):
         csvwriter.writerow(['vsg_id', 'length'])  # Write header row
 
         for record in SeqIO.parse(fasta_file, "fasta"):
-            fasta_header = record.id  # Extract the fasta header (sequence ID)
+            fasta_header = record.id.replace("cluster_", "")  # Extract the fasta header (sequence ID)
             sequence_length = len(record.seq)  # Calculate the sequence length
             csvwriter.writerow([fasta_header, sequence_length])  # Write to CSV
 
