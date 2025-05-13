@@ -33,7 +33,7 @@ if (params.help) {
              |                [default: ${params.vsgome}]
              |  --full_vsg_db    Location of a database to add into the VSGome (such as data/blastdb/concatAnTattb427_full.fa). 
              |                    Default will only include the assembled VSGome.
-             |  --mode    The mode to run the pipeline in. Options are full, assemble, predictvsgs, quantify, analyse.
+             |  --mode    The mode to run the pipeline in. Options are new_full, new_analyse.
              |                [default: ${params.mode}]
              |  --outdir        VSGSeq output directory. 
              |                [default: ${params.outdir}]
