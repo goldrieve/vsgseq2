@@ -159,39 +159,16 @@ ch_reads = ch_samplesheet
     .splitCsv(header:true)
     .map { row -> 
         def meta = [:]
-        meta.id = row.sample
+        meta.id = row.sample    // assuming the first column is named 'sample'
+        meta.prefix = row.sample  // use the first column as the prefix
         meta.single_end = row.r2.toString().isEmpty()
         
         def reads = []
-        // Convert .fastq.gz to .fq.gz for r1
         def r1 = file(row.r1, checkIfExists: true)
-        if (r1.name.endsWith('.fastq.gz')) {
-            def newName = r1.name.replace('.fastq.gz', '.fq.gz')
-            file("${r1.parent}/${newName}").withOutputStream { out ->
-                r1.withInputStream { input ->
-                    out << input
-                }
-            }
-            reads.add(file("${r1.parent}/${newName}"))
-        } else {
-            reads.add(r1)
-        }
+        def r2 = meta.single_end ? null : file(row.r2, checkIfExists: true)
 
-        // Handle r2 if paired-end
-        if (!meta.single_end) {
-            def r2 = file(row.r2, checkIfExists: true)
-            if (r2.name.endsWith('.fastq.gz')) {
-                def newName = r2.name.replace('.fastq.gz', '.fq.gz')
-                file("${r2.parent}/${newName}").withOutputStream { out ->
-                    r2.withInputStream { input ->
-                        out << input
-                    }
-                }
-                reads.add(file("${r2.parent}/${newName}"))
-            } else {
-                reads.add(r2)
-            }
-        }
+        reads.add(r1)
+        if (r2) reads.add(r2)
 
         [ meta, reads ]
     }

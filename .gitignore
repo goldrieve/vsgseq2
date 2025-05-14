@@ -11,3 +11,4 @@ WOR/
 .nextflow*
 .nextflow/
 .DS_Store
+sample_sheets/
