@@ -18,10 +18,8 @@ conda activate vsgseq2-env
 nextflow run main.nf --help
 
 # You can test the installation with synthetic VSGSeq data
-wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.xz
-tar -xf reads.tar.gz
-cd reads 
-nextflow run ../main.nf --samplesheet samples.csv
+cd data/reads 
+nextflow run ../../main.nf --samplesheet samples.csv
 ```
 
 2) Installation via Nextflow:

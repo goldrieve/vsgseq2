@@ -16,7 +16,7 @@ process BLAST {
     script:
     // Handle filename based on mode
     def basename = assemblies.simpleName.replace('_cdhit', '')
-    basename = (params.mode == 'new_full' || params.mode == 'new_analyse') ? basename : basename + '_cdhit'
+    basename = (params.mode == 'full' || params.mode == 'analyse') ? basename : basename + '_cdhit'
     """
     blastn -db ${vsg_db} -query ${assemblies} -outfmt 5 -out ${basename}.xml
     blastn -db ${notvsg_db} -query ${assemblies} -outfmt 5 -out ${basename}_nonVSG.xml
