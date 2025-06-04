@@ -159,8 +159,8 @@ ch_reads = ch_samplesheet
     .splitCsv(header:true)
     .map { row -> 
         def meta = [:]
-        meta.id = row.sample    // assuming the first column is named 'sample'
-        meta.prefix = row.sample  // use the first column as the prefix
+        meta.id = row.sample    // first column = prefix
+        meta.prefix = row.sample
         meta.single_end = row.r2.toString().isEmpty()
         
         def reads = []
