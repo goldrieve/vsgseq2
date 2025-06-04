@@ -123,12 +123,12 @@ flowchart TD
     M1 --> N1
     N1 --> P1
 
-    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px
-    classDef decision fill:#e1f5fe,stroke:#0288d1,stroke-width:2px
-    classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px,color:#000
+    classDef decision fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#000
+    classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000
 
     class C1,D3 decision
-    class D1,E1,F1,G1,H1,I1,J1,M1,N1,P1,C3,E3,F3,G3,H3,I3,K3,L3 proces
+    class D1,E1,F1,G1,H1,I1,J1,M1,N1,P1,C3,E3,F3,G3,H3,I3,K3,L3 process
 ```
 
 ## Customising analysis
