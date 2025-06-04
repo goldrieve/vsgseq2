@@ -70,8 +70,8 @@ config:
     fontSize: 30px
 ---
 flowchart TD
- subgraph s1["."]
-        C1{"_Trim reads?_"}
+    subgraph s1["."]
+        C1{"Trim reads?"}
         D1["Trim Galore & Cutadapt"]
         E1["Use raw FASTQ files"]
         F1["Trinity assembly"]
@@ -83,10 +83,10 @@ flowchart TD
         N1["Quantify with MULTo"]
         P1["Write final results"]
         Q1["Files are analysed in parallel"]
-  end
- subgraph vsgseq2["."]
+    end
+    subgraph vsgseq2["."]
         C3["Trim reads"]
-        D3{"_Full or Analyse?_"}
+        D3{"Full or Analyse?"}
         E3["Trinity assembly"]
         F3["Find ORFs in contigs"]
         G3["BLAST merged ORFs vs VSG DB"]
@@ -95,11 +95,12 @@ flowchart TD
         K3["Quantify with Salmon"]
         L3["Write final results"]
         M3["Multiple files are analysed in parallel"]
-  end
-    Fi1["File1"] --> M3
-    vsg["vsgseq2"] --> Fi2["File2"]
-    Fi2 --> M3
-    Fi3["File3"] --> M3
+    end
+
+    File1 --> M3
+    vsgseq2 --> File2
+    File2 --> M3
+    File3 --> M3
     M3 --> C3
     C3 --> D3 & K3
     D3 -- Full --> E3
@@ -110,11 +111,7 @@ flowchart TD
     H3 --> K3 & I3
     K3 --> L3
     I3 --> L3
-    Fl1["File1"] --> Q1
-    vsg_c["vsgseq-combined"] --> Fl2["File2"]
-    Fl2 --> Q1
-    Fl3["File3"] --> Q1
-    Q1 --> C1
+
     C1 -- Yes --> D1
     C1 -- No --> E1
     D1 --> F1
@@ -126,38 +123,13 @@ flowchart TD
     J1 --> M1
     M1 --> N1
     N1 --> P1
-     N2:::Rose
-     N1:::Rose
-     Q2:::Rose
-     Q2:::Pine
-     Q2:::Ash
-     Q2:::Sky
-     vsg2:::Ash
-     vsg2:::Pine
-     FR1:::Rose
-     FR1:::Pine
-     FR1:::Sky
-     FR2:::Rose
-     FR2:::Pine
-     FR2:::Sky
-     FR3:::Rose
-     FR3:::Pine
-     FR3:::Sky
-     Res3:::Rose
-     Res3:::Pine
-     Res3:::Sky
-     vsg:::Ash
-     vsg:::Pine
-     vsg_c:::Ash
-     vsg_c:::Pine
-    classDef Rose stroke-width:1px, stroke-dasharray:none, stroke:#FF5978, fill:#FFDFE5, color:#8E2236
-    classDef Class_01 stroke:#C8E6C9
-    classDef Pine stroke-width:1px, stroke-dasharray:none, stroke:#254336, fill:#27654A, color:#FFFFFF
-    classDef Ash stroke-width:1px, stroke-dasharray:none, stroke:#999999, fill:#EEEEEE, color:#000000
-    classDef Sky stroke-width:1px, stroke-dasharray:none, stroke:#374D7C, fill:#E2EBFF, color:#374D7C
-    linkStyle 1 stroke:none,fill:none
-    linkStyle 47 stroke:none,fill:none
-    linkStyle 63 stroke:none,fill:none
+
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px
+    classDef decision fill:#e1f5fe,stroke:#0288d1,stroke-width:2px
+    classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+
+    class C1,D3 decision
+    class D1,E1,F1,G1,H1,I1,J1,M1,N1,P1,C3,E3,F3,G3,H3,I3,K3,L3 process
 ```
 
 ## Customising analysis
