@@ -4,13 +4,27 @@ An updated pipeline for analyzing VSG-seq data. The original VSGSeq pipeline is 
 
 ## Installation and Environment Setup
 
-We use Nextflow in combination with Docker, Singularity or Conda to install dependencies. Please install Nextflow and your choice of Docker, Singularity or Conda then run the following command to ensure everything is working:
+We use Nextflow to run vsgseq2 analysis. You can install Nextflow via the manual vsgseq2 installation method.
+
+1) Manual installation with conda used to install dependencies:
 
 ```
+git clone https://github.com/goldrieve/vsgseq2
+cd vsgseq2/
+conda env create -f vsgseq2.yml
+nextflow run main.nf --help
+```
+
+2) Installation via Nextflow
+
+Nextflow can directly install vsgseq2 with the help of Docker, Singularity or Conda to install dependencies. Without cloning the vsgseq2 github, run:
+
+```
+conda create --name nf-env bioconda::nextflow
 nextflow run goldrieve/vsgseq2 -r main --help
 ```
 
-Next, download syntehtic VSGSeq data to test the installation:
+Either way, you can test the installation with synthetic VSGSeq data:
 
 ```
 wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.gz
@@ -49,7 +63,10 @@ Running the code will produce the figure below
 ## vsgseq2 structure
 The dag below summarises each step of vsgseq2.
 
-![dag](figures/vsgseq2.dag)
+[//]: # (The Mermaid diagram below is maintained in figures/comparison.mmd)
+```mermaid
+{{include figures/comparison.mmd}}
+```
 
 ## Customising analysis
 It is possible to run sections of vsgseq2 using the --mode flag. The default is to run the whole pipeline, but say you have assembled the transcripts during a first run and wish to change a single flag in the analysis section, you can feed in the pre-assembled transcripts and start the pipeline from the analysis section. 
@@ -64,25 +81,9 @@ This is the same as running:
 nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode full
 ```
 
-If you want to run the assembly step alone:
-```
-nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode assemble
-```
-
 To run the entire analysis steps, post assembly:
 ```
 nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode analyse
-```
-
-The analyse steps can be broken down even further.
-To predict VSGs from assemblies:
-```
-nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode predictvsgs
-```
-
-To quantify the expression of predicted VSGs:
-```
-nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode quantify
 ```
 
 ## Edit the pipeline execution using the following flags

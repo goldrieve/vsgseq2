@@ -16,7 +16,7 @@ def timestamp = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(new Dat
 params.outdir = "results/${timestamp}"
 params.samplesheet = "$projectDir/data/reads/samples.csv"
 params.help = ""
-params.mode = "new_full"
+params.mode = "full"
 
 if (params.help) {
     help = """VSGSEQ2.nf: A pipeline for analysing VSGSeq data
@@ -33,7 +33,7 @@ if (params.help) {
              |                [default: ${params.vsgome}]
              |  --full_vsg_db    Location of a database to add into the VSGome (such as data/blastdb/concatAnTattb427_full.fa). 
              |                    Default will only include the assembled VSGome.
-             |  --mode    The mode to run the pipeline in. Options are new_full, new_analyse.
+             |  --mode    The mode to run the pipeline in. Options are full, analyse.
              |                [default: ${params.mode}]
              |  --outdir        VSGSeq output directory. 
              |                [default: ${params.outdir}]
@@ -101,8 +101,8 @@ def validateParams() {
         }
         
         // Validate mode
-        if (!["full", "assemble", "predictvsgs", "quantify", "analyse", "new_full", "new_analyse"].contains(params.mode)) {
-            errors << "Invalid mode '${params.mode}'. Allowed values are: full, assemble, predictvsgs, quantify, analyse, new_full and new_analyse."
+        if (!["full", "analyse"].contains(params.mode)) {
+            errors << "Invalid mode '${params.mode}'. Allowed values are: full and analyse."
         }
         if (params.requestedcpus <= 0) {
             errors << "The requested CPUs '${params.requestedcpus}' must be greater than 0."
@@ -174,7 +174,7 @@ ch_reads = ch_samplesheet
     }
 
 workflow {
-    if (params.mode == "full") {
+    if (params.mode == "old_full") {
         trimmed_reads_ch = TRIM(ch_reads, params.cores)
         assemble_ch = ASSEMBLE(trimmed_reads_ch, params.cores, params.trinitymem)
         orf_ch = ORF(assemble_ch, params.cdslength)
@@ -205,7 +205,7 @@ workflow {
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
         summarise_ch = SUMMARISEVSGOME((quant_ch.quants).collect())
     }
-    else if (params.mode == "analyse"){
+    else if (params.mode == "old_analyse"){
         assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
         orf_ch = ORF(assemblies_ch, params.cdslength)
         indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhit_id, params.cdhit_as)
@@ -217,7 +217,7 @@ workflow {
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
         summarise_ch = SUMMARISE((quant_ch.quants).collect(), params.threshold, (blast_ch.vsgs).collect(), catcdhit_ch.clstr)
     }
-    else if (params.mode == "new_full") {
+    else if (params.mode == "full") {
         trimmed_reads_ch = TRIM(ch_reads, params.cores)
         assemble_ch = ASSEMBLE(trimmed_reads_ch, params.cores, params.trinitymem)
         orf_ch = ORF(assemble_ch, params.cdslength)
@@ -229,7 +229,7 @@ workflow {
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
         summarise_ch = SUMMARISE((quant_ch.quants).collect(), params.threshold, (blast_ch.vsgs).collect(), catcdhit_ch.clstr, population_ch)
     }
-    else if (params.mode == "new_analyse"){
+    else if (params.mode == "analyse"){
         assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
         orf_ch = ORF(assemblies_ch, params.cdslength)
         blast_ch = BLAST(orf_ch, params.vsg_db, params.notvsg_db)
