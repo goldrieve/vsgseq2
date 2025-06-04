@@ -2,40 +2,39 @@
 
 An updated pipeline for analyzing VSG-seq data. The original VSGSeq pipeline is described in this [paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4514441/) and [repository](https://github.com/mugnierlab/VSGSeqPipeline).
 
-## Installation and Environment Setup
+## Installation
 
-We use Nextflow to run vsgseq2 analysis. You can install Nextflow via the manual vsgseq2 installation method.
 
-1) Manual installation with conda used to install dependencies:
+
+We use Nextflow to run vsgseq2. There are two methods of installing Nextflow/vsgseq2, both asseume conda in pre-installed.
+
+1) Manual vsgseq2 installation:
 
 ```
 git clone https://github.com/goldrieve/vsgseq2
 cd vsgseq2/
 conda env create -f vsgseq2.yml
+conda activate vsgseq2-env
 nextflow run main.nf --help
+
+# You can test the installation with synthetic VSGSeq data
+wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.xz
+tar -xf reads.tar.gz
+cd reads 
+nextflow run ../main.nf --samplesheet samples.csv
 ```
 
-2) Installation via Nextflow
-
-Nextflow can directly install vsgseq2 with the help of Docker, Singularity or Conda to install dependencies. Without cloning the vsgseq2 github, run:
+2) Installation via Nextflow:
 
 ```
 conda create --name nf-env bioconda::nextflow
 nextflow run goldrieve/vsgseq2 -r main --help
-```
 
-Either way, you can test the installation with synthetic VSGSeq data:
-
-```
-wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.gz
-tar -xzf reads.tar.gz
-cd reads
-```
-
-Once you have navigated to the synthetic reads directory, run vsgseq2 on the data with the provided samplesheet. Here we use Docker, Conda and Singularity are also options which we describe below.
-
-```
-nextflow run goldrieve/vsgseq2 -r main -with-docker --samplesheet samples.csv
+# You can test the installation with synthetic VSGSeq data
+wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.xz
+tar -xf reads.tar.gz
+cd reads 
+nextflow run goldrieve/vsgseq2 -r main -with-conda --samplesheet samples.csv
 ```
 
 This will create the directory __tutorial_results__ which will contain 4 subdirectories
@@ -105,11 +104,7 @@ flowchart TD
 It is possible to run sections of vsgseq2 using the --mode flag. The default is to run the whole pipeline, but say you have assembled the transcripts during a first run and wish to change a single flag in the analysis section, you can feed in the pre-assembled transcripts and start the pipeline from the analysis section. 
 
 The default tutorial data run, including all vsgseq2 steps:
-```
-nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results
-```
 
-This is the same as running:
 ```
 nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode full
 ```
@@ -126,17 +121,21 @@ VSGSEQ2.nf: A pipeline for analysing VSGSeq data
 Required arguments:
 
   --assemblies Location of assemblies
-                [default: data/tutorial_assemblies/*_trinity.Trinity.fasta]
+                [default: *_trinity.Trinity.fasta]
   --vsg_db    Location of VSGdb
-                [default: data/blastdb/concatAnTattb427.fa]
+                [default: vsgseq2/data/blastdb/concatAnTattb427.fa]
   --notvsg_db Location of NOTVSGdb
-                [default: data/blastdb/NOTvsgs.fa]
+                [default: vsgseq2/data/blastdb/vsgseq2NOTvsgs.fa]
   --vsgome    Location of VSGome
-                [default: data/blastdb/concatAnTattb427.fa]
+                [default: vsgseq2/data/blastdb/concatAnTattb427.fa]
   --full_vsg_db    Location of a database to add into the VSGome (such as data/blastdb/concatAnTattb427_full.fa).
                     Default will only include the assembled VSGome.
-  --mode    The mode to run the pipeline in. Options are full, assemble, predictvsgs, quantify, analyse.
+  --mode    The mode to run the pipeline in. Options are full, analyse.
                 [default: full]
+  --outdir        VSGSeq output directory.
+                [default: results/20250604_160730]
+  --samplesheet  Define the path to the samplesheet.
+                [default: vsgseq2/data/reads/samples.csv]
 
 
 Optional arguments:
@@ -149,11 +148,11 @@ Optional arguments:
                 [default: 20 Gb]
   --cdslength    Define minimum CDS length (amino acids).
                 [default: 300]
-  --cdhitid       Define sequence identity threshold - how much the alignment has to match (0.0 - 1.0).
-                [default: 0.98]
-  --outdir        VSGSeq output directory.
-                [default: results]
-  --samplesheet  Define the path to the samplesheet.
-                [default: samplesheet.csv]
+  --cdhit_id       Define sequence identity threshold - how much the alignment has to match (0.0 - 1.0).
+                [default: 0.94]
+  --cdhit_as       Define alignment coverage for the shorter sequence (0.0 - 1.0).
+                [default: 0.94]
+  --threshold       Define the lowest number of reads a sample must have mapped to the VSGome to include in the filtered tpm.csv.
+                [default: 100000]
   --help         Print this message.
   ```
