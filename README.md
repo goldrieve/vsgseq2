@@ -70,19 +70,6 @@ config:
     fontSize: 30px
 ---
 flowchart TD
- subgraph VSGSeq["."]
-        C2{"_Trim reads?_"}
-        D2["Trim Galore & Cutadapt"]
-        E2["Use raw FASTQ files"]
-        F2["Trinity assembly"]
-        G2["Find ORFs in contigs"]
-        H2["Concatenate ORFs"]
-        I2["Cluster with cd-hit-est"]
-        J2["BLAST merged ORFs vs VSG DB"]
-        M2["Map reads with Bowtie"]
-        N2["Quantify with MULTo"]
-        P2["Write final results"]
-  end
  subgraph s1["."]
         C1{"_Trim reads?_"}
         D1["Trim Galore & Cutadapt"]
@@ -109,26 +96,6 @@ flowchart TD
         L3["Write final results"]
         M3["Multiple files are analysed in parallel"]
   end
-    File1["File1"] --> Q2["Files are analysed independently"]
-    vsg2["VSGSeq-individual"] --> File2["File2"]
-    File2 --> Q2
-    File3["File3"] --> Q2
-    Q2 --> C2 & C2 & C2
-    C2 -- Yes --> D2 & D2 & D2
-    C2 -- No --> E2 & E2 & E2
-    D2 --> F2 & F2 & F2
-    E2 --> F2 & F2 & F2
-    F2 --> G2 & G2 & G2
-    G2 --> H2 & H2 & H2
-    H2 --> I2 & I2 & I2
-    I2 --> J2 & J2 & J2
-    J2 --> M2 & M2 & M2
-    M2 --> N2 & N2 & N2
-    N2 --> P2 & P2 & P2
-    P2 --> FR1["File3_results"] & FR2["File2_results"] & FR3["File3_results"]
-    FR1 --> Res3["Cluster results to compare samples"]
-    FR2 --> Res3
-    FR3 --> Res3
     Fi1["File1"] --> M3
     vsg["vsgseq2"] --> Fi2["File2"]
     Fi2 --> M3
