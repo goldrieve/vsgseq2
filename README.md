@@ -66,20 +66,6 @@ The dag below summarises each step of vsgseq2.
 ```mermaid
 
 flowchart TD
-    subgraph s1["."]
-        C1{"Trim reads?"}
-        D1["Trim Galore & Cutadapt"]
-        E1["Use raw FASTQ files"]
-        F1["Trinity assembly"]
-        G1["Find ORFs in contigs"]
-        H1["Concatenate ORFs"]
-        I1["Cluster with cd-hit-est"]
-        J1["BLAST merged ORFs vs VSG DB"]
-        M1["Map reads with Bowtie"]
-        N1["Quantify with MULTo"]
-        P1["Write final results"]
-        Q1["Files are analysed in parallel"]
-    end
     subgraph vsgseq2["."]
         C3["Trim reads"]
         D3{"Full or Analyse?"}
@@ -106,22 +92,6 @@ flowchart TD
     H3 --> K3 & I3
     K3 --> L3
     I3 --> L3
-
-    Fl1["File1"] --> Q1
-    Fl2["File2"] --> Q1
-    Fl3["File3"] --> Q1
-    Q1 --> C1
-    C1 -- Yes --> D1
-    C1 -- No --> E1
-    D1 --> F1
-    E1 --> F1
-    F1 --> G1
-    G1 --> H1
-    H1 --> I1
-    I1 --> J1
-    J1 --> M1
-    M1 --> N1
-    N1 --> P1
 
     classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px,color:#000
     classDef decision fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#000
