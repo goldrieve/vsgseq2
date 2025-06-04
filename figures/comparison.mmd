@@ -1,0 +1,47 @@
+flowchart TD
+
+    Start([Input file list])
+
+    %% ----- VSGSeq -----
+    subgraph VSGSeq["__VSGSeq__"]
+        C2{"_Trim reads?_"}
+        D2["Trim Galore & Cutadapt"]
+        E2["Use raw FASTQ files"]
+        F2["Trinity assembly"]
+        G2["Find ORFs in contigs"]
+        H2["Concatenate ORFs"]
+        I2["Cluster with cd-hit-est"]
+        J2["BLAST merged ORFs vs VSG DB"]
+        M2["Map reads with Bowtie"]
+        N2["Quantify with rpkmforgenes.py"]
+        P2["Write final results"]
+    end
+
+    Start --> C2
+    C2 -- Yes --> D2
+    C2 -- No --> E2
+    D2 --> F2
+    E2 --> F2
+    F2 --> G2 --> H2 --> I2 --> J2 --> M2 --> N2 --> P2
+
+    %% ----- vsgseq2 -----
+    subgraph vsgseq2["__vsgseq2__"]
+        C3["Trim reads"]
+        D3{"_Full or Analyse?_"}
+        E3["Trinity assembly"]
+        F3["Find ORFs in contigs"]
+        G3["BLAST merged ORFs vs VSG DB"]
+        H3["Concatenate VSGs"]
+        I3["Cluster with cd-hit-est"]
+        K3["Quantify with Salmon"]
+        L3["Write final results"]
+    end
+
+    Start --> C3 --> D3
+    D3 -- Full --> E3 --> F3
+    D3 -- Analyse --> F3
+    F3 --> G3 --> H3 --> K3 --> L3
+
+    %% Additional direct links
+    C3 --> K3
+    H3 --> I3 --> L3

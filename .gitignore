@@ -11,4 +11,5 @@ WOR/
 .nextflow*
 .nextflow/
 .DS_Store
+.vscode
 sample_sheets/
