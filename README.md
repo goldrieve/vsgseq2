@@ -64,11 +64,7 @@ Running the code will produce the figure below
 The dag below summarises each step of vsgseq2.
 
 ```mermaid
----
-config:
-  themeVariables:
-    fontSize: 30px
----
+
 flowchart TD
     subgraph s1["."]
         C1{"Trim reads?"}
@@ -97,10 +93,9 @@ flowchart TD
         M3["Multiple files are analysed in parallel"]
     end
 
-    File1 --> M3
-    vsgseq2 --> File2
-    File2 --> M3
-    File3 --> M3
+    Fi1["File1"] --> M3
+    Fi2["File2"] --> M3
+    Fi3["File3"] --> M3
     M3 --> C3
     C3 --> D3 & K3
     D3 -- Full --> E3
@@ -112,6 +107,10 @@ flowchart TD
     K3 --> L3
     I3 --> L3
 
+    Fl1["File1"] --> Q1
+    Fl2["File2"] --> Q1
+    Fl3["File3"] --> Q1
+    Q1 --> C1
     C1 -- Yes --> D1
     C1 -- No --> E1
     D1 --> F1
@@ -129,7 +128,7 @@ flowchart TD
     classDef process fill:#fff3e0,stroke:#f57c00,stroke-width:2px
 
     class C1,D3 decision
-    class D1,E1,F1,G1,H1,I1,J1,M1,N1,P1,C3,E3,F3,G3,H3,I3,K3,L3 process
+    class D1,E1,F1,G1,H1,I1,J1,M1,N1,P1,C3,E3,F3,G3,H3,I3,K3,L3 proces
 ```
 
 ## Customising analysis
