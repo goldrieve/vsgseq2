@@ -22,6 +22,7 @@ vsg_count <- data.frame(sample = fasta_files, VSGs = counts)
 
 # Simplify the file column to remove the path and the .fasta part
 vsg_count$sample <- sub("\\_VSGs.fasta$", "", basename(vsg_count$sample))
+vsg_count$sample <- sub("\\_ORF$", "", vsg_count$sample)
 
 # Print the results
 write.csv(vsg_count, './vsg_count.csv', row.names=FALSE)

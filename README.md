@@ -4,8 +4,6 @@ An updated pipeline for analyzing VSG-seq data. The original VSGSeq pipeline is 
 
 ## Installation
 
-
-
 We use Nextflow to run vsgseq2. There are two methods of installing Nextflow/vsgseq2, both asseume conda in pre-installed.
 
 1) Manual vsgseq2 installation:
@@ -19,7 +17,7 @@ nextflow run main.nf --help
 
 # You can test the installation with synthetic VSGSeq data
 cd data/reads 
-nextflow run ../../main.nf --samplesheet samples.csv
+nextflow run ../../main.nf --samplesheet samples.csv --outdir results/tutorial
 ```
 
 2) Installation via Nextflow:
@@ -30,32 +28,43 @@ nextflow run goldrieve/vsgseq2 -r main --help
 
 # You can test the installation with synthetic VSGSeq data
 wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.xz
-tar -xf reads.tar.gz
+tar -xf reads.tar.xz
 cd reads 
-nextflow run goldrieve/vsgseq2 -r main -with-conda --samplesheet samples.csv
+nextflow run goldrieve/vsgseq2 -r main -with-conda --samplesheet samples.csv --outdir results/tutorial
 ```
 
-This will create the directory __tutorial_results__ which will contain 4 subdirectories
+## Example results
 
-1) VSGs 
-- VSGs predicted for each sample (e.g. 1_VSGs.fasta).  
-- concatenated list of all assembled VSGs (concatenated_vsgs.fasta). 
-- final VSG database, after removing duplicate VSGs with cd-hit (VSGome.fasta).
+1. VSGs/
+- {sample}_VSGs.fasta - Predicted VSG sequences per sample
+- concatenated_vsgs.fasta - All assembled VSGs combined
+- VSGome.fasta - Non-redundant VSG database after cd-hit clustering
+2. assemblies/
+- {sample}_trinity.Trinity.fasta - De novo transcriptome assemblies
+- {sample}_trinity.Trinity.fasta.gene_trans_map - Gene-transcript mappings
+3. summary/
+- tpm/
+  - tpm.csv - Raw Transcripts Per Million quantification
+  - filtered_tpm.csv - Filtered TPM based on read threshold
+  - cluster_tpm.csv - TPM values aggregated by VSG clusters
+- read_counts/
+  - num_reads.csv - Number of reads per VSG
+  - total_read_counts.csv - Total read counts per sample
+vsgs/
+- vsg_count.csv - Number of unique VSGs per sample
+- cluster/
+  - filtered_tpm_clusters.csv - TPM with cluster assignments
+  - filtered_tpm_clusters_length.csv - TPM with clusters and sequence lengths
+  - cluster_champion.csv - Representative VSGs for each cluster
+  - champion_vsgs.fasta - Sequences of representative VSGs
+- length/
+  -length.csv - Sequence length information for VSGs
+4. trimmed_reads/
+- {sample}_trimmed.fq.gz - Quality and adapter trimmed reads
 
-2) assemblies 
-- Trinity assembly for each sample.
 
-3) summary 
-- salmon alignment information (multiqc_report.html).
-- quantification summary for each sample (tpm.csv).
-- predicted VSG count for each sample (vsg_count.csv).
-
-4) trimmed_reads 
-- trimmed reads for each sample.
-
-To visualise the expression data and number of assembled VSGs, use the R script bin/plot_script.R
-Running the code will produce the figure below
-![tutorial_figure](figures/tutorial_summary.png)
+Tutorial plot
+![tutorial_figure](figures/vsg_summary.png)
 
 ## vsgseq2 structure
 The dag below summarises each step of vsgseq2.
@@ -101,15 +110,15 @@ flowchart TD
 ## Customising analysis
 It is possible to run sections of vsgseq2 using the --mode flag. The default is to run the whole pipeline, but say you have assembled the transcripts during a first run and wish to change a single flag in the analysis section, you can feed in the pre-assembled transcripts and start the pipeline from the analysis section. 
 
-The default tutorial data run, including all vsgseq2 steps:
+For example, if you installed vsgseq2 manually, the default run would analyse the data fully:
 
 ```
-nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode full
+nextflow run ../../main.nf --mode full --samplesheet samples.csv --outdir results/tutorial
 ```
+However, you can re-use the trinity assembly and re-run the analysis steps with modifications, such as editing the read alignment threshold:
 
-To run the entire analysis steps, post assembly:
 ```
-nextflow run goldrieve/vsgseq2 -r main --outdir tutorial_results --mode analyse
+nextflow run ../../main.nf --mode analyse --samplesheet samples.csv --assemblies 'results/tutorial/assemblies/*_trinity.Trinity.fasta' --threshold 200000 --outdir results/tutorial_200000
 ```
 
 ## Edit the pipeline execution using the following flags

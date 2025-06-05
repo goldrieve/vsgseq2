@@ -230,13 +230,14 @@ workflow {
         summarise_ch = SUMMARISE((quant_ch.quants).collect(), params.threshold, (blast_ch.vsgs).collect(), catcdhit_ch.clstr, population_ch)
     }
     else if (params.mode == "analyse"){
+        trimmed_reads_ch = TRIM(ch_reads, params.cores)
         assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
         orf_ch = ORF(assemblies_ch, params.cdslength)
         blast_ch = BLAST(orf_ch, params.vsg_db, params.notvsg_db)
         population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
         catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)
         index_ch = INDEX(population_ch, params.cores)
-        quant_ch = QUANTIFY(index_ch, params.cores, ch_reads)
+        quant_ch = QUANTIFY(index_ch, params.cores, trimmed_reads_ch)
         multiqc_ch = MULTIQC((quant_ch.quants).collect())
         summarise_ch = SUMMARISE((quant_ch.quants).collect(), params.threshold, (blast_ch.vsgs).collect(), catcdhit_ch.clstr, population_ch)
     }  
