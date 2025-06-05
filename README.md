@@ -164,3 +164,8 @@ Optional arguments:
                 [default: 100000]
   --help         Print this message.
   ```
+
+  ## Pottential issues
+
+  1. vsgseq2 has been extensivly tested on EDDIE, the University of Edinburgh Compute Cluster using Rocky Linux 9 and Mac (intel silicon) MacOS Sequoia. If you have conda setup on your own compute, it should be easy to get vsgseq2 running but please shout if you run into issues!
+  2. Trinity is pretty greedy. If vsgseq2 hangs on the assembly step it is likely you need to feed it more RAM or try and reduce the cores and memory requested by Trinity using these flags --requestedcpus 1 --cores 1 --trinitymem 10.
