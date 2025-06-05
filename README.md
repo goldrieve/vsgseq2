@@ -36,34 +36,35 @@ nextflow run goldrieve/vsgseq2 -r main -with-conda --samplesheet samples.csv --o
 ## Example results
 
 1. VSGs/
-- {sample}_VSGs.fasta - Predicted VSG sequences per sample
-- concatenated_vsgs.fasta - All assembled VSGs combined
-- VSGome.fasta - Non-redundant VSG database after cd-hit clustering
+- {sample}_ORF_VSGs.fasta - Predicted VSG ORF sequences per sample
+- concatenated_vsgs.fasta - All assembled VSGs from all samples combined
+- VSGome/
+  - VSGome.fasta - VSG database generated from concatenated_vsgs.fasta and processed with cd-hit-est.
+  - VSGome.fasta.clstr - Cluster file summarising the cd-hit-est clustering results.
 2. assemblies/
 - {sample}_trinity.Trinity.fasta - De novo transcriptome assemblies
-- {sample}_trinity.Trinity.fasta.gene_trans_map - Gene-transcript mappings
 3. summary/
-- tpm/
-  - tpm.csv - Raw Transcripts Per Million quantification
-  - filtered_tpm.csv - Filtered TPM based on read threshold
-  - cluster_tpm.csv - TPM values aggregated by VSG clusters
-- read_counts/
-  - num_reads.csv - Number of reads per VSG
-  - total_read_counts.csv - Total read counts per sample
-vsgs/
-- vsg_count.csv - Number of unique VSGs per sample
 - cluster/
   - filtered_tpm_clusters.csv - TPM with cluster assignments
   - filtered_tpm_clusters_length.csv - TPM with clusters and sequence lengths
   - cluster_champion.csv - Representative VSGs for each cluster
   - champion_vsgs.fasta - Sequences of representative VSGs
 - length/
-  -length.csv - Sequence length information for VSGs
-4. trimmed_reads/
+  - length.csv - Sequence length information for VSGs
+- multiqc_report.html - summary of salmon quantification
+- read_counts/
+  - num_reads.csv - Number of reads per VSG
+  - total_read_counts.csv - Total read counts per sample
+- tpm/
+  - tpm.csv - Raw Transcripts Per Million quantification
+  - filtered_tpm.csv - Filtered TPM based on read threshold
+  - cluster_tpm.csv - TPM values aggregated by VSG clusters
+- vsgs/
+  - vsg_count.csv - Number of unique VSGs per sample
+4. trimmed/
 - {sample}_trimmed.fq.gz - Quality and adapter trimmed reads
 
-
-Tutorial plot
+Summarising the cluster_tpm.csv file after analysing the tutorial results, using the R script in bin/plot_script.py, should produce this figure:
 ![tutorial_figure](figures/vsg_summary.png)
 
 ## vsgseq2 structure
