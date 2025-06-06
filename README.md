@@ -92,7 +92,9 @@ After running the tutorial data, output files are organized into the following d
 
 * `{sample}_trimmed.fq.gz` – Quality- and adapter-trimmed reads
 
-To generate a summary figure from `cluster_tpm.csv`, run the R script `bin/plot_script.py`. It should produce this plot:
+### 5. Figures
+
+* To generate a summary figure from `cluster_tpm.csv`, run the R script `bin/plot_script.py`. It should produce this plot:
 
 ![tutorial\_figure](figures/vsg_summary.png)
 
