@@ -20,7 +20,9 @@ To test the installation using synthetic data:
 
 ```bash
 cd data/reads
-nextflow run ../../main.nf --samplesheet samples.csv --outdir results/tutorial
+nextflow run ../../main.nf \
+  --samplesheet samples.csv \
+  --outdir results/tutorial
 ```
 
 ### 2. Installation via Nextflow
@@ -37,7 +39,11 @@ To test with example data:
 wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.xz
 tar -xf reads.tar.xz
 cd reads
-nextflow run goldrieve/vsgseq2 -r main -with-conda --samplesheet samples.csv --outdir results/tutorial
+nextflow run goldrieve/vsgseq2 \
+  -r main \
+  -with-conda \
+  --samplesheet samples.csv \
+  --outdir results/tutorial
 ```
 
 ## Example Output
@@ -136,7 +142,10 @@ Use the `--mode` flag to control which parts of the pipeline are executed.
 Run the full pipeline:
 
 ```bash
-nextflow run ../../main.nf --mode full --samplesheet samples.csv --outdir results/tutorial
+nextflow run ../../main.nf \
+  --mode full \
+  --samplesheet samples.csv \
+  --outdir results/tutorial
 ```
 
 Re-use Trinity assemblies and re-run the analysis section with a new threshold:
