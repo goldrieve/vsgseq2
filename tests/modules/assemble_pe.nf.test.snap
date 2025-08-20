@@ -1,5 +1,5 @@
 {
-    "PE: Should run without failures": {
+    "assemble_pe: Should assemble PE reads without failures": {
         "content": [
             {
                 "0": [

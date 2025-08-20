@@ -1,5 +1,5 @@
 {
-    "SE: Should run without failures": {
+    "assemble_se: Should assemble SE reads without failures": {
         "content": [
             {
                 "0": [
@@ -14,6 +14,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-20T13:12:54.185721972"
+        "timestamp": "2025-08-20T13:54:00.382236091"
     }
 }
