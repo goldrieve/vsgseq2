@@ -9,6 +9,7 @@ params.requestedcpus = 4
 params.cores = "4"
 params.trinitymem = "20"
 params.cdslength = "300"
+params.partial = "--complete_orfs_only"
 params.cdhit_id = "0.94"
 params.cdhit_as = "0.94"
 params.threshold = "100000"
@@ -50,6 +51,8 @@ if (params.help) {
              |  --trinitymem  Define memory amount for Trinity in Gb.
              |                [default: ${params.trinitymem} Gb]
              |  --cdslength    Define minimum CDS length (amino acids).
+             |                [default: ${params.cdslength}]
+             |  --partial       Only complete ORFs are produced as standard. It is possible to allow the production of partial ORFs by adding the --partial flag.
              |                [default: ${params.cdslength}]
              |  --cdhit_id       Define sequence identity threshold - how much the alignment has to match (0.0 - 1.0).
              |                [default: ${params.cdhit_id}]
@@ -130,7 +133,6 @@ def validateParams() {
     if (errors) {
         log.info("Parameter validation failed with the following errors:")
         errors.each { error -> 
-            // Print error message without the log file reference
             System.err.println("ERROR: ${error}")
         }
         System.exit(1)
@@ -174,53 +176,10 @@ ch_reads = ch_samplesheet
     }
 
 workflow {
-    if (params.mode == "old_full") {
+    if (params.mode == "full") {
         trimmed_reads_ch = TRIM(ch_reads, params.cores)
         assemble_ch = ASSEMBLE(trimmed_reads_ch, params.cores, params.trinitymem)
-        orf_ch = ORF(assemble_ch, params.cdslength)
-        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhit_id, params.cdhit_as)
-        blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
-        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
-        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)
-        index_ch = INDEX(catcdhit_ch, params.cores)
-        quant_ch = QUANTIFY(index_ch, params.cores, trimmed_reads_ch)
-        multiqc_ch = MULTIQC((quant_ch.quants).collect())
-        summarise_ch = SUMMARISE((quant_ch.quants).collect(), params.threshold, (blast_ch.vsgs).collect(), catcdhit_ch.clstr)
-    }  
-    else if (params.mode == "assemble"){
-        trimmed_reads_ch = TRIM(ch_reads, params.cores)
-        assemble_ch = ASSEMBLE(trimmed_reads_ch, params.cores, params.trinitymem)
-    }
-    else if (params.mode == "predictvsgs"){
-        assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
-        orf_ch = ORF(assemblies_ch, params.cdslength)
-        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhit_id, params.cdhit_as)
-        blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
-        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
-        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)
-    }
-    else if (params.mode == "quantify"){
-        index_ch = INDEX(params.vsgome, params.cores)
-        quant_ch = QUANTIFY(index_ch, params.cores, ch_reads)
-        multiqc_ch = MULTIQC((quant_ch.quants).collect())
-        summarise_ch = SUMMARISEVSGOME((quant_ch.quants).collect())
-    }
-    else if (params.mode == "old_analyse"){
-        assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
-        orf_ch = ORF(assemblies_ch, params.cdslength)
-        indivcdhit_ch = INDIVIDUAL_CDHIT(orf_ch.fasta, params.cdhit_id, params.cdhit_as)
-        blast_ch = BLAST(indivcdhit_ch, params.vsg_db, params.notvsg_db)
-        population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
-        catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)
-        index_ch = INDEX(catcdhit_ch, params.cores)
-        quant_ch = QUANTIFY(index_ch, params.cores, ch_reads)
-        multiqc_ch = MULTIQC((quant_ch.quants).collect())
-        summarise_ch = SUMMARISE((quant_ch.quants).collect(), params.threshold, (blast_ch.vsgs).collect(), catcdhit_ch.clstr)
-    }
-    else if (params.mode == "full") {
-        trimmed_reads_ch = TRIM(ch_reads, params.cores)
-        assemble_ch = ASSEMBLE(trimmed_reads_ch, params.cores, params.trinitymem)
-        orf_ch = ORF(assemble_ch, params.cdslength)
+        orf_ch = ORF(assemble_ch, params.cdslength, params.partial)
         blast_ch = BLAST(orf_ch, params.vsg_db, params.notvsg_db)
         population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
         catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)
@@ -232,7 +191,7 @@ workflow {
     else if (params.mode == "analyse"){
         trimmed_reads_ch = TRIM(ch_reads, params.cores)
         assemblies_ch = Channel.fromPath(params.assemblies, checkIfExists: true)
-        orf_ch = ORF(assemblies_ch, params.cdslength)
+        orf_ch = ORF(assemblies_ch, params.cdslength, params.partial)
         blast_ch = BLAST(orf_ch, params.vsg_db, params.notvsg_db)
         population_ch = CONCATENATE_VSGS((blast_ch.vsgs).collect(), params.full_vsg_db)
         catcdhit_ch = CONCATENATED_CDHIT(population_ch, params.cdhit_id, params.cdhit_as)

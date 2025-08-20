@@ -1,0 +1,19 @@
+{
+    "SE: Should run without failures": {
+        "content": [
+            {
+                "0": [
+                    "latesingle.fq_trinity.Trinity.fasta:md5,f12a8901521d8026d14770a241ed5944"
+                ],
+                "trinity_fasta": [
+                    "latesingle.fq_trinity.Trinity.fasta:md5,f12a8901521d8026d14770a241ed5944"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-20T13:12:54.185721972"
+    }
+}

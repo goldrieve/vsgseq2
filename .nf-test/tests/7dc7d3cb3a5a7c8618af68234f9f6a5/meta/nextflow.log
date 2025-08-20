@@ -1,0 +1,105 @@
+Aug-20 13:01:22.614 [main] DEBUG nextflow.cli.Launcher - $> nextflow -quiet -log /home/guyoldrieve/git/vsgseq2/.nf-test/tests/7dc7d3cb3a5a7c8618af68234f9f6a5/meta/nextflow.log run /home/guyoldrieve/git/vsgseq2/.nf-test-7dc7d3cb3a5a7c8618af68234f9f6a5.nf -c /home/guyoldrieve/git/vsgseq2/nextflow.config -c /home/guyoldrieve/git/vsgseq2/nextflow.config -params-file /home/guyoldrieve/git/vsgseq2/.nf-test/tests/7dc7d3cb3a5a7c8618af68234f9f6a5/meta/params.json -ansi-log false -with-trace /home/guyoldrieve/git/vsgseq2/.nf-test/tests/7dc7d3cb3a5a7c8618af68234f9f6a5/meta/trace.csv -w /home/guyoldrieve/git/vsgseq2/.nf-test/tests/7dc7d3cb3a5a7c8618af68234f9f6a5/work
+Aug-20 13:01:22.742 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.04.6
+Aug-20 13:01:22.773 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/guyoldrieve/.nextflow/plugins; core-plugins: nf-amazon@2.15.0,nf-azure@1.16.0,nf-cloudcache@0.4.3,nf-codecommit@0.2.3,nf-console@1.2.1,nf-google@1.21.1,nf-k8s@1.0.0,nf-tower@1.11.4,nf-wave@1.12.1
+Aug-20 13:01:22.807 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Aug-20 13:01:22.808 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Aug-20 13:01:22.815 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Aug-20 13:01:22.836 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Aug-20 13:01:22.881 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /home/guyoldrieve/git/vsgseq2/nextflow.config
+Aug-20 13:01:22.890 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /home/guyoldrieve/git/vsgseq2/nextflow.config
+Aug-20 13:01:22.891 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /home/guyoldrieve/git/vsgseq2/nextflow.config
+Aug-20 13:01:22.895 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/guyoldrieve/git/vsgseq2/nextflow.config
+Aug-20 13:01:22.895 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/guyoldrieve/git/vsgseq2/nextflow.config
+Aug-20 13:01:22.898 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/guyoldrieve/git/vsgseq2/nextflow.config
+Aug-20 13:01:22.947 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/guyoldrieve/.nextflow/secrets/store.json
+Aug-20 13:01:22.951 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@5300f14a] - activable => nextflow.secret.LocalSecretsProvider@5300f14a
+Aug-20 13:01:22.980 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Aug-20 13:01:23.653 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Aug-20 13:01:23.678 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Aug-20 13:01:23.744 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Aug-20 13:01:23.765 [main] INFO  nextflow.cli.CmdRun - Launching `/home/guyoldrieve/git/vsgseq2/.nf-test-7dc7d3cb3a5a7c8618af68234f9f6a5.nf` [boring_newton] DSL2 - revision: 87a3e060b0
+Aug-20 13:01:23.767 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Aug-20 13:01:23.767 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Aug-20 13:01:23.841 [main] DEBUG nextflow.Session - Session UUID: c6336926-2329-4c95-a079-1d3a1675ce47
+Aug-20 13:01:23.842 [main] DEBUG nextflow.Session - Run name: boring_newton
+Aug-20 13:01:23.842 [main] DEBUG nextflow.Session - Executor pool size: 4
+Aug-20 13:01:23.854 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Aug-20 13:01:23.864 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Aug-20 13:01:23.894 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.04.6 build 5954
+  Created: 01-07-2025 11:27 UTC 
+  System: Linux 6.14.0-1011-aws
+  Runtime: Groovy 4.0.26 on OpenJDK 64-Bit Server VM 17.0.14+1-b1367.22
+  Encoding: UTF-8 (UTF-8)
+  Process: 96799@ranch-1006 [192.168.4.9]
+  CPUs: 4 - Mem: 30.7 GB (21.5 GB) - Swap: 0 (0)
+Aug-20 13:01:23.938 [main] DEBUG nextflow.Session - Work-dir: /home/guyoldrieve/git/vsgseq2/.nf-test/tests/7dc7d3cb3a5a7c8618af68234f9f6a5/work [ext2/ext3]
+Aug-20 13:01:23.966 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Aug-20 13:01:23.980 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Aug-20 13:01:23.993 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Aug-20 13:01:24.037 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Aug-20 13:01:24.050 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+Aug-20 13:01:24.135 [main] DEBUG nextflow.Session - Session start
+Aug-20 13:01:24.139 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /home/guyoldrieve/git/vsgseq2/.nf-test/tests/7dc7d3cb3a5a7c8618af68234f9f6a5/meta/trace.csv
+Aug-20 13:01:24.888 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Aug-20 13:01:25.286 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `requestedcpus` -- Initialise it to a default value eg. `params.requestedcpus = some_value`
+Aug-20 13:01:25.376 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Aug-20 13:01:25.377 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Aug-20 13:01:25.386 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Aug-20 13:01:25.395 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=30.7 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Aug-20 13:01:25.399 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Aug-20 13:01:25.437 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'ASSEMBLE': maxForks=0; fair=false; array=0
+Aug-20 13:01:25.576 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: ASSEMBLE
+Aug-20 13:01:25.581 [main] DEBUG nextflow.Session - Igniting dataflow network (1)
+Aug-20 13:01:25.582 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > ASSEMBLE
+Aug-20 13:01:25.586 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_2293f14f6fdaf13e: /home/guyoldrieve/git/vsgseq2/.nf-test-7dc7d3cb3a5a7c8618af68234f9f6a5.nf
+  Script_fd001e4ce957d97a: /home/guyoldrieve/git/vsgseq2/modules/assemble.nf
+Aug-20 13:01:25.586 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Aug-20 13:01:25.586 [main] DEBUG nextflow.Session - Session await
+Aug-20 13:01:25.632 [Actor Thread 5] WARN  nextflow.processor.TaskProcessor - Input tuple does not match tuple declaration in process `ASSEMBLE` -- offending value: [, /home/guyoldrieve/git/vsgseq2/data/reads/late_1_1.fq.gz, /home/guyoldrieve/git/vsgseq2/data/reads/late_1_1.fq.gz]
+Aug-20 13:01:25.685 [Actor Thread 5] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=ASSEMBLE; work-dir=null
+  error [nextflow.exception.ProcessUnrecoverableException]: Process `ASSEMBLE` script contains error(s)
+Aug-20 13:01:25.766 [Actor Thread 5] ERROR nextflow.processor.TaskProcessor - Error executing process > 'ASSEMBLE'
+
+Caused by:
+  No such variable: single_end -- Check script '/home/guyoldrieve/git/vsgseq2/modules/assemble.nf' at line: 16
+
+
+Source block:
+  if(meta.single_end){
+      """
+      Trinity --seqType fq --single ${trimmed} --CPU ${cores} --max_memory ${trinitymem}G --no_path_merging --min_kmer_cov 2 --no_parallel_norm_stats --output ${trimmed.baseName.replace("_trimmed.fq","")}_trinity
+      rm -r ${trimmed.baseName.replace("_trimmed.fq","")}_trinity
+      """
+  } else {
+      """
+      Trinity --seqType fq --left ${trimmed[0]}  --right ${trimmed[1]} --CPU ${cores} --max_memory ${trinitymem}G --no_path_merging --min_kmer_cov 2 --no_parallel_norm_stats --output ${trimmed[0].baseName.replace("_trimmed_1.fq","")}_trinity
+      rm -r ${trimmed[0].baseName.replace("_trimmed_1.fq","")}_trinity
+      """
+  }
+
+Container:
+  goldrieve/vsgseq2:latest
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+Aug-20 13:01:25.768 [Actor Thread 5] DEBUG nextflow.Session - Session aborted -- Cause: Process `ASSEMBLE` script contains error(s)
+Aug-20 13:01:25.788 [Actor Thread 5] DEBUG nextflow.Session - The following nodes are still active:
+[process] ASSEMBLE
+  status=ACTIVE
+  port 0: (value) bound ; channel: -
+  port 1: (value) bound ; channel: cores
+  port 2: (value) bound ; channel: trinitymem
+  port 3: (cntrl) -     ; channel: $
+
+Aug-20 13:01:25.803 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Aug-20 13:01:25.803 [main] DEBUG nextflow.Session - Session await > all processes finished
+Aug-20 13:01:25.804 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Aug-20 13:01:25.811 [Actor Thread 4] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=ASSEMBLE; work-dir=null
+  error [java.lang.InterruptedException]: java.lang.InterruptedException
+Aug-20 13:01:25.817 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
+Aug-20 13:01:25.817 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Aug-20 13:01:25.824 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Aug-20 13:01:25.851 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
