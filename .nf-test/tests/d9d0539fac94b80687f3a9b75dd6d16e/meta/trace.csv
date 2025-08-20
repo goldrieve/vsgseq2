@@ -1,2 +1,0 @@
-task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
-1	d5/902fc4	105464	ASSEMBLE	COMPLETED	0	2025-08-20 13:11:43.952	1m 10s	1m 9s	139.6%	652.7 MB	21 GB	615.1 MB	314 MB
