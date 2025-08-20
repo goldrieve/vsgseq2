@@ -13,3 +13,5 @@ WOR/
 .DS_Store
 .vscode
 sample_sheets/
+.nf-test/
+.vscode
