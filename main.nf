@@ -9,7 +9,7 @@ params.requestedcpus = 4
 params.cores = "4"
 params.trinitymem = "20"
 params.cdslength = "300"
-params.partial = "--complete_orfs_only"
+params.partial = false
 params.cdhit_id = "0.94"
 params.cdhit_as = "0.94"
 params.threshold = "100000"
@@ -53,7 +53,7 @@ if (params.help) {
              |  --cdslength    Define minimum CDS length (amino acids).
              |                [default: ${params.cdslength}]
              |  --partial       Only complete ORFs are produced as standard. It is possible to allow the production of partial ORFs by adding the --partial flag.
-             |                [default: ${params.cdslength}]
+             |                [default: ${params.partial}]
              |  --cdhit_id       Define sequence identity threshold - how much the alignment has to match (0.0 - 1.0).
              |                [default: ${params.cdhit_id}]
              |  --cdhit_as       Define alignment coverage for the shorter sequence (0.0 - 1.0).

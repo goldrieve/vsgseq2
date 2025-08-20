@@ -10,6 +10,7 @@ nextflow_process {
             params {
                 cores = 1
                 trinitymem = 10
+                outdir = "${projectDir}/output"
             }
             process {
                 """
@@ -22,8 +23,22 @@ nextflow_process {
         }
 
         then {
-            assert process.success
-            assert snapshot(process.out).match()
+                assert process.success
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGGATTTGTTAACTGCGTTTCTCGTTGCAGCTCTACTATTGGGAGTGCAAACTGGACCC') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('CCCAAGCACAAGAAAAAATAAAACAAGCGGCATGAACGCATGCAACAATAATACTGGCGG') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGCTTCAAGCGCTAGCAATAGCCGTTATGTTATCGCTGCAAAGGTCGACAGCAAAGAAC') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('TTAAAAAAGCAAGGCCACAAATGCGGCAGAAACCACGCTGAGGGCGAATTTCTTGTTTAC') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('TTAAAAAAGCAAAAATGCAAGCAAAAGAGGGGCTTTGTTAATAACAAAAGAATTGTTGTT') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGCGCCTCATTCATCCAACCATTATAACTTGCCTCGCAGATTTCCAAAGCAAGCAACCG') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('TTAAAAAAGCAAGGCCACAAATGTAGCGGAAACCACACTGAGGGCGAATTTCTTGGTTAG') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGAACAAAAAGGCCGTCGTTTCCGCACTGGTAATAGCGACGCTATTAACCGACAAAGGC') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGCAGAAGTTAATAGCGATATACATAGCCATACATCTGTGTGCAACTGGCAAAGCGGCT') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('CCGTGTACTCCACTTCTGAAGCTTTGCTTCCTTACGGACCTGCCCACTGCCGATGATATA') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGTTAACAGCACTGCAGACAGGCCCCCTAGCCGTAACGGACCCAATTCTAAGACGACTA') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('TTACGAAGAGGAATATGGAGCTGTCAGCTGTACTTGAATCGAACGCGCAGAGATTCCTGG') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('AATCTTCTTTGGAGAAACGTGCCCGAGCACGGAACACAATAAATATCTAATGTGCTCATT') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGCCCTCAAGCAACTCGAAAACTGCACACTTACAAGCAGCAGTCCTCATACAATTGATT') }
+
         }
     }
 }
