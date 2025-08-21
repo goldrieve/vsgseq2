@@ -1,0 +1,30 @@
+nextflow_process {
+
+    name "Test Process QUANTIFY"
+    script "modules/quantify.nf"
+    process "QUANTIFY"
+
+    test("Should run salmon quantification") {
+
+        when {
+            params {
+                cores = 1
+            }
+            process {
+                """
+                // tuple val(meta), path(trimmed)
+                input[0] = [ [ id: 'late_se', single_end: true ], file("${projectDir}/data/reads/latesingle.fq.gz") ]
+                input[1] = params.cores
+                input[2] = "${projectDir}/tests/data/salmon_index"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}

@@ -1,0 +1,30 @@
+nextflow_process {
+
+    name "Test Process CONCATENATED_CDHIT"
+    script "modules/concatenated_cdhit.nf"
+    process "CONCATENATED_CDHIT"
+
+    test("Should run cd-hit on concatenated VSGs") {
+
+        when {
+            params {
+                cdhit_id = 0.94
+                cdhit_as = 0.94
+            }
+            process {
+                """
+                input [0] = "$projectDir/tests/data/concatenated_vsgs.fasta"
+                input [1] = params.cdhit_id
+                input [2] = params.cdhit_as
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}

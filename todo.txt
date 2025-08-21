@@ -1,0 +1,9 @@
+orf.test
+quantify.test
+summarise_vsgome.test
+quantify.test
+summarise_vsgome.test
+summarise.test
+trim.test
+blast.test
+integration test?

@@ -1,0 +1,28 @@
+nextflow_process {
+
+    name "Test Process CONCATENATE_VSGS"
+    script "modules/concatenate.nf"
+    process "CONCATENATE_VSGS"
+
+    test("Should run without failures") {
+
+        when {
+            params {
+                vsg_db = "$projectDir/data/blastdb/concatAnTattb427.fa"
+            }
+            process {
+                """
+                input [0] = "$projectDir/tests/data/latesingle_ORF_VSGs.fasta"
+                input [1] = params.vsg_db
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}

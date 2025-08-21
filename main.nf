@@ -145,7 +145,6 @@ validateParams()
 include { TRIM } from './modules/trim'
 include { ASSEMBLE } from './modules/assemble'
 include { ORF } from './modules/orf'
-include { INDIVIDUAL_CDHIT } from './modules/cdhit'
 include { BLAST } from './modules/blast'
 include { CONCATENATE_VSGS } from './modules/concatenate'
 include { CONCATENATED_CDHIT } from './modules/concatenated_cdhit'
@@ -153,7 +152,6 @@ include { INDEX } from './modules/index'
 include { QUANTIFY } from './modules/quantify'
 include { MULTIQC } from './modules/multiqc'
 include { SUMMARISE } from './modules/summarise'
-include { SUMMARISEVSGOME } from './modules/summarise_vsgome'
 
 ch_samplesheet = Channel.fromPath(params.samplesheet)
 

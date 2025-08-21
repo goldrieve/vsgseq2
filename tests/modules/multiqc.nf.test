@@ -1,0 +1,26 @@
+nextflow_process {
+
+    name "Test Process MULTIQC"
+    script "modules/multiqc.nf"
+    process "MULTIQC"
+
+    test("Should run without failures") {
+
+        when {
+            params {
+            }
+            process {
+                """
+                input[0] = "$projectDir/tests/data/early_1_quant/"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}
