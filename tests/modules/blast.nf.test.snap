@@ -1,0 +1,37 @@
+{
+    "Should run without failures": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "latesingle_trinity_cdhit.xml:md5,1c76e5abd0ac6fbd3268dfd67519243c",
+                        "latesingle_trinity_cdhit_nonVSG.xml:md5,7d3439b16633684c6714bd2bb80b3a98"
+                    ]
+                ],
+                "1": [
+                    "latesingle_trinity_cdhit_nonVSG.xml:md5,7d3439b16633684c6714bd2bb80b3a98"
+                ],
+                "2": [
+                    "latesingle_trinity_cdhit_VSGs.fasta:md5,966afb15c69677a4245f6b30f44ef008"
+                ],
+                "notvsgblast": [
+                    "latesingle_trinity_cdhit_nonVSG.xml:md5,7d3439b16633684c6714bd2bb80b3a98"
+                ],
+                "vsgblast": [
+                    [
+                        "latesingle_trinity_cdhit.xml:md5,1c76e5abd0ac6fbd3268dfd67519243c",
+                        "latesingle_trinity_cdhit_nonVSG.xml:md5,7d3439b16633684c6714bd2bb80b3a98"
+                    ]
+                ],
+                "vsgs": [
+                    "latesingle_trinity_cdhit_VSGs.fasta:md5,966afb15c69677a4245f6b30f44ef008"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-29T13:04:59.529106464"
+    }
+}

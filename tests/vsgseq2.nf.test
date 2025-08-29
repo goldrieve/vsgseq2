@@ -1,0 +1,33 @@
+nextflow_workflow {
+    name "Test vsgseq2 integration"
+    script "main.nf"
+    workflow "vsgseq2"
+
+    test("Should integrate modules") {
+
+        when {
+            params {
+                samplesheet = "${outputDir}/test_samples.csv"
+            }
+            workflow {
+                """
+                new File("${outputDir}/test_samples.csv").text = '''sample,r1,r2
+early_1,${projectDir}/tests/data/early_1_1.fastq.gz,${projectDir}/tests/data/early_1_2.fastq.gz
+latesingle,${projectDir}/tests/data/latesingle.fq.gz,'''
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert workflow.out.summary_champions
+            
+            // Snapshot specific outputs
+            assert snapshot(
+                workflow.out.summary_champions
+            ).match()
+        }
+
+    }
+
+}

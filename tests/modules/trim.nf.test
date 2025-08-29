@@ -4,17 +4,16 @@ nextflow_process {
     script "modules/trim.nf"
     process "TRIM"
 
-    test("Should run without failures") {
+    test("Should trim SE reads") {
 
         when {
             params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+                cores = 1
             }
             process {
                 """
-                // define inputs of the process here. Example:
-                // input[0] = file("test-file.txt")
+                input[0] = [ [ meta: 'late_se', single_end: true, prefix: 'late_se' ], file("${projectDir}/data/reads/latesingle.fq.gz") ]
+                input[1] = params.cores
                 """
             }
         }

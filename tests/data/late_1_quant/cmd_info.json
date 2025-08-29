@@ -1,0 +1,11 @@
+{
+    "salmon_version": "1.10.3",
+    "libType": "A",
+    "threads": "4",
+    "index": "salmon_index",
+    "mates1": "late_1_trimmed_1.fq.gz",
+    "mates2": "late_1_trimmed_2.fq.gz",
+    "validateMappings": [],
+    "output": "late_1_quant",
+    "auxDir": "aux_info"
+}

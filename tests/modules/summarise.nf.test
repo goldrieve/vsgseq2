@@ -4,17 +4,19 @@ nextflow_process {
     script "modules/summarise.nf"
     process "SUMMARISE"
 
-    test("Should run without failures") {
+    test("Should run summary steps") {
 
         when {
             params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+                threshold = 100000
             }
             process {
                 """
-                // define inputs of the process here. Example:
-                // input[0] = file("test-file.txt")
+                input[0] = "${projectDir}/tests/data/early_1_quant/, ${projectDir}/tests/data/late_1_quant/"
+                input[1] = params.threshold
+                input[2] = "${projectDir}/tests/data/latesingle_ORF_VSGs.fasta"
+                input[3] = "${projectDir}/tests/data/VSGome.fasta.clstr"
+                input[4] = "${projectDir}/tests/data/VSGome.fasta"
                 """
             }
         }

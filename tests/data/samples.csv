@@ -1,0 +1,3 @@
+sample,r1,r2
+early_1,tests/data/early_1_1.fastq.gz,tests/data/early_1_2.fastq.gz
+latesingle,tests/data/latesingle.fq.gz,

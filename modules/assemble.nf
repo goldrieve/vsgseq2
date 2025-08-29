@@ -1,16 +1,15 @@
 process ASSEMBLE {
-    conda "$projectDir/vsgseq2.yml"
+    conda "${params.conda_yml}"
     container 'goldrieve/vsgseq2:latest'
     publishDir "${params.outdir}/assemblies", pattern: '*trinity.Trinity.fasta', mode:'copy'
-    cpus = params.requestedcpus
     
     input:
-    tuple val(meta), path(trimmed)
-    val cores 
-    val trinitymem
+        tuple val(meta), path(trimmed)
+        val cores 
+        val trinitymem
 
     output:
-    path "*_trinity.Trinity.fasta", emit: trinity_fasta
+        path "*_trinity.Trinity.fasta", emit: trinity_fasta
 
     script:
     if(meta.single_end){

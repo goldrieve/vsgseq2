@@ -1,19 +1,19 @@
 process CONCATENATED_CDHIT {
-    conda "$projectDir/vsgseq2.yml"
+    conda "${params.conda_yml}"
     container 'goldrieve/vsgseq2:latest'
     publishDir "${params.outdir}/VSGs/VSGome", mode:'copy'
 
     input:
-    path (vsgs)
-    val cdhit_id
-    val cdhit_as
+        path (vsgs)
+        val cdhit_id
+        val cdhit_as
 
     output:
-    path "VSGome.fasta", emit: vsgome
-    path "VSGome.fasta.clstr", emit: clstr
+        path "VSGome.fasta", emit: vsgome
+        path "VSGome.fasta.clstr", emit: clstr
 
     script:
-    """
-    cd-hit-est -i ${vsgs} -o VSGome.fasta -d 0 -c ${cdhit_id} -n 8 -G 0 -g 1 -s 0.0 -aS ${cdhit_as} -t 4 -M 2000
-    """
+        """
+        cd-hit-est -i ${vsgs} -o VSGome.fasta -d 0 -c ${cdhit_id} -n 8 -G 0 -g 1 -s 0.0 -aS ${cdhit_as} -t 4 -M 2000
+        """
 }

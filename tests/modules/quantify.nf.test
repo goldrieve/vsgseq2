@@ -12,10 +12,9 @@ nextflow_process {
             }
             process {
                 """
-                // tuple val(meta), path(trimmed)
-                input[0] = [ [ id: 'late_se', single_end: true ], file("${projectDir}/data/reads/latesingle.fq.gz") ]
+                input[0] = "${projectDir}/tests/data/salmon_index"
                 input[1] = params.cores
-                input[2] = "${projectDir}/tests/data/salmon_index"
+                input[2] = [ [ id: 'late_se', single_end: true ], file("${projectDir}/data/reads/latesingle.fq.gz") ]
                 """
             }
         }
