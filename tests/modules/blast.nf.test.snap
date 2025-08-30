@@ -1,5 +1,5 @@
 {
-    "Should run without failures": {
+    "Should blast ORFs and output VSGs": {
         "content": [
             [
                 "latesingle_trinity_cdhit_VSGs.fasta:md5,966afb15c69677a4245f6b30f44ef008"

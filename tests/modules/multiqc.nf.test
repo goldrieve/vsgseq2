@@ -4,7 +4,7 @@ nextflow_process {
     script "modules/multiqc.nf"
     process "MULTIQC"
 
-    test("Should run without failures") {
+    test("Should run multiqc on salmon quants") {
 
         when {
             params {

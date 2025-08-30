@@ -4,7 +4,7 @@ nextflow_process {
     script "modules/blast.nf"
     process "BLAST"
 
-    test("Should run without failures") {
+    test("Should blast ORFs and output VSGs") {
 
         when {
             params {

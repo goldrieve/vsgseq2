@@ -1,5 +1,5 @@
 {
-    "Should run without failures": {
+    "Should run multiqc on salmon quants": {
         "content": [
             "multiqc_general_stats.txt:md5,28d27a8e4e2c279ec07df072c6e547d8"
         ],

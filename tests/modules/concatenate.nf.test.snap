@@ -1,5 +1,5 @@
 {
-    "Should run without failures": {
+    "Should concatenate VSGs": {
         "content": [
             {
                 "0": [
