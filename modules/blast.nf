@@ -19,6 +19,6 @@ process BLAST {
         """
         blastn -db ${vsg_db} -query ${assemblies} -outfmt 5 -out ${basename}.xml
         blastn -db ${notvsg_db} -query ${assemblies} -outfmt 5 -out ${basename}_nonVSG.xml
-        python $projectDir/bin/process_vsgs.py ${basename}
+        python ${params.scripts}process_vsgs.py ${basename}
         """
 }

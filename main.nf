@@ -4,6 +4,8 @@ params.assemblies = "$projectDir/data/tutorial_assemblies/*_trinity.Trinity.fast
 params.vsg_db = "$projectDir/data/blastdb/concatAnTattb427.fa"
 params.notvsg_db = "$projectDir/data/blastdb/vsgseq2NOTvsgs.fa"
 params.vsgome = "$projectDir/data/blastdb/concatAnTattb427.fa"
+params.genome = "$projectDir/data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome.fasta"
+params.decoys = "$projectDir/data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome_decoys.txt"
 params.full_vsg_db = ""
 params.cores = "4"
 params.trinitymem = "20"
@@ -18,6 +20,7 @@ params.samplesheet = "$projectDir/data/reads/samples.csv"
 params.help = ""
 params.mode = "full"
 params.conda_yml = "$projectDir/vsgseq2.yml"
+params.scripts = "$projectDir/bin/"
 
 def validateParams() {
     def errors = []
@@ -199,7 +202,9 @@ workflow vsgseq2 {
             )
         INDEX(
             CONCATENATE_VSGS.out,
-            params.cores
+            params.cores,
+            params.genome,
+            params.decoys
             )
         QUANTIFY(
             INDEX.out,
@@ -247,7 +252,9 @@ workflow vsgseq2 {
             )
         INDEX(
             CONCATENATE_VSGS.out,
-            params.cores
+            params.cores,
+            params.genome,
+            params.decoys
             )
         QUANTIFY(
             INDEX.out,
@@ -278,6 +285,10 @@ workflow {
     vsgseq2()
 
     workflow.onComplete {
-        log.info(workflow.success ? "\nDone!" : "Oops .. something went wrong")
+        log.info("\nWorkflow completed!")
+    }
+
+    workflow.onError {
+        log.error("Workflow execution failed: ${workflow.errorMessage}")
     }
 }

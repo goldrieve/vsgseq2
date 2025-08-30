@@ -9,12 +9,16 @@ nextflow_process {
         when {
             params {
                 cores = 1
+                genome = "$projectDir/data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome.fasta"
+                decoys = "$projectDir/data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome_decoys.txt"
+                
             }
             process {
                 """
                 input[0] = "$projectDir/tests/data/VSGome.fasta"
                 input[1] = params.cores
-
+                input[2] = params.genome
+                input[3] = params.decoys
                 """
             }
         }
@@ -23,7 +27,6 @@ nextflow_process {
             assert process.success
             def outputPath = process.out['0'][0].toString()
             def reflengthsFile = file("${outputPath}/reflengths.bin")
-            
             assert reflengthsFile.exists()
             assert snapshot(reflengthsFile).match()
         }

@@ -1,0 +1,22 @@
+{
+    "index_version": 4,
+    "reference_gfa": [
+        "salmon_index"
+    ],
+    "sampling_type": "dense",
+    "k": 31,
+    "num_kmers": 14621,
+    "num_contigs": 12,
+    "seq_length": 14981,
+    "have_ref_seq": true,
+    "have_edge_vec": false,
+    "SeqHash": "cd04f91ebe4cd51d1cf5b328b29793cd75c81e926fd92387264ae22a52ed7edc",
+    "NameHash": "a9ba2eb58a0f5a8e563c6676b680d1a5bd20de393fcbf43f637bf598478ea6cc",
+    "SeqHash512": "8439d3ca5b8252eb393c36c4538a3ffb97059b91fc0234ffceb4b7ae0ed896ea1e43b16e4d28effd55f1cd8d1615734297c5ea3ee6b9cc8b793cdc8dacbb1671",
+    "NameHash512": "3462a922c303ae1b3b374e23a98cc10bf787c715fa62e8c3b407e7c9733e3b7a902976b17739b9d362e8d596f76191cec013c28f55391cb90c990314e427b91b",
+    "DecoySeqHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "DecoyNameHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "num_decoys": 0,
+    "first_decoy_index": 18446744073709551615,
+    "keep_duplicates": false
+}

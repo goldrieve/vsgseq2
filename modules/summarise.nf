@@ -37,11 +37,11 @@ process SUMMARISE {
 
     script:
         """
-        Rscript $projectDir/bin/summarise_quant.R "${quants}" ${threshold}
-        Rscript $projectDir/bin/summarise_vsgs.R "${vsgs}"
-        python $projectDir/bin/add_cluster.py filtered_tpm.csv ${clstr} filtered_tpm_clusters.csv
-        python $projectDir/bin/length.py "${fasta}" length.csv
-        python $projectDir/bin/merge_length_tpm.py filtered_tpm.csv length.csv filtered_tpm_clusters_length.csv
-        python $projectDir/bin/sum_cluster.py filtered_tpm_clusters.csv cluster_tpm.csv cluster_champion.csv "${fasta}" champion_vsgs.fasta
+        Rscript ${params.scripts}summarise_quant.R "${quants}" ${threshold}
+        Rscript ${params.scripts}summarise_vsgs.R "${vsgs}"
+        python ${params.scripts}add_cluster.py filtered_tpm.csv ${clstr} filtered_tpm_clusters.csv
+        python ${params.scripts}length.py "${fasta}" length.csv
+        python ${params.scripts}merge_length_tpm.py filtered_tpm.csv length.csv filtered_tpm_clusters_length.csv
+        python ${params.scripts}sum_cluster.py filtered_tpm_clusters.csv cluster_tpm.csv cluster_champion.csv "${fasta}" champion_vsgs.fasta
         """
 }

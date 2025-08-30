@@ -1,12 +1,12 @@
 {
     "Should run salmon quantification": {
         "content": [
-            "quant.sf:md5,a20edaff25b16ad270dcb7ad60b3aab2"
+            "quant.sf:md5,4b11477268f9b40b9cd165b2b66080c8"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-30T11:16:38.311653143"
+        "timestamp": "2025-08-30T13:28:38.99357605"
     }
 }

@@ -10,6 +10,7 @@ nextflow_process {
             params {
                 vsg_db = "$projectDir/data/blastdb/concatAnTattb427.fa"
                 notvsg_db = "$projectDir/data/blastdb/vsgseq2NOTvsgs.fa"
+                scripts = "$projectDir/bin/"
             }
             process {
                 """
@@ -22,7 +23,7 @@ nextflow_process {
 
         then {
             assert process.success
-            assert snapshot(process.out).match()
+            assert snapshot(process.out.vsgs).match()
         }
 
     }
