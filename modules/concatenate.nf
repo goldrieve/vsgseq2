@@ -4,8 +4,8 @@ process CONCATENATE_VSGS {
     publishDir "${params.outdir}/VSGs", mode:'copy'
     
     input:
-        path (vsgome)
-        val (full_vsg_db)
+        path vsgome
+        val full_vsg_db
 
     output:
         path "concatenated_vsgs.fasta"

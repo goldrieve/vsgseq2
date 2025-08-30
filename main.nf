@@ -270,7 +270,7 @@ workflow vsgseq2 {
     }
 
     emit:
-        summary_champions = SUMMARISE.out.champion_vsgs
+        summary_champions = SUMMARISE.out.champ_vsgs
 }
 
 workflow {

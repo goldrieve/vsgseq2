@@ -3,7 +3,7 @@ process INDEX {
     container 'goldrieve/vsgseq2:latest'
     
     input:
-        path (vsgs)
+        path vsgs
         val cores
 
     output:

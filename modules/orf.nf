@@ -3,7 +3,7 @@ process ORF {
     container 'goldrieve/vsgseq2:latest'
     
     input:
-        path (assemblies)
+        path assemblies
         val cdslength
         val partial
 

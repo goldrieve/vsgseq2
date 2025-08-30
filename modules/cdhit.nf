@@ -3,7 +3,7 @@ process INDIVIDUAL_CDHIT {
     container 'goldrieve/vsgseq2:latest'
     
     input:
-        path (assemblies)
+        path assemblies
         val cdhit_id
         val cdhit_as
 

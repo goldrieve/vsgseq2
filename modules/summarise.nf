@@ -22,17 +22,17 @@ process SUMMARISE {
         val fasta
 
     output:
-        path "tpm.csv"
-        path "num_reads.csv"
-        path "total_read_counts.csv"
-        path "vsg_count.csv"
-        path "filtered_tpm.csv"
-        path "filtered_tpm_clusters.csv"
-        path "length.csv"
-        path "filtered_tpm_clusters_length.csv"
-        path "cluster_tpm.csv"
-        path "cluster_champion.csv"
-        path "champion_vsgs.fasta", emit: champion_vsgs
+        path "tpm.csv", emit: tpm
+        path "num_reads.csv", emit: num_reads
+        path "total_read_counts.csv", emit: total_reads
+        path "vsg_count.csv", emit: vsg_count
+        path "filtered_tpm.csv", emit: filtered_tpm
+        path "filtered_tpm_clusters.csv", emit: tpm_clusters
+        path "length.csv", emit: length
+        path "filtered_tpm_clusters_length.csv", emit: cluster_tpm_length
+        path "cluster_tpm.csv", emit: cluster_tpm
+        path "cluster_champion.csv", emit: cluster_champ
+        path "champion_vsgs.fasta", emit: champ_vsgs
 
 
     script:

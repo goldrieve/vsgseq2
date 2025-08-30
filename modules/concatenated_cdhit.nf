@@ -4,7 +4,7 @@ process CONCATENATED_CDHIT {
     publishDir "${params.outdir}/VSGs/VSGome", mode:'copy'
 
     input:
-        path (vsgs)
+        path vsgs
         val cdhit_id
         val cdhit_as
 

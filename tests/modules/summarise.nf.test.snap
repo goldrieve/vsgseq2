@@ -34,6 +34,39 @@
                 ],
                 "9": [
                     "cluster_champion.csv:md5,082444ebbf799633611b4c55b561ecde"
+                ],
+                "champ_vsgs": [
+                    "champion_vsgs.fasta:md5,e61f4e60eede6401fdfb415390b08f4c"
+                ],
+                "cluster_champ": [
+                    "cluster_champion.csv:md5,082444ebbf799633611b4c55b561ecde"
+                ],
+                "cluster_tpm": [
+                    "cluster_tpm.csv:md5,23b74fa576e97dfc1456d3dc637c6e74"
+                ],
+                "cluster_tpm_length": [
+                    "filtered_tpm_clusters_length.csv:md5,5142a3d772e66f98bb51e4663222c152"
+                ],
+                "filtered_tpm": [
+                    "filtered_tpm.csv:md5,3d1e151e6f0e65ad6e1d0b6e280d19dd"
+                ],
+                "length": [
+                    "length.csv:md5,a512692df3488283c7ff83214cf106c5"
+                ],
+                "num_reads": [
+                    "num_reads.csv:md5,d6a043ce56aa3690e74130cd1a041b5a"
+                ],
+                "total_reads": [
+                    "total_read_counts.csv:md5,28bfe7acad8c713c61bc6005347dc757"
+                ],
+                "tpm": [
+                    "tpm.csv:md5,3d1e151e6f0e65ad6e1d0b6e280d19dd"
+                ],
+                "tpm_clusters": [
+                    "filtered_tpm_clusters.csv:md5,0e5141df0a92c43f9e3f2d86e5b85411"
+                ],
+                "vsg_count": [
+                    "vsg_count.csv:md5,c2059fe15d1fca1498e299ce7c6c6d9d"
                 ]
             }
         ],
@@ -41,6 +74,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-29T12:44:45.555194108"
+        "timestamp": "2025-08-30T10:18:29.88953478"
     }
 }

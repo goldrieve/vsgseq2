@@ -3,7 +3,7 @@ process QUANTIFY {
     container 'goldrieve/vsgseq2:latest'
 
     input:
-        path (index)
+        path index
         val cores
         tuple val(meta), path(trimmed)
 

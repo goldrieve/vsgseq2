@@ -1,55 +1,12 @@
 {
     "Should run salmon quantification": {
         "content": [
-            {
-                "0": [
-                    [
-                        [
-                            "ambig_info.tsv:md5,a0e53a456ddb0a8949f6d436de47775d",
-                            "expected_bias.gz:md5,3407f87245d0003e0ffbfdf6d8c04f20",
-                            "fld.gz:md5,31781bfc4e79dce7a18c969ba0bee59f",
-                            "meta_info.json:md5,428e5823a4cf208218335c78ff8495a7",
-                            "observed_bias.gz:md5,92bcd0592d22a6a58d0360fc76103e56",
-                            "observed_bias_3p.gz:md5,92bcd0592d22a6a58d0360fc76103e56"
-                        ],
-                        "cmd_info.json:md5,0cf5261a82245dece835ed7773d4f7d6",
-                        [
-                            "flenDist.txt:md5,2de170bdc9f6fd237d286429b292bb28"
-                        ],
-                        "lib_format_counts.json:md5,670537b285033bd8ae2a64995c8047e4",
-                        [
-                            "salmon_quant.log:md5,26addba3b4e0d8c5e6f3a17b2d94de9a"
-                        ],
-                        "quant.sf:md5,a20edaff25b16ad270dcb7ad60b3aab2"
-                    ]
-                ],
-                "quants": [
-                    [
-                        [
-                            "ambig_info.tsv:md5,a0e53a456ddb0a8949f6d436de47775d",
-                            "expected_bias.gz:md5,3407f87245d0003e0ffbfdf6d8c04f20",
-                            "fld.gz:md5,31781bfc4e79dce7a18c969ba0bee59f",
-                            "meta_info.json:md5,428e5823a4cf208218335c78ff8495a7",
-                            "observed_bias.gz:md5,92bcd0592d22a6a58d0360fc76103e56",
-                            "observed_bias_3p.gz:md5,92bcd0592d22a6a58d0360fc76103e56"
-                        ],
-                        "cmd_info.json:md5,0cf5261a82245dece835ed7773d4f7d6",
-                        [
-                            "flenDist.txt:md5,2de170bdc9f6fd237d286429b292bb28"
-                        ],
-                        "lib_format_counts.json:md5,670537b285033bd8ae2a64995c8047e4",
-                        [
-                            "salmon_quant.log:md5,26addba3b4e0d8c5e6f3a17b2d94de9a"
-                        ],
-                        "quant.sf:md5,a20edaff25b16ad270dcb7ad60b3aab2"
-                    ]
-                ]
-            }
+            "quant.sf:md5,a20edaff25b16ad270dcb7ad60b3aab2"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-29T12:31:07.263221444"
+        "timestamp": "2025-08-30T11:16:38.311653143"
     }
 }

@@ -3,10 +3,10 @@
         "content": [
             {
                 "0": [
-                    "latesingle_ORF.fasta:md5,4088d10ae89a693a2f5d05b51fb642f5"
+                    "latesingle_trinity_cdhit_ORF.fasta:md5,b4641d026a44e78429e1c26817a3d412"
                 ],
                 "fasta": [
-                    "latesingle_ORF.fasta:md5,4088d10ae89a693a2f5d05b51fb642f5"
+                    "latesingle_trinity_cdhit_ORF.fasta:md5,b4641d026a44e78429e1c26817a3d412"
                 ]
             }
         ],
@@ -14,6 +14,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-21T15:19:42.02271792"
+        "timestamp": "2025-08-30T11:33:06.158087894"
     }
 }

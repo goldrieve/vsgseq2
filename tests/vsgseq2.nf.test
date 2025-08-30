@@ -21,8 +21,6 @@ latesingle,${projectDir}/tests/data/latesingle.fq.gz,'''
         then {
             assert workflow.success
             assert workflow.out.summary_champions
-            
-            // Snapshot specific outputs
             assert snapshot(
                 workflow.out.summary_champions
             ).match()

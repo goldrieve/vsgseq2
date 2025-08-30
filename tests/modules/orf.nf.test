@@ -13,7 +13,7 @@ nextflow_process {
             }
             process {
                 """
-                input[0] = "$projectDir/tests/data/latesingle_trinity.Trinity.fasta"
+                input[0] = "$projectDir/tests/data/latesingle_trinity_cdhit.fasta"
                 input[1] = params.cdslength
                 input[2] = params.partial
                 """

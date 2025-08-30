@@ -21,7 +21,11 @@ nextflow_process {
 
         then {
             assert process.success
-            assert snapshot(process.out).match()
+            def outputPath = process.out['0'][0].toString()
+            def reflengthsFile = file("${outputPath}/reflengths.bin")
+            
+            assert reflengthsFile.exists()
+            assert snapshot(reflengthsFile).match()
         }
 
     }
