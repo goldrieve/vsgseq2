@@ -1,0 +1,29 @@
+nextflow_process {
+
+    name "Test Process MULTIQC"
+    script "modules/multiqc.nf"
+    process "MULTIQC"
+
+    test("Should run multiqc on salmon quants") {
+
+        when {
+            params {
+            }
+            process {
+                """
+                input[0] = "$projectDir/tests/data/early_1_quant/"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            def outputPath = process.out['1'][0].toString()
+            def statsFile = file("${outputPath}/multiqc_general_stats.txt")
+            assert statsFile.exists()
+            assert snapshot(statsFile).match()
+        }
+
+    }
+
+}

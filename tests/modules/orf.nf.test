@@ -1,0 +1,30 @@
+nextflow_process {
+
+    name "Test Process ORF"
+    script "modules/orf.nf"
+    process "ORF"
+
+    test("Should identify ORFs") {
+
+        when {
+            params {
+                cdslength = 300
+                partial = false
+            }
+            process {
+                """
+                input[0] = "$projectDir/tests/data/latesingle_trinity_cdhit.fasta"
+                input[1] = params.cdslength
+                input[2] = params.partial
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}

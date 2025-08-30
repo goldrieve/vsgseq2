@@ -12,7 +12,7 @@ dependencies:
   - bioconda::blast
   - bowtie2
   - cd-hit=4.8.1
-  - salmon
+  - salmon=1.10.3
   - samtools
   - seqkit
   - seqtk=1.4

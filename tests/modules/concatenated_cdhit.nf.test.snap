@@ -1,0 +1,25 @@
+{
+    "Should run cd-hit on concatenated VSGs": {
+        "content": [
+            {
+                "0": [
+                    "VSGome.fasta:md5,4eacb0f84c72f87f4fffe227e70bcb7f"
+                ],
+                "1": [
+                    "VSGome.fasta.clstr:md5,e2fe520e2b535152d14fc91f7e6a7760"
+                ],
+                "clstr": [
+                    "VSGome.fasta.clstr:md5,e2fe520e2b535152d14fc91f7e6a7760"
+                ],
+                "vsgome": [
+                    "VSGome.fasta:md5,4eacb0f84c72f87f4fffe227e70bcb7f"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-21T15:04:03.56849463"
+    }
+}

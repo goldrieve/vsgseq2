@@ -1,0 +1,32 @@
+nextflow_process {
+
+    name "Test Process SUMMARISE"
+    script "modules/summarise.nf"
+    process "SUMMARISE"
+
+    test("Should run summary steps") {
+
+        when {
+            params {
+                threshold = 100000
+                scripts = "$projectDir/bin/"
+            }
+            process {
+                """
+                input[0] = "${projectDir}/tests/data/early_1_quant/, ${projectDir}/tests/data/late_1_quant/"
+                input[1] = params.threshold
+                input[2] = "${projectDir}/tests/data/latesingle_ORF_VSGs.fasta"
+                input[3] = "${projectDir}/tests/data/VSGome.fasta.clstr"
+                input[4] = "${projectDir}/tests/data/VSGome.fasta"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}

@@ -1,17 +1,19 @@
 process INDEX {
-    conda "$projectDir/vsgseq2.yml"
+    conda "${params.conda_yml}"
     container 'goldrieve/vsgseq2:latest'
+    
     input:
-    path (vsgs)
-    val cores
+        path vsgs
+        val cores
+        path genome
+        path decoys
 
     output:
-    path "salmon_index"
-
+        path "salmon_index"
 
     script:
-    """
-    cat $vsgs $projectDir/data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome.fasta > gentrome.fasta
-    salmon index --threads $cores -t gentrome.fasta -d $projectDir/data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome_decoys.txt -i salmon_index --gencode
-    """
+        """
+        cat $vsgs $genome > gentrome.fasta
+        salmon index --threads $cores -t gentrome.fasta -d $decoys -i salmon_index --gencode
+        """
 }

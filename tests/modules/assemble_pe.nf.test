@@ -1,0 +1,44 @@
+nextflow_process {
+
+    name "Test Process ASSEMBLE (paired-end)"
+    script "modules/assemble.nf"
+    process "ASSEMBLE"
+
+    test("assemble_pe: Should assemble PE reads without failures") {
+
+        when {
+            params {
+                cores = 1
+                trinitymem = 10
+                outdir = "${projectDir}/output"
+            }
+            process {
+                """
+                // tuple val(meta), path(trimmed[0..1])
+                input[0] = [ [ id: 'late_pe', single_end: false ], [ file("${projectDir}/data/reads/late_1_1.fq.gz"), file("${projectDir}/data/reads/late_1_2.fq.gz") ] ]
+                input[1] = params.cores
+                input[2] = params.trinitymem
+                """
+            }
+        }
+
+        then {
+                assert process.success
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGGATTTGTTAACTGCGTTTCTCGTTGCAGCTCTACTATTGGGAGTGCAAACTGGACCC') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('CCCAAGCACAAGAAAAAATAAAACAAGCGGCATGAACGCATGCAACAATAATACTGGCGG') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGCTTCAAGCGCTAGCAATAGCCGTTATGTTATCGCTGCAAAGGTCGACAGCAAAGAAC') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('TTAAAAAAGCAAGGCCACAAATGCGGCAGAAACCACGCTGAGGGCGAATTTCTTGTTTAC') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('TTAAAAAAGCAAAAATGCAAGCAAAAGAGGGGCTTTGTTAATAACAAAAGAATTGTTGTT') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGCGCCTCATTCATCCAACCATTATAACTTGCCTCGCAGATTTCCAAAGCAAGCAACCG') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('TTAAAAAAGCAAGGCCACAAATGTAGCGGAAACCACACTGAGGGCGAATTTCTTGGTTAG') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGAACAAAAAGGCCGTCGTTTCCGCACTGGTAATAGCGACGCTATTAACCGACAAAGGC') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGCAGAAGTTAATAGCGATATACATAGCCATACATCTGTGTGCAACTGGCAAAGCGGCT') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('CCGTGTACTCCACTTCTGAAGCTTTGCTTCCTTACGGACCTGCCCACTGCCGATGATATA') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGTTAACAGCACTGCAGACAGGCCCCCTAGCCGTAACGGACCCAATTCTAAGACGACTA') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('TTACGAAGAGGAATATGGAGCTGTCAGCTGTACTTGAATCGAACGCGCAGAGATTCCTGG') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('AATCTTCTTTGGAGAAACGTGCCCGAGCACGGAACACAATAAATATCTAATGTGCTCATT') }
+                assert path(process.out.trinity_fasta[0]).readLines().any { it.contains('ATGCCCTCAAGCAACTCGAAAACTGCACACTTACAAGCAGCAGTCCTCATACAATTGATT') }
+
+        }
+    }
+}

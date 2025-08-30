@@ -1,0 +1,32 @@
+nextflow_process {
+
+    name "Test Process QUANTIFY"
+    script "modules/quantify.nf"
+    process "QUANTIFY"
+
+    test("Should run salmon quantification") {
+
+        when {
+            params {
+                cores = 1
+            }
+            process {
+                """
+                input[0] = "${projectDir}/tests/data/salmon_index"
+                input[1] = params.cores
+                input[2] = [ [ id: 'late_se', single_end: true ], file("${projectDir}/data/reads/latesingle.fq.gz") ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            def outputPath = process.out['0'][0].toString()
+            def quantSfFile = file("${outputPath}/quant.sf")
+            assert quantSfFile.exists()
+            assert snapshot(quantSfFile).match()
+        }
+
+    }
+
+}

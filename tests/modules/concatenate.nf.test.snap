@@ -1,0 +1,16 @@
+{
+    "Should concatenate VSGs": {
+        "content": [
+            {
+                "0": [
+                    "concatenated_vsgs.fasta:md5,0282cea538b8883720e9e77a4a8625f0"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-21T14:48:54.6178238"
+    }
+}

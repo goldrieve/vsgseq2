@@ -1,0 +1,31 @@
+nextflow_process {
+
+    name "Test Process BLAST"
+    script "modules/blast.nf"
+    process "BLAST"
+
+    test("Should blast ORFs and output VSGs") {
+
+        when {
+            params {
+                vsg_db = "$projectDir/data/blastdb/concatAnTattb427.fa"
+                notvsg_db = "$projectDir/data/blastdb/vsgseq2NOTvsgs.fa"
+                scripts = "$projectDir/bin/"
+            }
+            process {
+                """
+                input [0] = "$projectDir/tests/data/latesingle_trinity_cdhit.fasta"
+                input [1] = params.vsg_db
+                input [2] = params.notvsg_db 
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out.vsgs).match()
+        }
+
+    }
+
+}

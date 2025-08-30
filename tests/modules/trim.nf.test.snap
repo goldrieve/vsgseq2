@@ -1,0 +1,33 @@
+{
+    "Should trim SE reads": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "meta": "late_se",
+                            "single_end": true,
+                            "prefix": "late_se"
+                        },
+                        "late_se_trimmed.fq.gz:md5,ef4a56e3aaa02f34a69a48d82b7000e3"
+                    ]
+                ],
+                "trimmed_reads": [
+                    [
+                        {
+                            "meta": "late_se",
+                            "single_end": true,
+                            "prefix": "late_se"
+                        },
+                        "late_se_trimmed.fq.gz:md5,ef4a56e3aaa02f34a69a48d82b7000e3"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-29T13:02:16.246474928"
+    }
+}

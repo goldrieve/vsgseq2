@@ -1,0 +1,12 @@
+{
+    "Should index fasta file": {
+        "content": [
+            "reflengths.bin:md5,b97672b4b08d3c6eb62413304a03a2f8"
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-08-30T11:48:14.109233035"
+    }
+}

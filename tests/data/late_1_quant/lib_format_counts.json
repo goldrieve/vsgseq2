@@ -1,0 +1,22 @@
+{
+    "read_files": "[ late_1_trimmed_1.fq.gz, late_1_trimmed_2.fq.gz]",
+    "expected_format": "IU",
+    "compatible_fragment_ratio": 1.0,
+    "num_compatible_fragments": 112770,
+    "num_assigned_fragments": 112770,
+    "num_frags_with_concordant_consistent_mappings": 110920,
+    "num_frags_with_inconsistent_or_orphan_mappings": 1850,
+    "strand_mapping_bias": 0.49853948791922106,
+    "MSF": 0,
+    "OSF": 0,
+    "ISF": 55298,
+    "MSR": 0,
+    "OSR": 0,
+    "ISR": 55622,
+    "SF": 1114,
+    "SR": 736,
+    "MU": 0,
+    "OU": 0,
+    "IU": 0,
+    "U": 0
+}
