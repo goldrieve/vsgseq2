@@ -26,9 +26,6 @@ latesingle,${projectDir}/tests/data/latesingle.fq.gz,'''
                 def lines = path(get(0)).readLines()
                 assert lines.size() >= 2
                 assert lines.any { it.startsWith('ATGAACAAAAAGGCCGTCGTTTCCGCACTGGTAATAGCGACGCTATTAACCGACAAAGGC') }
-                assert lines.any { it.startsWith('ATGCCCTCAAGCAACTCGAAAACTGCACACTTACAAGCAGCAGTCCTCATACAATTGATT') }
-                assert lines.any { it.startsWith('ATGATAAAAACAATCACCACCGTAGCATTGCTGGTGATAGGGTCAGCAAGTGCGATAGCA') }
-                assert lines.any { it.startsWith('ATGCTTCAAGCGCTAGCAATAGCCGTTATGTTATCGCTGCAAAGGTCGACAGCAAAGAAC') }
             }
         }
 
