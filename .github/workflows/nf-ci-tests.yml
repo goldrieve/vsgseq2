@@ -1,4 +1,4 @@
-name: CI tests using nf-test
+name: vsgseq2 CI
 
 on: [push, pull_request]
 
