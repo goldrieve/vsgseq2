@@ -1,5 +1,7 @@
 # vsgseq2
 
+[![vsgseq2 CI](https://github.com/goldrieve/vsgseq2/workflows/vsgseq2%20CI/badge.svg)](https://github.com/goldrieve/vsgseq2/actions)
+
 **vsgseq2** is an updated pipeline for analyzing VSG-seq data, based on the original VSGSeq pipeline described in [this paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4514441/) and [repository](https://github.com/mugnierlab/VSGSeqPipeline).
 
 ## Installation
