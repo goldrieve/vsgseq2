@@ -214,6 +214,8 @@ nextflow run ../../main.nf \
                   [default: 20]
 --cdslength       Minimum CDS length (aa)
                   [default: 300]
+--partial         Only complete ORFs are produced as standard. It is possible to allow the  production of partial ORFs by adding the --partial flag.
+                  [default: false]
 --cdhit_id        cd-hit-est identity threshold (0–1)
                   [default: 0.94]
 --cdhit_as        cd-hit-est alignment coverage (0–1)
