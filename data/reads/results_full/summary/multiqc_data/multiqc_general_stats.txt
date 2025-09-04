@@ -1,0 +1,5 @@
+Sample	Salmon_mqc-generalstats-salmon-percent_mapped	Salmon_mqc-generalstats-salmon-num_mapped	Salmon_mqc-generalstats-salmon-library_types	Salmon_mqc-generalstats-salmon-compatible_fragment_ratio	Salmon_mqc-generalstats-salmon-strand_mapping_bias
+early_1_quant	44.07852392190517	123270	IU	1.0	0.5072857495677945
+earlysingle_quant	44.65	107160	U	1.0	0.5054871220604703
+late_1_quant	60.7970412861348	112770	IU	1.0	0.49853948791922104
+latesingle_quant	61.389	122778	U	1.0	0.4985909527765561

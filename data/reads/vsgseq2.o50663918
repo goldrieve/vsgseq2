@@ -1,0 +1,414 @@
+
+ N E X T F L O W   ~  version 25.04.3
+
+Launching `../../main.nf` [friendly_church] DSL2 - revision: 451869277f
+
+[-        ] vsgseq2:TRIM               -
+[-        ] vsgseq2:ASSEMBLE           -
+[-        ] vsgseq2:ORF                -
+[-        ] vsgseq2:BLAST              -
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+
+[-        ] vsgseq2:TRIM               | 0 of 4
+[-        ] vsgseq2:ASSEMBLE           -
+[-        ] vsgseq2:ORF                -
+[-        ] vsgseq2:BLAST              -
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (4)
+[f2/7609d4] vsgseq2:TRIM (4)           | 0 of 4
+[-        ] vsgseq2:ASSEMBLE           -
+[-        ] vsgseq2:ORF                -
+[-        ] vsgseq2:BLAST              -
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (5)
+[1a/067a91] vsgseq2:TRIM (3)           | 1 of 4
+[ad/ad6719] vsgseq2:ASSEMBLE (1)       | 0 of 1
+[-        ] vsgseq2:ORF                -
+[-        ] vsgseq2:BLAST              -
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (6)
+[08/93b256] vsgseq2:TRIM (2)           | 2 of 4
+[c3/22de9d] vsgseq2:ASSEMBLE (2)       | 0 of 2
+[-        ] vsgseq2:ORF                -
+[-        ] vsgseq2:BLAST              -
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (7)
+[f2/7609d4] vsgseq2:TRIM (4)           | 3 of 4
+[4f/0bb915] vsgseq2:ASSEMBLE (3)       | 0 of 3
+[-        ] vsgseq2:ORF                -
+[-        ] vsgseq2:BLAST              -
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (7)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4
+[4f/0bb915] vsgseq2:ASSEMBLE (3)       | 0 of 3
+[-        ] vsgseq2:ORF                -
+[-        ] vsgseq2:BLAST              -
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (8)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 0 of 4
+[-        ] vsgseq2:ORF                -
+[-        ] vsgseq2:BLAST              -
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (9)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[4f/0bb915] vsgseq2:ASSEMBLE (3)       | 1 of 4
+[25/eff158] vsgseq2:ORF (1)            | 0 of 1
+[-        ] vsgseq2:BLAST              -
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (9)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[4f/0bb915] vsgseq2:ASSEMBLE (3)       | 1 of 4
+[25/eff158] vsgseq2:ORF (1)            | 0 of 1
+[-        ] vsgseq2:BLAST              -
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (9)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[4f/0bb915] vsgseq2:ASSEMBLE (3)       | 1 of 4
+[25/eff158] vsgseq2:ORF (1)            | 1 of 1
+[-        ] vsgseq2:BLAST              -
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (10)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[4f/0bb915] vsgseq2:ASSEMBLE (3)       | 1 of 4
+[25/eff158] vsgseq2:ORF (1)            | 1 of 1
+[92/1da37b] vsgseq2:BLAST (1)          | 0 of 1
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (10)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[4f/0bb915] vsgseq2:ASSEMBLE (3)       | 1 of 4
+[25/eff158] vsgseq2:ORF (1)            | 1 of 1
+[92/1da37b] vsgseq2:BLAST (1)          | 1 of 1
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (11)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[c3/22de9d] vsgseq2:ASSEMBLE (2)       | 2 of 4
+[6e/3cce03] vsgseq2:ORF (2)            | 1 of 2
+[92/1da37b] vsgseq2:BLAST (1)          | 1 of 1
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (12)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[c3/22de9d] vsgseq2:ASSEMBLE (2)       | 2 of 4
+[6e/3cce03] vsgseq2:ORF (2)            | 2 of 2
+[c9/124cbe] vsgseq2:BLAST (2)          | 1 of 2
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (12)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[c3/22de9d] vsgseq2:ASSEMBLE (2)       | 2 of 4
+[6e/3cce03] vsgseq2:ORF (2)            | 2 of 2
+[c9/124cbe] vsgseq2:BLAST (2)          | 1 of 2
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (12)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[c3/22de9d] vsgseq2:ASSEMBLE (2)       | 2 of 4
+[6e/3cce03] vsgseq2:ORF (2)            | 2 of 2
+[c9/124cbe] vsgseq2:BLAST (2)          | 2 of 2
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (13)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[ad/ad6719] vsgseq2:ASSEMBLE (1)       | 3 of 4
+[c0/1dfb55] vsgseq2:ORF (3)            | 2 of 3
+[c9/124cbe] vsgseq2:BLAST (2)          | 2 of 2
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (14)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[ad/ad6719] vsgseq2:ASSEMBLE (1)       | 3 of 4
+[c0/1dfb55] vsgseq2:ORF (3)            | 3 of 3
+[af/372441] vsgseq2:BLAST (3)          | 2 of 3
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (14)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[ad/ad6719] vsgseq2:ASSEMBLE (1)       | 3 of 4
+[c0/1dfb55] vsgseq2:ORF (3)            | 3 of 3
+[af/372441] vsgseq2:BLAST (3)          | 2 of 3
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (14)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[ad/ad6719] vsgseq2:ASSEMBLE (1)       | 3 of 4
+[c0/1dfb55] vsgseq2:ORF (3)            | 3 of 3
+[af/372441] vsgseq2:BLAST (3)          | 3 of 3
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (15)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 3 of 4
+[af/372441] vsgseq2:BLAST (3)          | 3 of 3
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (16)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 3 of 4
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (16)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 3 of 4
+[-        ] vsgseq2:CONCATENATE_VSGS   -
+[-        ] vsgseq2:CONCATENATED_CDHIT -
+[-        ] vsgseq2:INDEX              -
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (19)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 4 of 4 ✔
+[fd/e71851] vsgseq2:CONCATENATE_VSGS   | 1 of 1 ✔
+[09/383361] vsgseq2:CONCATENATED_CDHIT | 0 of 1
+[6a/26710b] vsgseq2:INDEX              | 0 of 1
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (19)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 4 of 4 ✔
+[fd/e71851] vsgseq2:CONCATENATE_VSGS   | 1 of 1 ✔
+[09/383361] vsgseq2:CONCATENATED_CDHIT | 1 of 1 ✔
+[6a/26710b] vsgseq2:INDEX              | 0 of 1
+[-        ] vsgseq2:QUANTIFY           -
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (23)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 4 of 4 ✔
+[fd/e71851] vsgseq2:CONCATENATE_VSGS   | 1 of 1 ✔
+[09/383361] vsgseq2:CONCATENATED_CDHIT | 1 of 1 ✔
+[6a/26710b] vsgseq2:INDEX              | 1 of 1 ✔
+[cb/503c20] vsgseq2:QUANTIFY (1)       | 0 of 4
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (23)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 4 of 4 ✔
+[fd/e71851] vsgseq2:CONCATENATE_VSGS   | 1 of 1 ✔
+[09/383361] vsgseq2:CONCATENATED_CDHIT | 1 of 1 ✔
+[6a/26710b] vsgseq2:INDEX              | 1 of 1 ✔
+[48/6211c8] vsgseq2:QUANTIFY (3)       | 1 of 4
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (23)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 4 of 4 ✔
+[fd/e71851] vsgseq2:CONCATENATE_VSGS   | 1 of 1 ✔
+[09/383361] vsgseq2:CONCATENATED_CDHIT | 1 of 1 ✔
+[6a/26710b] vsgseq2:INDEX              | 1 of 1 ✔
+[af/32a0df] vsgseq2:QUANTIFY (2)       | 2 of 4
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (23)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 4 of 4 ✔
+[fd/e71851] vsgseq2:CONCATENATE_VSGS   | 1 of 1 ✔
+[09/383361] vsgseq2:CONCATENATED_CDHIT | 1 of 1 ✔
+[6a/26710b] vsgseq2:INDEX              | 1 of 1 ✔
+[cb/503c20] vsgseq2:QUANTIFY (1)       | 3 of 4
+[-        ] vsgseq2:MULTIQC            -
+[-        ] vsgseq2:SUMMARISE          -
+
+executor >  local (25)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 4 of 4 ✔
+[fd/e71851] vsgseq2:CONCATENATE_VSGS   | 1 of 1 ✔
+[09/383361] vsgseq2:CONCATENATED_CDHIT | 1 of 1 ✔
+[6a/26710b] vsgseq2:INDEX              | 1 of 1 ✔
+[5d/199031] vsgseq2:QUANTIFY (4)       | 4 of 4 ✔
+[0e/05d06b] vsgseq2:MULTIQC            | 0 of 1
+[56/e61e43] vsgseq2:SUMMARISE          | 0 of 1
+
+executor >  local (25)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 4 of 4 ✔
+[fd/e71851] vsgseq2:CONCATENATE_VSGS   | 1 of 1 ✔
+[09/383361] vsgseq2:CONCATENATED_CDHIT | 1 of 1 ✔
+[6a/26710b] vsgseq2:INDEX              | 1 of 1 ✔
+[5d/199031] vsgseq2:QUANTIFY (4)       | 4 of 4 ✔
+[0e/05d06b] vsgseq2:MULTIQC            | 1 of 1 ✔
+[56/e61e43] vsgseq2:SUMMARISE          | 0 of 1
+
+executor >  local (25)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 4 of 4 ✔
+[fd/e71851] vsgseq2:CONCATENATE_VSGS   | 1 of 1 ✔
+[09/383361] vsgseq2:CONCATENATED_CDHIT | 1 of 1 ✔
+[6a/26710b] vsgseq2:INDEX              | 1 of 1 ✔
+[5d/199031] vsgseq2:QUANTIFY (4)       | 4 of 4 ✔
+[0e/05d06b] vsgseq2:MULTIQC            | 1 of 1 ✔
+[56/e61e43] vsgseq2:SUMMARISE          | 1 of 1 ✔
+
+executor >  local (25)
+[89/779dda] vsgseq2:TRIM (1)           | 4 of 4 ✔
+[2a/41c9fc] vsgseq2:ASSEMBLE (4)       | 4 of 4 ✔
+[a8/3b802e] vsgseq2:ORF (4)            | 4 of 4 ✔
+[7d/e001e5] vsgseq2:BLAST (4)          | 4 of 4 ✔
+[fd/e71851] vsgseq2:CONCATENATE_VSGS   | 1 of 1 ✔
+[09/383361] vsgseq2:CONCATENATED_CDHIT | 1 of 1 ✔
+[6a/26710b] vsgseq2:INDEX              | 1 of 1 ✔
+[5d/199031] vsgseq2:QUANTIFY (4)       | 4 of 4 ✔
+[0e/05d06b] vsgseq2:MULTIQC            | 1 of 1 ✔
+[56/e61e43] vsgseq2:SUMMARISE          | 1 of 1 ✔
+
+Workflow completed!
+Completed at: 03-Sep-2025 08:34:41
+Duration    : 4m 17s
+CPU hours   : 0.2
+Succeeded   : 25
+
+
