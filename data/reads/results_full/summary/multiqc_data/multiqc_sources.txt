@@ -1,5 +1,0 @@
-Module	Section	Sample Name	Source
-Salmon	all_sections	early_1_quant	/exports/eddie/scratch/goldriev/frank/vsgseq2/data/reads/work/8e/7f0a168cebf2e165a450399d362765/early_1_quant/libParams/flenDist.txt
-Salmon	all_sections	late_1_quant	/exports/eddie/scratch/goldriev/frank/vsgseq2/data/reads/work/8e/7f0a168cebf2e165a450399d362765/late_1_quant/libParams/flenDist.txt
-Salmon	all_sections	earlysingle_quant	/exports/eddie/scratch/goldriev/frank/vsgseq2/data/reads/work/8e/7f0a168cebf2e165a450399d362765/earlysingle_quant/libParams/flenDist.txt
-Salmon	all_sections	latesingle_quant	/exports/eddie/scratch/goldriev/frank/vsgseq2/data/reads/work/8e/7f0a168cebf2e165a450399d362765/latesingle_quant/libParams/flenDist.txt
