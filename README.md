@@ -6,9 +6,30 @@
 
 ## Installation
 
-This pipeline is built using [Nextflow](https://www.nextflow.io/). You can install and run **vsgseq2** in two main ways. Both methods assume that **Conda** is pre-installed.
+This pipeline is built using [Nextflow](https://www.nextflow.io/). You can install and run **vsgseq2** in three main ways. All methods assume that **Conda** is pre-installed.
 
-### 1. Manual installation with Conda
+### 1. Installation via Nextflow
+
+```bash
+conda create --name nf-env bioconda::nextflow
+conda activate nf-env
+nextflow run goldrieve/vsgseq2 -r main --help
+```
+
+Test the installation using synthetic data:
+
+```bash
+wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.xz
+tar -xf reads.tar.xz
+cd reads
+nextflow run goldrieve/vsgseq2 \
+  -r main \
+  -with-docker \
+  --samplesheet samples.csv \
+  --outdir results/tutorial
+```
+
+### 2. Manual installation with Conda
 
 ```bash
 git clone https://github.com/goldrieve/vsgseq2
@@ -27,7 +48,7 @@ nextflow run ../../main.nf \
   --outdir results/tutorial
 ```
 
-### 2. Manual installation with Docker
+### 3. Manual installation with Docker
 
 ```bash
 git clone https://github.com/goldrieve/vsgseq2
@@ -44,27 +65,6 @@ nextflow run ../../main.nf \
   --samplesheet samples.csv \
   --outdir results/tutorial \
   -with-docker goldrieve/vsgseq2
-```
-
-### 3. Installation via Nextflow
-
-```bash
-conda create --name nf-env bioconda::nextflow
-conda activate nf-env
-nextflow run goldrieve/vsgseq2 -r main --help
-```
-
-Test the installation using synthetic data:
-
-```bash
-wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.xz
-tar -xf reads.tar.xz
-cd reads
-nextflow run goldrieve/vsgseq2 \
-  -r main \
-  -with-conda \
-  --samplesheet samples.csv \
-  --outdir results/tutorial
 ```
 
 ## Example Output
