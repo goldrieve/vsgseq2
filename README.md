@@ -232,9 +232,12 @@ nextflow run ../../main.nf \
 1. **Platform Compatibility**:
    vsgseq2 has been tested on:
 
-   * **Eddie (University of Edinburgh HPC)** running Rocky Linux 9
-   * **MacOS Sequoia (Intel-based)**
-     If you have Conda installed, it should work on most systems. If you encounter issues, please raise an issue or get in touch.
+   * **Eddie (University of Edinburgh cluster)** running Rocky Linux 9
+   * **MARS (University of Glasgow cluster) running Rocky Linux 8.10**
+   * **MacOS Sequoia (Apple M1)**
+   * **MacOS Sequoia (Intel)**
+
+If you have Conda/Docker installed, it should work on most systems. If you encounter issues, please raise an issue or get in touch.
 
 2. **Memory Usage (Trinity)**:
    Trinity is memory-hungry. If vsgseq2 stalls during assembly, try reducing resource usage:
