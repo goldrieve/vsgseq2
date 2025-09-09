@@ -1,4 +1,5 @@
 process QUANTIFY {
+    cpus = params.cores
     conda "${params.conda_yml}"
     container 'goldrieve/vsgseq2:latest'
 
