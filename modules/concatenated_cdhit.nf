@@ -1,6 +1,4 @@
 process CONCATENATED_CDHIT {
-    conda "${params.conda_yml}"
-    container 'goldrieve/vsgseq2:latest'
     publishDir "${params.outdir}/VSGs/VSGome", mode:'copy'
 
     input:
