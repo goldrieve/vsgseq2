@@ -6,70 +6,53 @@
 
 ## Installation
 
-This pipeline is built using [Nextflow](https://www.nextflow.io/). You can install and run **vsgseq2** in three main ways. All methods assume that **Conda** is pre-installed.
-
-### 1. Installation via Nextflow
+This pipeline is built using [Nextflow](https://www.nextflow.io/). Nextflow can be installed via Conda like this:
 
 ```bash
 conda create --name nf-env bioconda::nextflow
 conda activate nf-env
-nextflow run goldrieve/vsgseq2 -r main --help
 ```
 
-Test the installation using synthetic data:
+### Download test data
 
 ```bash
 wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.xz
 tar -xf reads.tar.xz
 cd reads
+```
+
+Run vsgseq2 on test data with one of Docker, Singularity or Conda:
+
+### 1. Docker
+
+```bash
 nextflow run goldrieve/vsgseq2 \
-  -r main \
-  -with-docker \
   --samplesheet samples.csv \
-  --outdir results/tutorial
+  --outdir results \
+  -profile docker
 ```
 
-### 2. Manual installation with Conda
+### 2. Singularity
 
 ```bash
-git clone https://github.com/goldrieve/vsgseq2
-cd vsgseq2/
-conda env create -f vsgseq2.yml
-conda activate vsgseq2-env
-nextflow run main.nf --help
-```
-
-Test the installation using synthetic data:
-
-```bash
-cd data/reads
-nextflow run ../../main.nf \
+nextflow run goldrieve/vsgseq2 \
   --samplesheet samples.csv \
-  --outdir results/tutorial
+  --outdir results \
+  -profile singularity
 ```
 
-### 3. Manual installation with Docker
+### 3. Conda
 
 ```bash
-git clone https://github.com/goldrieve/vsgseq2
-cd vsgseq2/
-docker pull goldrieve/vsgseq2
-nextflow run main.nf --help
-```
-
-Test the installation using synthetic data:
-
-```bash
-cd data/reads
-nextflow run ../../main.nf \
+nextflow run goldrieve/vsgseq2 \
   --samplesheet samples.csv \
-  --outdir results/tutorial \
-  -with-docker goldrieve/vsgseq2
+  --outdir results \
+  -profile conda
 ```
 
 ## Example Output
 
-After running the tutorial data, output files are organized into the following directories:
+After running the tutorial data, output files are organised into the following directories:
 
 ### 1. `VSGs/`
 
