@@ -1,6 +1,4 @@
 process SUMMARISE {
-    conda "${params.conda_yml}"
-    container 'goldrieve/vsgseq2:latest'
     
     publishDir "${params.outdir}/summary/tpm", mode:'copy', pattern: "tpm.csv"
     publishDir "${params.outdir}/summary/read_counts", mode:'copy', pattern: "num_reads.csv"

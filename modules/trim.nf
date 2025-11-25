@@ -1,6 +1,4 @@
 process TRIM {
-    conda "${params.conda_yml}"
-    container 'goldrieve/vsgseq2:latest'
     publishDir "${params.outdir}/trimmed", mode:'copy'
     
     input:

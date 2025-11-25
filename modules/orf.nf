@@ -1,6 +1,4 @@
 process ORF {
-    conda "${params.conda_yml}"
-    container 'goldrieve/vsgseq2:latest'
     
     input:
         path assemblies
