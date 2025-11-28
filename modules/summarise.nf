@@ -13,11 +13,11 @@ process SUMMARISE {
     publishDir "${params.outdir}/summary/cluster", mode:'copy', pattern: "champion_vsgs.fasta"
     
     input:
-        val quants
+        path quants
         val threshold
-        val vsgs
-        val clstr
-        val fasta
+        path vsgs
+        path clstr
+        path fasta
 
     output:
         path "tpm.csv", emit: tpm

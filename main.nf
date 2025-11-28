@@ -171,8 +171,6 @@ workflow vsgseq2 {
         [ meta, reads ]
     }
 
-    // Create channels for BLAST database files (main file + all index files)
-    // Combine both databases into a single channel so they're all staged together
     ch_blast_dbs = Channel.fromPath("${params.vsg_db}*")
         .mix(Channel.fromPath("${params.notvsg_db}*"))
         .collect()
