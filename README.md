@@ -27,6 +27,7 @@ Run vsgseq2 on test data with one of Docker, Singularity or Conda:
 
 ```bash
 nextflow run goldrieve/vsgseq2 \
+  -r main \
   --samplesheet samples.csv \
   --outdir results \
   -profile docker
@@ -36,6 +37,7 @@ nextflow run goldrieve/vsgseq2 \
 
 ```bash
 nextflow run goldrieve/vsgseq2 \
+  -r main \
   --samplesheet samples.csv \
   --outdir results \
   -profile singularity
@@ -45,6 +47,7 @@ nextflow run goldrieve/vsgseq2 \
 
 ```bash
 nextflow run goldrieve/vsgseq2 \
+  -r main \
   --samplesheet samples.csv \
   --outdir results \
   -profile conda
@@ -148,21 +151,24 @@ Use the `--mode` flag to control which parts of the pipeline are executed.
 Run the full pipeline:
 
 ```bash
-nextflow run ../../main.nf \
+nextflow run goldrieve/vsgseq2 \
+  -r main \
   --mode full \
   --samplesheet samples.csv \
-  --outdir results/tutorial
+  --outdir results \
+  -profile docker
 ```
 
 Re-use Trinity assemblies and re-run the analysis section with a new threshold:
 
 ```bash
-nextflow run ../../main.nf \
+nextflow run goldrieve/vsgseq2 \
+  -r main \
   --mode analyse \
   --samplesheet samples.csv \
-  --assemblies 'results/tutorial/assemblies/*_trinity.Trinity.fasta' \
   --threshold 200000 \
   --outdir results/tutorial_200000
+  -profile docker
 ```
 
 ## Command-line Options

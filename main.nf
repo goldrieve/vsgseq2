@@ -171,6 +171,10 @@ workflow vsgseq2 {
         [ meta, reads ]
     }
 
+    ch_blast_dbs = Channel.fromPath("${params.vsg_db}*")
+        .mix(Channel.fromPath("${params.notvsg_db}*"))
+        .collect()
+
     if (params.mode == "full") {
         TRIM(
             ch_reads,
@@ -188,8 +192,7 @@ workflow vsgseq2 {
             )
         BLAST(
             ORF.out,
-            params.vsg_db,
-            params.notvsg_db
+            ch_blast_dbs
             )
         CONCATENATE_VSGS(
             (BLAST.out.vsgs).collect(),
@@ -238,8 +241,7 @@ workflow vsgseq2 {
             )
         BLAST(
             ORF.out,
-            params.vsg_db,
-            params.notvsg_db
+            ch_blast_dbs
             )
         CONCATENATE_VSGS(
             (BLAST.out.vsgs).collect(),

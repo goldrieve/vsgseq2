@@ -13,9 +13,9 @@ nextflow_process {
             }
             process {
                 """
-                input[0] = "${projectDir}/tests/data/early_1_quant/, ${projectDir}/tests/data/late_1_quant/"
+                input[0] = Channel.fromPath(["${projectDir}/tests/data/early_1_quant", "${projectDir}/tests/data/late_1_quant"]).collect()
                 input[1] = params.threshold
-                input[2] = "${projectDir}/tests/data/latesingle_ORF_VSGs.fasta"
+                input[2] = Channel.fromPath("${projectDir}/tests/data/latesingle_ORF_VSGs.fasta").collect()
                 input[3] = "${projectDir}/tests/data/VSGome.fasta.clstr"
                 input[4] = "${projectDir}/tests/data/VSGome.fasta"
                 """
