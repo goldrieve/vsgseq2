@@ -34,9 +34,11 @@ process SUMMARISE {
 
 
     script:
+        def quants_array = quants instanceof List ? "[${quants.join(', ')}]" : "[${quants}]"
+        def vsgs_array = vsgs instanceof List ? "[${vsgs.join(', ')}]" : "[${vsgs}]"
         """
-        Rscript ${params.scripts}summarise_quant.R "${quants}" ${threshold}
-        Rscript ${params.scripts}summarise_vsgs.R "${vsgs}"
+        Rscript ${params.scripts}summarise_quant.R "${quants_array}" ${threshold}
+        Rscript ${params.scripts}summarise_vsgs.R "${vsgs_array}"
         python ${params.scripts}add_cluster.py filtered_tpm.csv ${clstr} filtered_tpm_clusters.csv
         python ${params.scripts}length.py "${fasta}" length.csv
         python ${params.scripts}merge_length_tpm.py filtered_tpm.csv length.csv filtered_tpm_clusters_length.csv
