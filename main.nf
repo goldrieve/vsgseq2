@@ -171,6 +171,13 @@ workflow vsgseq2 {
         [ meta, reads ]
     }
 
+    // Create channels for BLAST database directories
+    vsg_db_dir = file(params.vsg_db).parent
+    notvsg_db_dir = file(params.notvsg_db).parent
+    
+    ch_vsg_db = Channel.fromPath("${vsg_db_dir}/*").collect()
+    ch_notvsg_db = Channel.fromPath("${notvsg_db_dir}/*").collect()
+
     if (params.mode == "full") {
         TRIM(
             ch_reads,
@@ -188,8 +195,8 @@ workflow vsgseq2 {
             )
         BLAST(
             ORF.out,
-            params.vsg_db,
-            params.notvsg_db
+            ch_vsg_db,
+            ch_notvsg_db
             )
         CONCATENATE_VSGS(
             (BLAST.out.vsgs).collect(),
@@ -238,8 +245,8 @@ workflow vsgseq2 {
             )
         BLAST(
             ORF.out,
-            params.vsg_db,
-            params.notvsg_db
+            ch_vsg_db,
+            ch_notvsg_db
             )
         CONCATENATE_VSGS(
             (BLAST.out.vsgs).collect(),
