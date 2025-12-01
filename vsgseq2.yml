@@ -3,13 +3,14 @@ name: vsgseq2-env
 channels:
   - conda-forge
   - bioconda
-  - nodefaults
+  - defaults
 dependencies:
-  - trinity
-  - r-base
+  - python=3.9
+  - biopython
   - numpy
-  - python=3.8
+  - pandas
   - bioconda::blast
+  - bioconda::trinity=2.15.1
   - bowtie2
   - cd-hit=4.8.1
   - salmon=1.10.3
@@ -18,11 +19,8 @@ dependencies:
   - seqtk=1.4
   - bioconda::transdecoder
   - trimmomatic=0.39
-  - bioconda::trinity=2.15.1
-  - biopython=1.78
+  - r-base
   - r-pacman
-  - conda-forge::boost=1.85.0
   - multiqc=1.21
   - typing_extensions
   - nextflow
-  - anaconda::pandas
