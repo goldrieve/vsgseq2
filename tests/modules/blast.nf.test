@@ -15,8 +15,9 @@ nextflow_process {
             process {
                 """
                 input [0] = "$projectDir/tests/data/latesingle_trinity_cdhit.fasta"
-                input [1] = params.vsg_db
-                input [2] = params.notvsg_db 
+                input [1] = Channel.fromPath("$projectDir/data/blastdb/concatAnTattb427.fa*")
+                    .mix(Channel.fromPath("$projectDir/data/blastdb/vsgseq2NOTvsgs.fa*"))
+                    .collect()
                 """
             }
         }
