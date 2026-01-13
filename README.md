@@ -15,6 +15,13 @@ conda activate nf-env
 
 ### Download test data
 
+You will require wget, which can be installed using OS specific package manager or conda e.g.
+
+```bash
+conda create -n wget anaconda::wget
+conda activate wget
+```
+
 ```bash
 wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.xz
 tar -xf reads.tar.xz
