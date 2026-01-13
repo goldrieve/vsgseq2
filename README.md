@@ -52,7 +52,7 @@ nextflow run goldrieve/vsgseq2 \
 
 ### 3. Conda
 
-We recommend running vsgseq2 with Docker or Singularity, however, you can also use Conda. This will build a conda env with dependencies, rather than pulling a pre-built image.
+We recommend running vsgseq2 with Docker or Singularity, however, you can also use Conda on Linux. This will build a conda env with dependencies, rather than pulling a pre-built image.
 
 ```bash
 nextflow run goldrieve/vsgseq2 \
