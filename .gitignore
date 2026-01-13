@@ -17,3 +17,4 @@ sample_sheets/
 .nf-test/
 .vscode
 output/
+*.Rhistory
