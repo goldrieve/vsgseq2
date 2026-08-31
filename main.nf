@@ -151,7 +151,7 @@ workflow vsgseq2 {
 
     validateParams()
 
-    ch_samplesheet = Channel.fromPath(params.samplesheet)
+    ch_samplesheet = channel.fromPath(params.samplesheet)
 
     ch_reads = ch_samplesheet
         .splitCsv(header:true)
@@ -171,8 +171,8 @@ workflow vsgseq2 {
         [ meta, reads ]
     }
 
-    ch_blast_dbs = Channel.fromPath("${params.vsg_db}*")
-        .mix(Channel.fromPath("${params.notvsg_db}*"))
+    ch_blast_dbs = channel.fromPath("${params.vsg_db}*")
+        .mix(channel.fromPath("${params.notvsg_db}*"))
         .collect()
 
     if (params.mode == "full") {
@@ -230,7 +230,7 @@ workflow vsgseq2 {
             params.cores
             )
         assemblies_ch = 
-        Channel.fromPath(
+        channel.fromPath(
             params.assemblies,
             checkIfExists: true
             )
@@ -279,7 +279,7 @@ workflow vsgseq2 {
     }
 
     emit:
-        summary_champions = SUMMARISE.out.champ_vsgs
+        SUMMARISE.out.champ_vsgs
 }
 
 workflow {
