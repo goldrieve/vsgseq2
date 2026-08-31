@@ -2,9 +2,9 @@
 pacman::p_load(dplyr, RColorBrewer, reshape, ggpubr)
 
 # Read in data
-tpm <- read.csv("/Volumes/matthews/Guy/Raw_data/frank/results_full/summary/tpm/cluster_tpm.csv", check.names = FALSE)
-meta <- read.csv("/Volumes/matthews/Guy/Raw_data/frank/results_full/summary/meta.csv")
-count <- read.csv("/Volumes/matthews/Guy/Raw_data/frank/results_full/summary/vsgs/vsg_count.csv")
+tpm <- read.csv("/path/to/cluster_tpm.csv", check.names = FALSE)
+meta <- read.csv("/path/to/meta.csv")
+count <- read.csv("/path/to/vsg_count.csv")
 
 # Filter rows in tpm where any numeric column has a value greater than 100000
 keep_tpm <- tpm %>%
