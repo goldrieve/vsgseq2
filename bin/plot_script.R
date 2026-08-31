@@ -2,9 +2,9 @@
 pacman::p_load(dplyr, RColorBrewer, reshape, ggpubr)
 
 # Read in data
-tpm <- read.csv("~/pkgs/vsgseq2/data/reads/results/tutorial/summary/tpm/cluster_tpm.csv")
-meta <- read.csv("~/pkgs/vsgseq2/data/reads/meta.csv")
-count <- read.csv("~/pkgs/vsgseq2/data/reads/results/tutorial/summary/vsgs/vsg_count.csv")
+tpm <- read.csv("/path/to/cluster_tpm.csv", check.names = FALSE)
+meta <- read.csv("/path/to/meta.csv")
+count <- read.csv("/path/to/vsg_count.csv")
 
 # Filter rows in tpm where any numeric column has a value greater than 100000
 keep_tpm <- tpm %>%
@@ -27,11 +27,11 @@ long <- merge(x=meta, y=long, by.x="isolate", by.y="variable")[]
 coul <- brewer.pal(12,"Set3") 
 coul <- colorRampPalette(coul)(-1 + length(unique(long$cluster)))
 coul <- append(coul, "black")
-
+long$day <- as.numeric(long$day )
 # Create bar plot
-a <- ggbarplot(long, x = "isolate", y = "value",
+ggbarplot(long, x = "day", y = "value",
                add.params = list(size = 2), color = "cluster", fill = "cluster") +
-  facet_wrap(~ stage, scales = 'free_x', ncol = 2) +
+  facet_wrap(~ mouse, scales = 'fixed', ncol = 2) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
   scale_fill_manual(values = coul) +
   scale_color_manual(values = coul) +

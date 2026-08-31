@@ -1,5 +1,5 @@
 process QUANTIFY {
-    cpus = params.cores
+    cpus params.cores
 
     input:
         path index

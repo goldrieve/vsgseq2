@@ -1,5 +1,5 @@
 process ASSEMBLE {
-    cpus = params.cores
+    cpus params.cores
     publishDir "${params.outdir}/assemblies", pattern: '*trinity.Trinity.fasta', mode:'copy'
     
     input:

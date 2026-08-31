@@ -15,6 +15,10 @@ conda activate nf-env
 
 ### Download test data
 
+You will require `wget`, which can be installed using your OS-specific package manager or Conda, e.g.:
+
+    conda install -n nf-env anaconda::wget
+
 ```bash
 wget https://github.com/goldrieve/vsgseq2/raw/refs/heads/main/data/reads.tar.xz
 tar -xf reads.tar.xz
@@ -45,7 +49,7 @@ nextflow run goldrieve/vsgseq2 \
 
 ### 3. Conda
 
-We recommend running vsgseq2 with Docker or Singularity, however, you can also use Conda. This will build a conda env with dependencies, rather than pulling a pre-built image.
+We recommend running vsgseq2 with Docker or Singularity, however, you can also use Conda on Linux. This will build a conda env with dependencies, rather than pulling a pre-built image.
 
 ```bash
 nextflow run goldrieve/vsgseq2 \
