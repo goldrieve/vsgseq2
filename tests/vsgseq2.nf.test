@@ -20,8 +20,7 @@ latesingle,${projectDir}/tests/data/latesingle.fq.gz,'''
 
         then {
             assert workflow.success
-            assert workflow.out
-            with(workflow.out) {
+            with(workflow.out[0]) {
                 assert size() >= 1
                 def lines = path(get(0)).readLines()
                 assert lines.size() >= 2
