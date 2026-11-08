@@ -25,5 +25,4 @@ jobs:
 
       - name: Run nf-test
         run: |
-          eval "$(conda shell.bash hook)"
           nf-test test --ci
