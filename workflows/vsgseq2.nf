@@ -51,7 +51,13 @@ workflow VSGSEQ2 {
     } else {
         ch_assemblies = channel
             .fromPath(params.assemblies, checkIfExists: true)
-            .map { assembly -> [ [ id: assembly.baseName.replace('_trinity.Trinity', '') ], assembly ] }
+            .map { assembly ->
+                def id = assembly.baseName.replace('_trinity.Trinity', '')
+                if (!(id ==~ /^[A-Za-z0-9][A-Za-z0-9_-]*$/) || !(assembly.name ==~ /^[A-Za-z0-9._-]+$/)) {
+                    error("Invalid assembly file name '${assembly.name}': sample names must start with a letter or digit and contain only letters, digits, underscores or hyphens, e.g. '<sample>_trinity.Trinity.fasta'")
+                }
+                [ [ id: id ], assembly ]
+            }
     }
 
     //
