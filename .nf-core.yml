@@ -72,7 +72,7 @@ template:
   name: vsgseq2
   description: Assembly, identification and quantification of VSGs from VSG-seq data
   author: Guy Oldrieve
-  version: 2.0.0dev
+  version: 1.0.4dev
   force: true
   outdir: .
   skip_features:
