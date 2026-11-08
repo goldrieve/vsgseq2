@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   nf-test:
     runs-on: ubuntu-latest
@@ -12,6 +15,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
+
+      - name: Setup Apptainer
+        uses: eWaterCycle/setup-apptainer@v2
+        with:
+          apptainer-version: 1.4.5
 
       - name: Setup Nextflow
         uses: nf-core/setup-nextflow@v2
@@ -24,5 +32,4 @@ jobs:
           sudo mv nf-test /usr/local/bin/
 
       - name: Run nf-test
-        run: |
-          nf-test test --ci
+        run: nf-test test --ci
