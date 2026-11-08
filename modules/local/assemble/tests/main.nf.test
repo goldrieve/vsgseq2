@@ -20,7 +20,18 @@ nextflow_process {
             assert process.success
             def lines = path(process.out.trinity_fasta[0][1]).readLines()
             assert lines.any { it.contains('ATGGATTTGTTAACTGCGTTTCTCGTTGCAGCTCTACTATTGGGAGTGCAAACTGGACCC') }
+            assert lines.any { it.contains('CCCAAGCACAAGAAAAAATAAAACAAGCGGCATGAACGCATGCAACAATAATACTGGCGG') }
+            assert lines.any { it.contains('ATGCTTCAAGCGCTAGCAATAGCCGTTATGTTATCGCTGCAAAGGTCGACAGCAAAGAAC') }
+            assert lines.any { it.contains('TTAAAAAAGCAAGGCCACAAATGCGGCAGAAACCACGCTGAGGGCGAATTTCTTGTTTAC') }
+            assert lines.any { it.contains('TTAAAAAAGCAAAAATGCAAGCAAAAGAGGGGCTTTGTTAATAACAAAAGAATTGTTGTT') }
+            assert lines.any { it.contains('ATGCGCCTCATTCATCCAACCATTATAACTTGCCTCGCAGATTTCCAAAGCAAGCAACCG') }
+            assert lines.any { it.contains('TTAAAAAAGCAAGGCCACAAATGTAGCGGAAACCACACTGAGGGCGAATTTCTTGGTTAG') }
             assert lines.any { it.contains('ATGAACAAAAAGGCCGTCGTTTCCGCACTGGTAATAGCGACGCTATTAACCGACAAAGGC') }
+            assert lines.any { it.contains('ATGCAGAAGTTAATAGCGATATACATAGCCATACATCTGTGTGCAACTGGCAAAGCGGCT') }
+            assert lines.any { it.contains('CCGTGTACTCCACTTCTGAAGCTTTGCTTCCTTACGGACCTGCCCACTGCCGATGATATA') }
+            assert lines.any { it.contains('ATGTTAACAGCACTGCAGACAGGCCCCCTAGCCGTAACGGACCCAATTCTAAGACGACTA') }
+            assert lines.any { it.contains('TTACGAAGAGGAATATGGAGCTGTCAGCTGTACTTGAATCGAACGCGCAGAGATTCCTGG') }
+            assert lines.any { it.contains('AATCTTCTTTGGAGAAACGTGCCCGAGCACGGAACACAATAAATATCTAATGTGCTCATT') }
             assert lines.any { it.contains('ATGCCCTCAAGCAACTCGAAAACTGCACACTTACAAGCAGCAGTCCTCATACAATTGATT') }
         }
 

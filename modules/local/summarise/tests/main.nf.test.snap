@@ -29,7 +29,7 @@
                     "total_read_counts.csv:md5,28bfe7acad8c713c61bc6005347dc757"
                 ],
                 "3": [
-                    "vsg_count.csv:md5,b5114d81cd9a368f5f2864b941d61090"
+                    "vsg_count.csv:md5,c2059fe15d1fca1498e299ce7c6c6d9d"
                 ],
                 "4": [
                     "filtered_tpm.csv:md5,3d1e151e6f0e65ad6e1d0b6e280d19dd"
@@ -94,11 +94,11 @@
                     ]
                 ],
                 "vsg_count": [
-                    "vsg_count.csv:md5,b5114d81cd9a368f5f2864b941d61090"
+                    "vsg_count.csv:md5,c2059fe15d1fca1498e299ce7c6c6d9d"
                 ]
             }
         ],
-        "timestamp": "2026-11-08T08:56:48.536095293",
+        "timestamp": "2026-11-08T09:27:37.426864904",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

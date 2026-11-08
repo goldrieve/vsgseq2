@@ -9,7 +9,7 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = [ [ id: 'latesingle' ], file("${projectDir}/tests/data/latesingle_ORF_VSGs.fasta", checkIfExists: true) ]
+                input[0] = [ [ id: 'latesingle' ], file("${projectDir}/tests/data/latesingle_trinity_cdhit.fasta", checkIfExists: true) ]
                 input[1] = 300
                 input[2] = false
                 """
