@@ -1,5 +1,5 @@
 process INDEX {
-    label 'process_medium'
+    label 'process_low'
 
     conda "${moduleDir}/environment.yml"
     container "community.wave.seqera.io/library/salmon:1.10.3--6ea6d56a4b0c26b8"

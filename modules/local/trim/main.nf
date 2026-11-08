@@ -1,6 +1,6 @@
 process TRIM {
     tag "${meta.id}"
-    label 'process_medium'
+    label 'process_low'
 
     conda "${moduleDir}/environment.yml"
     container "community.wave.seqera.io/library/trimmomatic:0.39--f4a7af7a8bfa5641"

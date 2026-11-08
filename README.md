@@ -246,11 +246,24 @@ Run `nextflow run goldrieve/vsgseq2 --help` for all options.
 
 Three parameters control how much of your machine or cluster vsgseq2 uses.
 
-| Parameter      | Applies to                      | Effect                                                                                                 |
-| -------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `--cores`      | TRIM, ASSEMBLE, INDEX, QUANTIFY | Threads per task. All other steps are single-threaded.                                                 |
-| `--trinitymem` | ASSEMBLE                        | Memory per Trinity task in GB, passed to Trinity as `--max_memory`. Other steps do not request memory. |
-| `--forks`      | Every step                      | Maximum number of tasks of the same step running at once.                                              |
+| Parameter      | Applies to                      | Effect                                                              |
+| -------------- | ------------------------------- | ------------------------------------------------------------------- |
+| `--cores`      | TRIM, ASSEMBLE, INDEX, QUANTIFY | Threads per task. All other steps are single-threaded.              |
+| `--trinitymem` | ASSEMBLE                        | Memory per Trinity task in GB, passed to Trinity as `--max_memory`. |
+| `--forks`      | Every step                      | Maximum number of tasks of the same step running at once.           |
+
+The other steps request a fixed amount of memory, which doubles if a task is retried after running out of memory:
+
+| Steps                                                                | Memory (first attempt) |
+| -------------------------------------------------------------------- | ---------------------- |
+| TRIM, INDEX, QUANTIFY                                                | 12 GB                  |
+| ORF, BLAST, CONCATENATE_VSGS, CONCATENATED_CDHIT, MULTIQC, SUMMARISE | 6 GB                   |
+
+To cap every request at what your machine or queue allows, set `process.resourceLimits` in a config file passed with `-c`:
+
+```groovy
+process.resourceLimits = [ cpus: 8, memory: 16.GB, time: 24.h ]
+```
 
 `--forks` is a per-step limit, not a pipeline-wide one, so different steps can overlap. For example, ASSEMBLE can run on one sample while TRIM runs on another. While Trinity is assembling, the peak use is roughly:
 
@@ -265,7 +278,7 @@ With the defaults (`--cores 4 --trinitymem 20 --forks 5`), that is up to 20 CPUs
 | Workstation (32 CPUs, 128 GB) | `--cores 8 --trinitymem 20 --forks 4`  | 32 CPUs, 80 GB         |
 | HPC cluster                   | `--cores 8 --trinitymem 40 --forks 20` | Per job: 8 CPUs, 40 GB |
 
-When running locally, Nextflow also never starts more tasks than the machine has CPUs, and stops with an error if `--trinitymem` is larger than the available memory. On a cluster, each task is submitted as a separate job with the requested CPUs and memory, and `--forks` limits how many jobs of each step are queued at once. Pass your scheduler settings in a config file with `-c`, for example:
+When running locally, Nextflow also never starts more tasks than the machine has CPUs, and stops with an error if a task requests more memory than is available, so set `process.resourceLimits` on machines with less than 12 GB. On a cluster, each task is submitted as a separate job with the requested CPUs and memory, and `--forks` limits how many jobs of each step are queued at once. Pass your scheduler settings in a config file with `-c`, for example:
 
 ```groovy
 // cluster.config
