@@ -1,15 +1,16 @@
 # vsgseq2
 
-[![vsgseq2 CI](https://github.com/goldrieve/vsgseq2/workflows/vsgseq2%20CI/badge.svg)](https://github.com/goldrieve/vsgseq2/actions)
+[![nf-test](https://github.com/goldrieve/vsgseq2/actions/workflows/ci.yml/badge.svg)](https://github.com/goldrieve/vsgseq2/actions/workflows/ci.yml)
+[![lint](https://github.com/goldrieve/vsgseq2/actions/workflows/lint.yml/badge.svg)](https://github.com/goldrieve/vsgseq2/actions/workflows/lint.yml)
 
 **vsgseq2** is an updated pipeline for analysing VSG-seq data, based on the original VSGSeq pipeline described in [this paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4514441/) and [repository](https://github.com/mugnierlab/VSGSeqPipeline).
 
 ## Installation
 
-This pipeline is built using [Nextflow](https://www.nextflow.io/). Nextflow can be installed via Conda like this:
+This pipeline is built using [Nextflow](https://www.nextflow.io/) and requires Nextflow 26.04.0 or later. Nextflow can be installed via Conda like this:
 
 ```bash
-conda create --name nf-env bioconda::nextflow
+conda create --name nf-env "bioconda::nextflow>=26.04.0"
 conda activate nf-env
 ```
 
@@ -35,7 +36,20 @@ nextflow run goldrieve/vsgseq2 \
   -profile conda
 ```
 
-Each module has its own Conda environment (`modules/local/<module>/environment.yml`). Use `-profile docker`, `-profile singularity` or `-profile apptainer` once module containers are available.
+### Profiles
+
+Choose how software is provided with `-profile`:
+
+| Profile       | Software                                                                    | Cache directory                                     |
+| ------------- | --------------------------------------------------------------------------- | --------------------------------------------------- |
+| `conda`       | One Conda environment per module (`modules/local/<module>/environment.yml`) | `conda-cache/` or `$NXF_CONDA_CACHEDIR`             |
+| `docker`      | One container per module                                                    | Docker's own image store                            |
+| `singularity` | One container per module                                                    | `singularity-cache/` or `$NXF_SINGULARITY_CACHEDIR` |
+| `apptainer`   | One container per module                                                    | `apptainer-cache/` or `$NXF_APPTAINER_CACHEDIR`     |
+
+Environments and images are created on first use and reused on later runs. Set the matching `NXF_*_CACHEDIR` variable to share a cache between projects. We recommend containers where available, as they give identical software on every system.
+
+If you run with `-profile conda` from a shell with a Python virtual environment active, deactivate it first. Otherwise its `python` can take priority over the module environments.
 
 ### Samplesheet
 
@@ -54,6 +68,8 @@ From a clone of the repository, run the bundled test data with:
 ```bash
 nextflow run main.nf -profile test,conda --outdir results/test
 ```
+
+The `test` profile uses two small samples from `tests/data` (one paired-end, one single-end) and limits each task to 2 CPUs and 15 GB of memory. Swap `conda` for `docker`, `singularity` or `apptainer` to test containers.
 
 ## Example Output
 
@@ -104,7 +120,7 @@ After running the tutorial data, output files are organised into the following d
 
 ### 4. `trimmed/`
 
-- `{sample}_trimmed.fq.gz` – Quality- and adapter-trimmed reads
+- `{sample}_trimmed.fq.gz` (single-end) or `{sample}_trimmed_1.fq.gz` and `{sample}_trimmed_2.fq.gz` (paired-end) – Quality-trimmed reads
 
 ### 5. `pipeline_info/`
 
@@ -157,6 +173,8 @@ Use the `--mode` flag to control which parts of the pipeline are executed.
 - `full` (default): Run the entire pipeline from raw reads
 - `analyse`: Use pre-assembled transcripts to rerun downstream analyses
 
+In `analyse` mode, Trinity is skipped and ORFs are predicted from the files matched by `--assemblies`. The sample name is taken from each file name by removing `_trinity.Trinity.fasta`, so assemblies from a previous run (`<outdir>/assemblies/`) can be reused directly. The samplesheet is still required, because reads are trimmed and quantified against the new VSGome.
+
 ### Example
 
 Run the full pipeline:
@@ -176,6 +194,7 @@ Re-use Trinity assemblies and re-run the analysis section with a new threshold:
 nextflow run goldrieve/vsgseq2 \
   -r main \
   --mode analyse \
+  --assemblies 'results/assemblies/*_trinity.Trinity.fasta' \
   --samplesheet samples.csv \
   --threshold 200000 \
   --outdir results/tutorial_200000 \
@@ -223,6 +242,41 @@ Run `nextflow run goldrieve/vsgseq2 --help` for all options.
 --forks           Maximum parallel tasks per process                [default: 5]
 ```
 
+## Resources: cores, memory and forks
+
+Three parameters control how much of your machine or cluster vsgseq2 uses.
+
+| Parameter      | Applies to                      | Effect                                                                                                 |
+| -------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `--cores`      | TRIM, ASSEMBLE, INDEX, QUANTIFY | Threads per task. All other steps are single-threaded.                                                 |
+| `--trinitymem` | ASSEMBLE                        | Memory per Trinity task in GB, passed to Trinity as `--max_memory`. Other steps do not request memory. |
+| `--forks`      | Every step                      | Maximum number of tasks of the same step running at once.                                              |
+
+`--forks` is a per-step limit, not a pipeline-wide one, so different steps can overlap. For example, ASSEMBLE can run on one sample while TRIM runs on another. While Trinity is assembling, the peak use is roughly:
+
+- CPUs: `forks × cores`
+- Memory: `forks × trinitymem` GB
+
+With the defaults (`--cores 4 --trinitymem 20 --forks 5`), that is up to 20 CPUs and 100 GB. Choose values that fit your machine:
+
+| Machine                       | Suggested settings                     | Peak during assembly   |
+| ----------------------------- | -------------------------------------- | ---------------------- |
+| Laptop (8 CPUs, 16 GB)        | `--cores 4 --trinitymem 10 --forks 1`  | 4 CPUs, 10 GB          |
+| Workstation (32 CPUs, 128 GB) | `--cores 8 --trinitymem 20 --forks 4`  | 32 CPUs, 80 GB         |
+| HPC cluster                   | `--cores 8 --trinitymem 40 --forks 20` | Per job: 8 CPUs, 40 GB |
+
+When running locally, Nextflow also never starts more tasks than the machine has CPUs, and stops with an error if `--trinitymem` is larger than the available memory. On a cluster, each task is submitted as a separate job with the requested CPUs and memory, and `--forks` limits how many jobs of each step are queued at once. Pass your scheduler settings in a config file with `-c`, for example:
+
+```groovy
+// cluster.config
+process.executor = 'slurm'
+process.queue    = 'standard'
+```
+
+```bash
+nextflow run goldrieve/vsgseq2 -profile apptainer -c cluster.config --samplesheet samples.csv --cores 8 --trinitymem 40 --forks 20
+```
+
 ## Pipeline structure
 
 vsgseq2 follows the nf-core template:
@@ -252,8 +306,13 @@ tests/                     integration test and test data
 If you have Conda/Docker installed, it should work on most systems. If you encounter issues, please raise an issue or get in touch.
 
 2. **Memory Usage (Trinity)**:
-   Trinity is memory-hungry. If vsgseq2 stalls during assembly, try reducing resource usage:
+   Trinity is memory-hungry. If vsgseq2 stalls or is killed during assembly, run fewer assemblies at once and give each less memory:
 
    ```bash
-   --cores 1 --trinitymem 10
+   --cores 2 --trinitymem 10 --forks 1
    ```
+
+   See [Resources: cores, memory and forks](#resources-cores-memory-and-forks).
+
+3. **Resuming a run**:
+   Add `-resume` to the same command to reuse completed steps after an error or a change of downstream parameters such as `--threshold`.

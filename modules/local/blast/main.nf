@@ -6,7 +6,7 @@ process BLAST {
     container "community.wave.seqera.io/library/blast_biopython_python:118ae71af8a11bc3"
 
     input:
-        tuple val(meta), path(orfs)
+        tuple val(meta), path(orfs, stageAs: 'input/*')
         tuple val(vsg_db), path(vsg_db_files, stageAs: 'vsg_db/*')
         tuple val(notvsg_db), path(notvsg_db_files, stageAs: 'notvsg_db/*')
 
@@ -20,9 +20,7 @@ process BLAST {
     script:
         def prefix = "${meta.id}_ORF"
         """
-        if [ "${orfs}" != "${prefix}.fasta" ]; then
-            ln -s ${orfs} ${prefix}.fasta
-        fi
+        ln -s ${orfs} ${prefix}.fasta
 
         blastn -db vsg_db/${vsg_db} -query ${prefix}.fasta -outfmt 5 -out ${prefix}.xml
         blastn -db notvsg_db/${notvsg_db} -query ${prefix}.fasta -outfmt 5 -out ${prefix}_nonVSG.xml
