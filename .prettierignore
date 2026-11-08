@@ -13,3 +13,4 @@ conda-cache/
 singularity-cache/
 apptainer-cache/
 .ruff_cache/
+setup-nextflow/
