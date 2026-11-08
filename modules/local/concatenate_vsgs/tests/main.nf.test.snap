@@ -1,0 +1,33 @@
+{
+    "Should concatenate VSGs with a VSG database": {
+        "content": [
+            {
+                "0": [
+                    "concatenated_vsgs.fasta:md5,fcd32a8ce19f0de2618c4a24884e4094"
+                ],
+                "1": [
+                    [
+                        "CONCATENATE_VSGS",
+                        "coreutils",
+                        "9.5"
+                    ]
+                ],
+                "fasta": [
+                    "concatenated_vsgs.fasta:md5,fcd32a8ce19f0de2618c4a24884e4094"
+                ],
+                "versions_coreutils": [
+                    [
+                        "CONCATENATE_VSGS",
+                        "coreutils",
+                        "9.5"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-11-08T08:54:39.652244795",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

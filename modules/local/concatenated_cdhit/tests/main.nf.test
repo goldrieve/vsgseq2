@@ -1,0 +1,26 @@
+nextflow_process {
+
+    name "Test Process CONCATENATED_CDHIT"
+    script "../main.nf"
+    process "CONCATENATED_CDHIT"
+
+    test("Should cluster VSGs") {
+
+        when {
+            process {
+                """
+                input[0] = file("${projectDir}/tests/data/concatenated_vsgs.fasta", checkIfExists: true)
+                input[1] = 0.94
+                input[2] = 0.94
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}

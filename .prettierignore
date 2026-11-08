@@ -1,0 +1,15 @@
+.nextflow*
+work/
+data/
+results/
+output/
+.DS_Store
+testing/
+testing*
+*.pyc
+.nf-test/
+tests/data/
+conda-cache/
+singularity-cache/
+apptainer-cache/
+.ruff_cache/

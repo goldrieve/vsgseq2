@@ -1,0 +1,26 @@
+nextflow_process {
+
+    name "Test Process BLAST"
+    script "../main.nf"
+    process "BLAST"
+
+    test("Should blast ORFs and output VSGs") {
+
+        when {
+            process {
+                """
+                input[0] = [ [ id: 'latesingle' ], file("${projectDir}/tests/data/latesingle_ORF_VSGs.fasta", checkIfExists: true) ]
+                input[1] = channel.fromPath("${projectDir}/data/blastdb/concatAnTattb427.fa*").collect().map { files -> [ 'concatAnTattb427.fa', files ] }
+                input[2] = channel.fromPath("${projectDir}/data/blastdb/vsgseq2NOTvsgs.fa*").collect().map { files -> [ 'vsgseq2NOTvsgs.fa', files ] }
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out.vsgs).match()
+        }
+
+    }
+
+}

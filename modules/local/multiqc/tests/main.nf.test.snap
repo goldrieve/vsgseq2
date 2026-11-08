@@ -1,0 +1,12 @@
+{
+    "Should summarise salmon output": {
+        "content": [
+            "multiqc_general_stats.txt:md5,28d27a8e4e2c279ec07df072c6e547d8"
+        ],
+        "timestamp": "2026-11-08T08:56:10.165461158",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+nextflow_process {
+
+    name "Test Process INDEX"
+    script "../main.nf"
+    process "INDEX"
+
+    test("Should build salmon index") {
+
+        when {
+            process {
+                """
+                input[0] = file("${projectDir}/tests/data/VSGome.fasta", checkIfExists: true)
+                input[1] = 1
+                input[2] = file("${projectDir}/data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome.fasta", checkIfExists: true)
+                input[3] = file("${projectDir}/data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome_decoys.txt", checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            def reflengths = file("${process.out.index[0]}/reflengths.bin")
+            assert reflengths.exists()
+            assert snapshot(reflengths).match()
+        }
+
+    }
+
+}

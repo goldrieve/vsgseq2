@@ -1,5 +1,8 @@
-import pandas as pd
+#!/usr/bin/env python3
 import argparse
+
+import pandas as pd
+
 
 def add_length_to_tpm(tpm_file, length_file, output_file):
     """

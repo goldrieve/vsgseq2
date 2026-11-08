@@ -1,6 +1,9 @@
-from Bio import SeqIO
-import csv
+#!/usr/bin/env python3
 import argparse
+import csv
+
+from Bio import SeqIO
+
 
 def count_vsg_lengths(fasta_file, csv_file):
     """

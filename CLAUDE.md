@@ -1,3 +1,3 @@
-# wildbioscience/dna-seq-nf
+# goldrieve/vsgseq2
 
 See `AGENTS.md` for instructions.

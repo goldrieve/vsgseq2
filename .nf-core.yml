@@ -1,0 +1,91 @@
+repository_type: pipeline
+
+nf_core_version: 4.1.0
+
+lint:
+  files_unchanged:
+    - LICENSE
+    - .github/workflows/branch.yml
+    - docs/CONTRIBUTING.md
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-vsgseq2_logo_light.png
+    - docs/images/nf-core-vsgseq2_logo_light.png
+    - docs/images/nf-core-vsgseq2_logo_dark.png
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+    - .github/PULL_REQUEST_TEMPLATE.md
+    - assets/email_template.txt
+    - docs/README.md
+    - assets/sendmail_template.txt
+    - .prettierignore
+  nextflow_config:
+    - process.cpus
+    - process.memory
+    - process.time
+    - custom_config
+    - params.custom_config_version
+    - params.custom_config_base
+    - manifest.name
+    - manifest.homePage
+    - params.input
+  multiqc_config: false
+  files_exist:
+    - docs/README.md
+    - docs/output.md
+    - docs/usage.md
+    - CHANGELOG.md
+    - CITATIONS.md
+    - docs/CONTRIBUTING.md
+    - conf/test_full.config
+    - ro-crate-metadata.json
+    - .github/.dockstore.yml
+    - assets/nf-core-vsgseq2_logo_light.png
+    - docs/images/nf-core-vsgseq2_logo_light.png
+    - docs/images/nf-core-vsgseq2_logo_dark.png
+    - conf/igenomes.config
+    - conf/igenomes_ignored.config
+    - CODE_OF_CONDUCT.md
+    - .github/ISSUE_TEMPLATE/config.yml
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+    - .github/ISSUE_TEMPLATE/feature_request.yml
+    - .github/PULL_REQUEST_TEMPLATE.md
+    - .github/actions/get-shards/action.yml
+    - .github/actions/nf-test/action.yml
+    - .github/workflows/branch.yml
+    - .github/workflows/linting.yml
+    - .github/workflows/nf-test.yml
+    - .github/workflows/pr-comment.yml
+    - .github/workflows/awstest.yml
+    - .github/workflows/awsfulltest.yml
+    - assets/multiqc_config.yml
+    - assets/email_template.html
+    - assets/sendmail_template.txt
+    - assets/email_template.txt
+  readme:
+    - nextflow_badge
+    - nfcore_template_badge
+  included_configs: false
+  nf_test_content:
+    - tests/default.nf.test
+
+template:
+  org: goldrieve
+  name: vsgseq2
+  description: Assembly, identification and quantification of VSGs from VSG-seq data
+  author: Guy Oldrieve
+  version: 2.0.0dev
+  force: true
+  outdir: .
+  skip_features:
+    - github_badges
+    - license
+    - igenomes
+    - multiqc
+    - fastqc
+    - nf_core_configs
+    - seqera_platform
+    - gpu
+    - codespaces
+    - vscode
+    - rocrate
+    - email
+  is_nfcore: false

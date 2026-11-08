@@ -25,31 +25,7 @@ tar -xf reads.tar.xz
 cd reads
 ```
 
-Run vsgseq2 on test data with one of Docker, Singularity or Conda:
-
-### 1. Docker
-
-```bash
-nextflow run goldrieve/vsgseq2 \
-  -r main \
-  --samplesheet samples.csv \
-  --outdir results \
-  -profile docker
-```
-
-### 2. Singularity
-
-```bash
-nextflow run goldrieve/vsgseq2 \
-  -r main \
-  --samplesheet samples.csv \
-  --outdir results \
-  -profile singularity
-```
-
-### 3. Conda
-
-We recommend running vsgseq2 with Docker or Singularity, however, you can also use Conda on Linux. This will build a conda env with dependencies, rather than pulling a pre-built image.
+Run vsgseq2 on test data with Conda:
 
 ```bash
 nextflow run goldrieve/vsgseq2 \
@@ -59,55 +35,84 @@ nextflow run goldrieve/vsgseq2 \
   -profile conda
 ```
 
+Each module has its own Conda environment (`modules/local/<module>/environment.yml`). Use `-profile docker`, `-profile singularity` or `-profile apptainer` once module containers are available.
+
+### Samplesheet
+
+The samplesheet is a CSV with the columns `sample`, `r1` and `r2`. Leave `r2` empty for single-end reads. Sample names must be unique and cannot contain spaces or full stops. See `assets/samplesheet.csv`.
+
+```csv
+sample,r1,r2
+early_1,early_1_1.fastq.gz,early_1_2.fastq.gz
+latesingle,latesingle.fq.gz,
+```
+
+### Test profile
+
+From a clone of the repository, run the bundled test data with:
+
+```bash
+nextflow run main.nf -profile test,conda --outdir results/test
+```
+
 ## Example Output
 
 After running the tutorial data, output files are organised into the following directories:
 
 ### 1. `VSGs/`
 
-* `{sample}_ORF_VSGs.fasta` – Predicted VSG ORF sequences per sample
-* `concatenated_vsgs.fasta` – All assembled VSGs from all samples
-* `VSGome/`
+- `{sample}_ORF_VSGs.fasta` – Predicted VSG ORF sequences per sample
+- `concatenated_vsgs.fasta` – All assembled VSGs from all samples
+- `VSGome/`
 
-  * `VSGome.fasta` – Clustered VSG database using cd-hit-est
-  * `VSGome.fasta.clstr` – Summary of clustering results
+  - `VSGome.fasta` – Clustered VSG database using cd-hit-est
+  - `VSGome.fasta.clstr` – Summary of clustering results
 
 ### 2. `assemblies/`
 
-* `{sample}_trinity.Trinity.fasta` – De novo transcriptome assemblies
+- `{sample}_trinity.Trinity.fasta` – De novo transcriptome assemblies
 
 ### 3. `summary/`
 
-* `cluster/`
+- `cluster/`
 
-  * `filtered_tpm_clusters.csv` – TPM values with cluster assignments
-  * `filtered_tpm_clusters_length.csv` – As above with sequence lengths
-  * `cluster_champion.csv` – Representative VSGs per cluster
-  * `champion_vsgs.fasta` – Sequences of representative VSGs
-* `length/`
+  - `filtered_tpm_clusters.csv` – TPM values with cluster assignments
+  - `filtered_tpm_clusters_length.csv` – As above with sequence lengths
+  - `cluster_champion.csv` – Representative VSGs per cluster
+  - `champion_vsgs.fasta` – Sequences of representative VSGs
 
-  * `length.csv` – Sequence length data
-* `multiqc_report.html` – Summary of quantification (Salmon)
-* `read_counts/`
+- `length/`
 
-  * `num_reads.csv` – Read counts per VSG
-  * `total_read_counts.csv` – Total reads per sample
-* `tpm/`
+  - `length.csv` – Sequence length data
 
-  * `tpm.csv` – Raw TPM values
-  * `filtered_tpm.csv` – TPM values filtered by read threshold
-  * `cluster_tpm.csv` – Cluster-level TPMs
-* `vsgs/`
+- `multiqc_report.html` – Summary of quantification (Salmon)
+- `multiqc_data/` – MultiQC data files
+- `read_counts/`
 
-  * `vsg_count.csv` – Number of unique VSGs per sample
+  - `num_reads.csv` – Read counts per VSG
+  - `total_read_counts.csv` – Total reads per sample
+
+- `tpm/`
+
+  - `tpm.csv` – Raw TPM values
+  - `filtered_tpm.csv` – TPM values filtered by read threshold
+  - `cluster_tpm.csv` – Cluster-level TPMs
+
+- `vsgs/`
+
+  - `vsg_count.csv` – Number of unique VSGs per sample
 
 ### 4. `trimmed/`
 
-* `{sample}_trimmed.fq.gz` – Quality- and adapter-trimmed reads
+- `{sample}_trimmed.fq.gz` – Quality- and adapter-trimmed reads
 
-### 5. Figures
+### 5. `pipeline_info/`
 
-* To generate a summary figure from `cluster_tpm.csv`, run the R script `bin/plot_script.py`. It should produce this plot:
+- Execution report, timeline, trace, DAG and software versions
+
+### 6. Figures
+
+- To generate a summary figure from `cluster_tpm.csv`, run the R script `bin/plot_script.R`. It should produce this plot:
 
 ![tutorial\_figure](figures/vsg_summary.png)
 
@@ -149,8 +154,8 @@ flowchart TD
 
 Use the `--mode` flag to control which parts of the pipeline are executed.
 
-* `full` (default): Run the entire pipeline from raw reads
-* `analyse`: Use pre-assembled transcripts to rerun downstream analyses
+- `full` (default): Run the entire pipeline from raw reads
+- `analyse`: Use pre-assembled transcripts to rerun downstream analyses
 
 ### Example
 
@@ -162,7 +167,7 @@ nextflow run goldrieve/vsgseq2 \
   --mode full \
   --samplesheet samples.csv \
   --outdir results \
-  -profile docker
+  -profile conda
 ```
 
 Re-use Trinity assemblies and re-run the analysis section with a new threshold:
@@ -173,53 +178,65 @@ nextflow run goldrieve/vsgseq2 \
   --mode analyse \
   --samplesheet samples.csv \
   --threshold 200000 \
-  --outdir results/tutorial_200000
-  -profile docker
+  --outdir results/tutorial_200000 \
+  -profile conda
 ```
 
 ## Command-line Options
 
-**Required arguments:**
+Run `nextflow run goldrieve/vsgseq2 --help` for all options.
+
+**Input/output:**
 
 ```text
---assemblies      Location of transcript assemblies
-                  [default: *_trinity.Trinity.fasta]
---vsg_db          Location of VSG BLAST database
-                  [default: data/blastdb/concatAnTattb427.fa]
---notvsg_db       Location of non-VSG BLAST database
-                  [default: data/blastdb/vsgseq2NOTvsgs.fa]
---vsgome          Location of VSGome file
-                  [default: data/blastdb/concatAnTattb427.fa]
---full_vsg_db     Additional database to add to VSGome
-                  [default: none]
---mode            Run mode: full or analyse
-                  [default: full]
---outdir          Output directory
-                  [default: results/{timestamp}]
---samplesheet     Path to input sample sheet
-                  [default: data/reads/samples.csv]
+--samplesheet     Samplesheet CSV (sample,r1,r2)                    [required]
+--outdir          Output directory                                  [default: results/<today>]
+--mode            full or analyse                                   [default: full]
+--assemblies      Assemblies used in analyse mode                   [default: data/tutorial_assemblies/*_trinity.Trinity.fasta]
 ```
 
-**Optional arguments:**
+**References:**
 
 ```text
---requestedcpus   Total CPUs for Nextflow tasks
-                  [default: 4]
---cores           Cores for Trinity and other tools
-                  [default: 4]
---trinitymem      RAM allocated to Trinity (GB)
-                  [default: 20]
---cdslength       Minimum CDS length (aa)
-                  [default: 300]
---partial         Only complete ORFs are produced as standard. It is possible to allow the  production of partial ORFs by adding the --partial flag.
-                  [default: false]
---cdhit_id        cd-hit-est identity threshold (0–1)
-                  [default: 0.94]
---cdhit_as        cd-hit-est alignment coverage (0–1)
-                  [default: 0.94]
---threshold       Minimum reads to include sample in TPM filter
-                  [default: 100000]
---help            Print this help message
+--vsg_db          VSG BLAST database                                [default: data/blastdb/concatAnTattb427.fa]
+--notvsg_db       Non-VSG BLAST database                            [default: data/blastdb/vsgseq2NOTvsgs.fa]
+--full_vsg_db     Additional VSGs to add to the VSGome              [default: none]
+--genome          Genome used as Salmon decoys                      [default: data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome.fasta]
+--decoys          Salmon decoy names                                [default: data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome_decoys.txt]
+```
+
+**Analysis:**
+
+```text
+--cdslength       Minimum ORF length (aa)                           [default: 300]
+--partial         Allow partial ORFs                                [default: false]
+--cdhit_id        cd-hit-est identity threshold (0-1)               [default: 0.94]
+--cdhit_as        cd-hit-est alignment coverage (0-1)               [default: 0.94]
+--threshold       Minimum reads to keep a sample in the TPM filter  [default: 100000]
+```
+
+**Resources:**
+
+```text
+--cores           Threads for Trimmomatic, Trinity and Salmon       [default: 4]
+--trinitymem      Memory for Trinity (GB)                           [default: 20]
+--forks           Maximum parallel tasks per process                [default: 5]
+```
+
+## Pipeline structure
+
+vsgseq2 follows the nf-core template:
+
+```text
+main.nf                    entry point
+workflows/vsgseq2.nf       main workflow
+subworkflows/              initialisation, validation and completion
+modules/local/<module>/    one process per module, with environment.yml and nf-test
+conf/                      base resources, module options and the test profile
+assets/schema_input.json   samplesheet schema
+nextflow_schema.json       parameter schema
+bin/                       helper scripts used by the modules
+tests/                     integration test and test data
 ```
 
 ## Known Issues & Troubleshooting
@@ -227,10 +244,10 @@ nextflow run goldrieve/vsgseq2 \
 1. **Platform Compatibility**:
    vsgseq2 has been tested on:
 
-   * **Eddie (University of Edinburgh cluster)** running Rocky Linux 9
-   * **MARS (University of Glasgow cluster) running Rocky Linux 8.10**
-   * **MacOS Sequoia (Apple M1)**
-   * **MacOS Sequoia (Intel)**
+   - **Eddie (University of Edinburgh cluster)** running Rocky Linux 9
+   - **MARS (University of Glasgow cluster) running Rocky Linux 8.10**
+   - **MacOS Sequoia (Apple M1)**
+   - **MacOS Sequoia (Intel)**
 
 If you have Conda/Docker installed, it should work on most systems. If you encounter issues, please raise an issue or get in touch.
 
@@ -238,5 +255,5 @@ If you have Conda/Docker installed, it should work on most systems. If you encou
    Trinity is memory-hungry. If vsgseq2 stalls during assembly, try reducing resource usage:
 
    ```bash
-   --requestedcpus 1 --cores 1 --trinitymem 10
+   --cores 1 --trinitymem 10
    ```

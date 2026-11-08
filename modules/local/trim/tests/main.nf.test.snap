@@ -1,0 +1,45 @@
+{
+    "Should trim SE reads": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "late_se",
+                            "single_end": true
+                        },
+                        "late_se_trimmed.fq.gz:md5,ef4a56e3aaa02f34a69a48d82b7000e3"
+                    ]
+                ],
+                "1": [
+                    [
+                        "TRIM",
+                        "trimmomatic",
+                        "0.39"
+                    ]
+                ],
+                "trimmed_reads": [
+                    [
+                        {
+                            "id": "late_se",
+                            "single_end": true
+                        },
+                        "late_se_trimmed.fq.gz:md5,ef4a56e3aaa02f34a69a48d82b7000e3"
+                    ]
+                ],
+                "versions_trimmomatic": [
+                    [
+                        "TRIM",
+                        "trimmomatic",
+                        "0.39"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-11-08T08:57:08.101754482",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}
