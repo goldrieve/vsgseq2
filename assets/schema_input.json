@@ -9,9 +9,9 @@
         "properties": {
             "sample": {
                 "type": "string",
-                "pattern": "^[^\\s.]+$",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$",
                 "meta": ["id"],
-                "errorMessage": "Sample name must be provided and cannot contain spaces or full stops"
+                "errorMessage": "Sample names must start with a letter or digit and contain only letters, digits, underscores or hyphens"
             },
             "r1": {
                 "type": "string",

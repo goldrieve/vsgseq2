@@ -39,6 +39,6 @@ while IFS= read -r file; do
                 ;;
         esac
     fi
-done < <(git diff --cached --name-only)
+done < <(git diff --cached --name-only --diff-filter=d)
 
 exit "$status"
