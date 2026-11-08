@@ -1,0 +1,39 @@
+{
+    "Should cluster VSGs": {
+        "content": [
+            {
+                "0": [
+                    "VSGome.fasta:md5,4eacb0f84c72f87f4fffe227e70bcb7f"
+                ],
+                "1": [
+                    "VSGome.fasta.clstr:md5,e2fe520e2b535152d14fc91f7e6a7760"
+                ],
+                "2": [
+                    [
+                        "CONCATENATED_CDHIT",
+                        "cd-hit",
+                        "4.8.1"
+                    ]
+                ],
+                "clstr": [
+                    "VSGome.fasta.clstr:md5,e2fe520e2b535152d14fc91f7e6a7760"
+                ],
+                "versions_cdhit": [
+                    [
+                        "CONCATENATED_CDHIT",
+                        "cd-hit",
+                        "4.8.1"
+                    ]
+                ],
+                "vsgome": [
+                    "VSGome.fasta:md5,4eacb0f84c72f87f4fffe227e70bcb7f"
+                ]
+            }
+        ],
+        "timestamp": "2026-11-08T09:26:27.181265034",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

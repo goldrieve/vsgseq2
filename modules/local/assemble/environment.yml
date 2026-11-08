@@ -1,0 +1,6 @@
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - bioconda::trinity=2.15.1
+  - bioconda::salmon=1.10.3

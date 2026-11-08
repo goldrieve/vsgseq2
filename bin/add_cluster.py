@@ -1,5 +1,8 @@
+#!/usr/bin/env python3
 import re
+
 import pandas as pd
+
 
 def add_cluster_to_lines(cluster_file, processed_cluster_file):
     """
@@ -15,7 +18,6 @@ def add_cluster_to_lines(cluster_file, processed_cluster_file):
             elif line:
                 match = re.search(r'>([^\s]+)', line)
                 if match:
-                    transcript_id = match.group(1)
                     outfile.write(f"{line}\t{current_cluster}\n")  # Add cluster to the line
                 else:
                     outfile.write(line + '\n')  # Write other lines as is

@@ -1,0 +1,26 @@
+nextflow_process {
+
+    name "Test Process MULTIQC"
+    script "../main.nf"
+    process "MULTIQC"
+
+    test("Should summarise salmon output") {
+
+        when {
+            process {
+                """
+                input[0] = file("${projectDir}/tests/data/early_1_quant", checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            def stats = file("${process.out.data[0]}/multiqc_general_stats.txt")
+            assert stats.exists()
+            assert snapshot(stats).match()
+        }
+
+    }
+
+}

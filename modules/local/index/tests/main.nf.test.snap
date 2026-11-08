@@ -1,0 +1,12 @@
+{
+    "Should build salmon index": {
+        "content": [
+            "reflengths.bin:md5,b97672b4b08d3c6eb62413304a03a2f8"
+        ],
+        "timestamp": "2026-11-08T09:27:17.675877221",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

@@ -1,0 +1,222 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/goldrieve/vsgseq2/main/nextflow_schema.json",
+    "title": "goldrieve/vsgseq2 pipeline parameters",
+    "description": "Assembly, identification and quantification of VSGs from VSG-seq data",
+    "type": "object",
+    "$defs": {
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": ["samplesheet", "outdir"],
+            "properties": {
+                "samplesheet": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "schema": "assets/schema_input.json",
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "description": "Path to comma-separated file with columns `sample`, `r1` and `r2`. Leave `r2` empty for single-end reads.",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "outdir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "The output directory where the results will be saved. Defaults to `results/<today>`.",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "today": {
+                    "type": "string",
+                    "description": "Date stamp used in the default output directory. Defaults to today's date (ddMMMYY).",
+                    "hidden": true
+                },
+                "mode": {
+                    "type": "string",
+                    "default": "full",
+                    "enum": ["full", "analyse"],
+                    "description": "`full` assembles each sample with Trinity. `analyse` reuses the assemblies given by `--assemblies`.",
+                    "fa_icon": "fas fa-route"
+                },
+                "assemblies": {
+                    "type": "string",
+                    "description": "Glob of pre-assembled transcripts used in `analyse` mode, named `<sample>_trinity.Trinity.fasta`. Defaults to the tutorial assemblies in `data/tutorial_assemblies`.",
+                    "fa_icon": "fas fa-file"
+                }
+            }
+        },
+        "reference_options": {
+            "title": "Reference options",
+            "type": "object",
+            "fa_icon": "fas fa-dna",
+            "description": "BLAST databases and genome used to identify and quantify VSGs. Defaults point to the T. brucei files in `data/`.",
+            "properties": {
+                "vsg_db": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "VSG BLAST database. All files matching `<vsg_db>*` are staged. Defaults to `data/blastdb/concatAnTattb427.fa`."
+                },
+                "notvsg_db": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Non-VSG BLAST database. All files matching `<notvsg_db>*` are staged. Defaults to `data/blastdb/vsgseq2NOTvsgs.fa`."
+                },
+                "full_vsg_db": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "description": "Optional FASTA of VSGs to add to the assembled VSGome, such as `data/blastdb/concatAnTattb427_full.fa`."
+                },
+                "genome": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Genome FASTA used as Salmon decoys. Defaults to `data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome.fasta`."
+                },
+                "decoys": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Salmon decoy names for the genome. Defaults to `data/genome/TriTrypDB-67_TbruceiEATRO1125_Genome_decoys.txt`."
+                }
+            }
+        },
+        "analysis_options": {
+            "title": "Analysis options",
+            "type": "object",
+            "fa_icon": "fas fa-sliders-h",
+            "description": "ORF prediction, clustering and summary thresholds.",
+            "properties": {
+                "cdslength": {
+                    "type": "integer",
+                    "default": 300,
+                    "minimum": 1,
+                    "description": "Minimum ORF length (amino acids) for TransDecoder."
+                },
+                "partial": {
+                    "type": "boolean",
+                    "description": "Allow partial ORFs. Only complete ORFs are kept by default."
+                },
+                "cdhit_id": {
+                    "type": "number",
+                    "default": 0.94,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "cd-hit-est sequence identity threshold (0 to 1)."
+                },
+                "cdhit_as": {
+                    "type": "number",
+                    "default": 0.94,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "cd-hit-est alignment coverage for the shorter sequence (0 to 1)."
+                },
+                "threshold": {
+                    "type": "integer",
+                    "default": 100000,
+                    "minimum": 0,
+                    "description": "Minimum number of reads for a sample to be kept in the filtered TPM tables."
+                }
+            }
+        },
+        "resource_options": {
+            "title": "Resource options",
+            "type": "object",
+            "fa_icon": "fas fa-microchip",
+            "description": "Threads, memory and parallel samples for the multi-threaded tools.",
+            "properties": {
+                "cores": {
+                    "type": "integer",
+                    "default": 4,
+                    "minimum": 1,
+                    "description": "Threads for Trimmomatic, Trinity and Salmon."
+                },
+                "trinitymem": {
+                    "type": "integer",
+                    "default": 20,
+                    "minimum": 1,
+                    "description": "Memory for Trinity in GB."
+                },
+                "forks": {
+                    "type": "integer",
+                    "default": 5,
+                    "minimum": 1,
+                    "description": "Maximum number of parallel tasks per process."
+                }
+            }
+        },
+        "generic_options": {
+            "title": "Generic options",
+            "type": "object",
+            "fa_icon": "fas fa-file-import",
+            "description": "Less common options for the pipeline, typically set in a config file.",
+            "properties": {
+                "version": {
+                    "type": "boolean",
+                    "description": "Display version and exit.",
+                    "fa_icon": "fas fa-question-circle",
+                    "hidden": true
+                },
+                "publish_dir_mode": {
+                    "type": "string",
+                    "default": "copy",
+                    "description": "Method used to save pipeline results to output directory.",
+                    "fa_icon": "fas fa-copy",
+                    "enum": ["symlink", "rellink", "link", "copy", "copyNoFollow", "move"],
+                    "hidden": true
+                },
+                "monochrome_logs": {
+                    "type": "boolean",
+                    "description": "Do not use coloured log outputs.",
+                    "fa_icon": "fas fa-palette",
+                    "hidden": true
+                },
+                "validate_params": {
+                    "type": "boolean",
+                    "description": "Boolean whether to validate parameters against the schema at runtime",
+                    "default": true,
+                    "fa_icon": "fas fa-check-square",
+                    "hidden": true
+                },
+                "trace_report_suffix": {
+                    "type": "string",
+                    "fa_icon": "far calendar",
+                    "description": "Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss.",
+                    "hidden": true
+                },
+                "help": {
+                    "type": ["boolean", "string"],
+                    "description": "Display the help message.",
+                    "hidden": true
+                },
+                "help_full": {
+                    "type": "boolean",
+                    "description": "Display the full detailed help message.",
+                    "hidden": true
+                },
+                "show_hidden": {
+                    "type": "boolean",
+                    "description": "Display hidden parameters in the help message (only works when --help or --help_full are provided).",
+                    "hidden": true
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/$defs/input_output_options"
+        },
+        {
+            "$ref": "#/$defs/reference_options"
+        },
+        {
+            "$ref": "#/$defs/analysis_options"
+        },
+        {
+            "$ref": "#/$defs/resource_options"
+        },
+        {
+            "$ref": "#/$defs/generic_options"
+        }
+    ]
+}

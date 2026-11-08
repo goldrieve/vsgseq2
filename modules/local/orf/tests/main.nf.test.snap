@@ -1,0 +1,57 @@
+{
+    "Should predict ORFs": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "latesingle"
+                        },
+                        "latesingle_ORF.fasta:md5,b4641d026a44e78429e1c26817a3d412"
+                    ]
+                ],
+                "1": [
+                    [
+                        "ORF",
+                        "transdecoder",
+                        "5.7.1"
+                    ]
+                ],
+                "2": [
+                    [
+                        "ORF",
+                        "seqkit",
+                        "2.10.0"
+                    ]
+                ],
+                "fasta": [
+                    [
+                        {
+                            "id": "latesingle"
+                        },
+                        "latesingle_ORF.fasta:md5,b4641d026a44e78429e1c26817a3d412"
+                    ]
+                ],
+                "versions_seqkit": [
+                    [
+                        "ORF",
+                        "seqkit",
+                        "2.10.0"
+                    ]
+                ],
+                "versions_transdecoder": [
+                    [
+                        "ORF",
+                        "transdecoder",
+                        "5.7.1"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-11-08T09:27:26.929208475",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

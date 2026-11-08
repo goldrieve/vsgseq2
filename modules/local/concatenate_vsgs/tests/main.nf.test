@@ -1,0 +1,25 @@
+nextflow_process {
+
+    name "Test Process CONCATENATE_VSGS"
+    script "../main.nf"
+    process "CONCATENATE_VSGS"
+
+    test("Should concatenate VSGs with a VSG database") {
+
+        when {
+            process {
+                """
+                input[0] = file("${projectDir}/tests/data/latesingle_ORF_VSGs.fasta", checkIfExists: true)
+                input[1] = file("${projectDir}/data/blastdb/concatAnTattb427.fa", checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}

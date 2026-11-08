@@ -1,4 +1,8 @@
-pacman::p_load(dplyr, stringr)
+#!/usr/bin/env Rscript
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(stringr)
+})
 
 # Access the command line arguments
 args <- commandArgs(trailingOnly = TRUE)

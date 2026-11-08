@@ -1,0 +1,28 @@
+nextflow_process {
+
+    name "Test Process QUANTIFY"
+    script "../main.nf"
+    process "QUANTIFY"
+
+    test("Should quantify SE reads") {
+
+        when {
+            process {
+                """
+                input[0] = file("${projectDir}/tests/data/salmon_index", checkIfExists: true)
+                input[1] = 1
+                input[2] = [ [ id: 'late_se', single_end: true ], file("${projectDir}/data/reads/latesingle.fq.gz", checkIfExists: true) ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            def quant_sf = file("${process.out.quants[0][1]}/quant.sf")
+            assert quant_sf.exists()
+            assert snapshot(quant_sf).match()
+        }
+
+    }
+
+}

@@ -1,8 +1,9 @@
-import pandas as pd
+#!/usr/bin/env python3
 import sys
+
+import pandas as pd
 from Bio import SeqIO
-from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
+
 
 def summarise_cluster_expression(tpm_file, cluster_summary_output, highest_tpm_vsg_output, fasta_file, output_fasta):
     """
@@ -57,14 +58,14 @@ def summarise_cluster_expression(tpm_file, cluster_summary_output, highest_tpm_v
     except KeyError as e:
         print(f"Error: Column not found during mean calculation: {e}")
         return
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"An unexpected error occurred during mean calculation: {e}")
         return
 
     # Group by 'cluster' and find the vsg_id with the highest mean TPM value
     try:
         highest_tpm_vsg = tpm_df.groupby('cluster').apply(lambda x: x.loc[x['mean_tpm'].idxmax(), 'vsg_id']).reset_index(name='highest_tpm_vsg_id')
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"An unexpected error occurred during grouping and max identification: {e}")
         return
 
@@ -74,7 +75,7 @@ def summarise_cluster_expression(tpm_file, cluster_summary_output, highest_tpm_v
     except KeyError as e:
         print(f"Error: Column not found during aggregation: {e}")
         return
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"An unexpected error occurred during aggregation: {e}")
         return
 
@@ -82,14 +83,14 @@ def summarise_cluster_expression(tpm_file, cluster_summary_output, highest_tpm_v
     try:
         cluster_summary.to_csv(cluster_summary_output)
         print(f"Cluster summary saved to {cluster_summary_output}")
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"Error: Could not save cluster summary to CSV file: {e}")
 
     # Save the highest TPM VSG IDs to a CSV file
     try:
         highest_tpm_vsg.to_csv(highest_tpm_vsg_output, index=False)
         print(f"Highest mean TPM VSG IDs saved to {highest_tpm_vsg_output}")
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"Error: Could not save highest mean TPM VSG IDs to CSV file: {e}")
 
     # Extract sequences from FASTA file
@@ -118,7 +119,7 @@ def summarise_cluster_expression(tpm_file, cluster_summary_output, highest_tpm_v
     except FileNotFoundError:
         print(f"Error: FASTA file not found at {fasta_file}")
         return
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"Error: Could not extract sequences from FASTA file: {e}")
 
 

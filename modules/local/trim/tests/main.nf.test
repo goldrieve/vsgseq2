@@ -1,0 +1,25 @@
+nextflow_process {
+
+    name "Test Process TRIM"
+    script "../main.nf"
+    process "TRIM"
+
+    test("Should trim SE reads") {
+
+        when {
+            process {
+                """
+                input[0] = [ [ id: 'late_se', single_end: true ], file("${projectDir}/data/reads/latesingle.fq.gz", checkIfExists: true) ]
+                input[1] = 1
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}

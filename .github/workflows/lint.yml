@@ -1,0 +1,44 @@
+name: lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Nextflow
+        uses: nf-core/setup-nextflow@v2
+        with:
+          version: "26.04.6"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install nf-core tools
+        run: pip install nf-core==4.1.0
+
+      - name: Run nf-core pipelines lint
+        run: nf-core pipelines lint
+
+      - name: Run nextflow lint
+        run: nextflow lint .
+
+      - name: Check code formatting with Prettier
+        run: npx prettier@3.9.3 --check .
+
+      - name: Lint Python with ruff
+        uses: astral-sh/ruff-action@v4.1.0
+        with:
+          args: "check --verbose"

@@ -1,0 +1,19 @@
+{
+    "Should blast ORFs and output VSGs": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "latesingle"
+                    },
+                    "latesingle_ORF_VSGs.fasta:md5,966afb15c69677a4245f6b30f44ef008"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-08T09:26:19.821723704",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}
